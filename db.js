@@ -2,8 +2,9 @@
 // this was it's suggested code:
 
 // Import the functions you need from the SDKs you need
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-import { getDatabase, ref, set, get } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js';
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.8.0/firebase-app.js';
+import { getFirestore, doc, setDoc, getDoc, collection, addDoc } from 'https://www.gstatic.com/firebasejs/11.8.0/firebase-firestore.js';
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -21,13 +22,38 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
-
+const db = getFirestore(app);  // Note: getFirestore instead of getDatabase
 
 // get the button by its ID
 const button = document.getElementById("connect"); // remember the element id has to mathch the one in the HTML with the same name.
+//add an event listener to the button
+button.addEventListener("click", async () => {
+ try {
+        // Write to Firestore (documents in collections)
+        await setDoc(doc(db, 'test', 'My connection'), {
+            message: "Connected to Firestore successfully!",
+            timestamp: Date.now()
+        });
 
+        console.log('Data written to Firestore!');
 
+        // Read from Firestore
+        const docRef = doc(db, 'test', 'My connection');
+        const docSnap = await getDoc(docRef);
+
+        if(docSnap.exists()) {
+            console.log('Data from Firestore:', docSnap.data());
+        } else {
+            console.log('No document found!');
+        }
+        
+        
+    } catch (error) {
+        console.error('Firestore error:', error);
+    }
+});
+
+// the following was a button test to make sure that the <script> tag in index.html was working.
 
 // get the button by its ID
 const otherButton = document.getElementById("test"); // remember the element id has to mathch the one in the HTML with the same name.
@@ -37,29 +63,4 @@ otherButton.addEventListener('click', function() {
     console.log('HTML talking to db.js');
 });
 
-
-
-//add an event listener to the button
-button.addEventListener("click", async () => {
-  
-
- try {
-        // Write to database (awaits the Promise)
-        await set(ref(database, 'test/connection'), {
-            message: 'Connected successfully!',
-            timestamp: Date.now()
-        });
-        
-        console.log('Data written successfully!');
-        
-        // Read from database (awaits the Promise)
-        const snapshot = await get(ref(database, 'test/connection'));
-        if (snapshot.exists()) {
-            console.log('Data retrieved:', snapshot.val());
-        }
-        
-    } catch (error) {
-        console.error('Firebase error:', error);
-    }
-});
   
