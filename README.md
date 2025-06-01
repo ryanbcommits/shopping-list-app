@@ -1,7 +1,11 @@
 ##Connecting the frontend to a DB
 The purpose of this app is the demonstrate that after a database was created, in this case Firestore, it is possible to connect to it successfully using a button along with an async await method with a try catch embedded to write and then read from the db.
 
-In the end I was able to create a button that once clicked would write to the db and read the data from the db and write it to the console. Below are my project scratch notes...
+In the end I was able to create a button that once clicked would write to the db and read the data from the db and write it to the console. 
+
+Untimately I plan to build off of this to build an app that can accept users data like a simple email at first, then build off of that to ultimately hold an array of data like item information.
+
+Below are my project scratch notes. Refer to github for the version control history.
 
 
 I solely want to establish a connection to the vsCode-2025 db I created.
