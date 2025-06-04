@@ -6,13 +6,32 @@
     <title>Connecting to A DB with a Button</title>
 </head>
 <body>
-    <div>Click the button to write to a db and have it write to the console.</div>
+    <div>Complete the form and send it to the Firestore db!</div>
 
-    <!--create an event listener for id tag "connect"-->
-    <button id="connect">Connect to Firebase</button>
-    <button id="test">Test Button</button>
-    <!--commenting out the test script.js code
-    <script src="script.js"></script>
+
+    
+    
+    <form id="userForm">
+        <div>
+            <label for="username">Name</label>
+            <input type="text" id="username" name="username">
+        </div>
+
+        <div>
+            <label for="userAge">Age</label>
+            <input type="number" id="userAge" name="userAge"> 
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input>
+        </div>
+    </form>
+
+    <button id="connect">Submit</button>
+    
+    <!--<button id="test">Test Button</button>
+    commenting out the test script.js code
+    <script src="script.js"></script> 
     -->
     <script type="module" src="db.js"></script>
 </body>

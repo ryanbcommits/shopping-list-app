@@ -29,27 +29,35 @@ const button = document.getElementById("connect"); // remember the element id ha
 //add an event listener to the button
 button.addEventListener("click", async () => {
  try {
-        // Write to Firestore (documents in collections)
-        await setDoc(doc(db, 'test', 'My connection'), {
-            message: "Connected to Firestore successfully!",
-            timestamp: Date.now()
+        // I'm hardcoding what I want Firestore to do
+        await setDoc(doc(db, 'people', 'person1'), {
+            name: "Ryan G",
+            age: 25,
+            email: "ryanb@gmail.com",
+            timestamp: Date.now(),
         });
 
         console.log('Data written to Firestore!');
 
         // Read from Firestore
-        const docRef = doc(db, 'test', 'My connection');
+        const docRef = doc(db, 'people', 'person1');
         const docSnap = await getDoc(docRef);
 
         if(docSnap.exists()) {
+            console.log(getDoc.name);
+            // console.log('Username:', docSnap.name);
+            // console.log('Age:', docSnap.age);
+            // console.log('email:', docSnap.email);
             console.log('Data from Firestore:', docSnap.data());
         } else {
             console.log('No document found!');
         }
         
+        setDoc()
         
     } catch (error) {
         console.error('Firestore error:', error);
+        
     }
 });
 
@@ -63,4 +71,7 @@ otherButton.addEventListener('click', function() {
     console.log('HTML talking to db.js');
 });
 
+async (params) => {
+    
+}
   
