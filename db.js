@@ -44,16 +44,12 @@ button.addEventListener("click", async () => {
         const docSnap = await getDoc(docRef);
 
         if(docSnap.exists()) {
-            console.log(getDoc.name);
-            // console.log('Username:', docSnap.name);
-            // console.log('Age:', docSnap.age);
-            // console.log('email:', docSnap.email);
+            // this prints an array of the doc I hardcoded in the setDoc method
             console.log('Data from Firestore:', docSnap.data());
+
         } else {
             console.log('No document found!');
         }
-        
-        setDoc()
         
     } catch (error) {
         console.error('Firestore error:', error);
@@ -64,12 +60,12 @@ button.addEventListener("click", async () => {
 // the following was a button test to make sure that the <script> tag in index.html was working.
 
 // get the button by its ID
-const otherButton = document.getElementById("test"); // remember the element id has to mathch the one in the HTML with the same name.
+// const otherButton = document.getElementById("test"); // remember the element id has to mathch the one in the HTML with the same name.
 
 //add an event listener to the button
-otherButton.addEventListener('click', function() {
-    console.log('HTML talking to db.js');
-});
+// otherButton.addEventListener('click', function() {
+//     console.log('HTML talking to db.js');
+// });
 
 async (params) => {
     
