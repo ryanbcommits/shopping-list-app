@@ -45,12 +45,19 @@ button.addEventListener("click", async () => {
 
         if(docSnap.exists()) {
             // this prints an array of the doc I hardcoded in the setDoc method
-            console.log('Data from Firestore:', docSnap.data());
+            // console.log('Data from Firestore:', docSnap.data());
+            // I was stumpted at this point and asked claude how to print the data to the console.
+            // it suggested the following:
+            const userData = docSnap.data();
+            console.log('Name:', userData.name);
+            console.log('Age:', userData.age);
+            console.log('Email:', userData.email);
+            console.log('Timestamp:', userData.timestamp);
 
         } else {
             console.log('No document found!');
         }
-        
+
     } catch (error) {
         console.error('Firestore error:', error);
         
@@ -66,8 +73,3 @@ button.addEventListener("click", async () => {
 // otherButton.addEventListener('click', function() {
 //     console.log('HTML talking to db.js');
 // });
-
-async (params) => {
-    
-}
-  
