@@ -25,15 +25,20 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);  // Note: getFirestore instead of getDatabase
 
 // get the button by its ID
-const button = document.getElementById("connect"); // remember the element id has to mathch the one in the HTML with the same name.
-//add an event listener to the button
+const button = document.getElementById("connect"); 
+
 button.addEventListener("click", async () => {
+
+    const username = document.getElementById("username").value;
+    const userAge = document.getElementById("userAge").value;
+    const email = document.getElementById("email").value;
+
  try {
         // I'm hardcoding what I want Firestore to do
         await setDoc(doc(db, 'people', 'person1'), {
-            name: "Ryan G",
-            age: 25,
-            email: "ryanb@gmail.com",
+            name: username,
+            age: parseInt(userAge),
+            email: email,
             timestamp: Date.now(),
         });
 
