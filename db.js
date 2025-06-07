@@ -3,7 +3,7 @@
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.8.0/firebase-app.js';
-import { getFirestore, doc, setDoc, getDoc, collection, addDoc } from 'https://www.gstatic.com/firebasejs/11.8.0/firebase-firestore.js';
+import { getFirestore, doc, getDoc, collection, addDoc } from 'https://www.gstatic.com/firebasejs/11.8.0/firebase-firestore.js';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -33,26 +33,25 @@ button.addEventListener("click", async () => {
     const userAge = document.getElementById("userAge").value;
     const email = document.getElementById("email").value;
 
+    
  try {
-        // I'm hardcoding what I want Firestore to do
-        await setDoc(doc(db, 'people', 'person1'), {
+        // setDoc method was deleted so taht new docs could be added on every click
+        // addDoc creates a new document with auto-generated ID
+        const docRef =   await addDoc(collection(db, 'people'), {
             name: username,
             age: parseInt(userAge),
             email: email,
-            timestamp: Date.now(),
+            timestamp: new Date().toISOString(),
         });
 
-        console.log('Data written to Firestore!');
+         console.log('Data written to Firestore!');
 
         // Read from Firestore
-        const docRef = doc(db, 'people', 'person1');
+        // const docRef = doc(db, 'people');
         const docSnap = await getDoc(docRef);
 
         if(docSnap.exists()) {
-            // this prints an array of the doc I hardcoded in the setDoc method
-            // console.log('Data from Firestore:', docSnap.data());
-            // I was stumpted at this point and asked claude how to print the data to the console.
-            // it suggested the following:
+   
             const userData = docSnap.data();
             console.log('Name:', userData.name);
             console.log('Age:', userData.age);
@@ -61,7 +60,7 @@ button.addEventListener("click", async () => {
 
         } else {
             console.log('No document found!');
-        }
+        }   
 
     } catch (error) {
         console.error('Firestore error:', error);
