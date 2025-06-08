@@ -4,6 +4,9 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.8.0/firebase-app.js';
 import { getFirestore, doc, getDoc, collection, addDoc } from 'https://www.gstatic.com/firebasejs/11.8.0/firebase-firestore.js';
+import {
+    getAuth, connectAuthEmulator, signInWithEmailAndPassword
+} from 'https://www.gstatic.com/firebasejs/11.9.0/firebase-auth.js';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -13,12 +16,29 @@ import { getFirestore, doc, getDoc, collection, addDoc } from 'https://www.gstat
 const firebaseConfig = {
   apiKey: "AIzaSyD7U-ghzlo2_AZN_MZKTS8HNQkh5Vxqv10",
   authDomain: "vscode-2025.firebaseapp.com",
+  databaseURL: "https://vscode-2025-default-rtdb.firebaseio.com",
   projectId: "vscode-2025",
   storageBucket: "vscode-2025.firebasestorage.app",
   messagingSenderId: "565826875429",
   appId: "1:565826875429:web:cc2d539e7ba4484fa8cfcc",
   measurementId: "G-XXWEQL8VN1"
 };
+
+// Attempt to get log in code started...
+
+
+
+// watched video "Getting Started with Firebase Authentication on the Web"
+const auth = getAuth(firebaseConfig);
+connectAuthEmulator(auth,"http://localhost:5500");
+
+const loginEmailPassword = async () => {
+    const loginEmail = txtEmail.value;
+    const loginPassword = txtPassword.value;
+
+    const userCredential = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
+    console.log(userCredential.user);
+}
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

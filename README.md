@@ -9,6 +9,13 @@ Method: Code first and attempt to acomplish my goal without AI, if I run into a 
 
 The overall purpose of this exercise is to leverage AI to speed up my learning not to use it as a shortcut.
 
+
+6/8/25 -
+
+I watcehd a tutorial called "Getting Started with Firebase Authentication on the web" from Google's Firebase Authentication page. I walked through the processes but ran into an bug where ater I tried logging in, the console returned an error stating that there was no 'heartbeat.' Something to to with getProvider in the Firebase code. 
+
+After some troubleshooting I turned to Claude for a possible solution and it informed me that the code that I had used from the tutorial was incorrect and that I used getAuth() incorrectly and the order of operations was wrong.
+
 ## Acomplishments
 - Achieved multiple doc additions to my db by switching out the setDoc method to addDoc method.
 
