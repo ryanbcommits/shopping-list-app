@@ -1,7 +1,7 @@
 import {
  signInWithEmailAndPassword
 } from 'https://www.gstatic.com/firebasejs/11.9.0/firebase-auth.js';
-import { auth } from "firebase-config.js";
+import { auth } from './firebase-config.js';
 
 // DOMContentLoaded ensures DOM elements exist before we try to access them
 document.addEventListener('DOMContentLoaded', () => {
