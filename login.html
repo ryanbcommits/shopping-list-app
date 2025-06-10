@@ -8,19 +8,19 @@
 <body>
     <!-- This is the login page befoer the homepage-->
     <div>The form below is to test firebase authentication</div>
-    <form>
+    <form id="loginForm">
         <div>
-            <label for="username">Username</label>
-            <input type="text" placeholder="Username" name="username" autocomplete="username">
+            <label for="useremail">Email</label>
+            <input type="useremail" id="userEmail" placeholder="email" name="useremail" autocomplete="email">
 
             <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required autocomplete="current-password">
+            <input type="password" id="password" placeholder="Enter Password" name="psw" required autocomplete="current-password">
 
-            <button type="submit">Login</button>
+            <button type="submit" id="submit">Login</button>
         
         </div>
 
     </form>
-    <script type="module" src="login.js"></script>
+    <script type="module" src="firebase.js"></script>
 </body>
 </html>

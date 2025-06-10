@@ -2,10 +2,10 @@
 // this was it's suggested code:
 
 // Import the functions you need from the SDKs you need
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.8.0/firebase-app.js';
-import { getFirestore, doc, getDoc, collection, addDoc } from 'https://www.gstatic.com/firebasejs/11.8.0/firebase-firestore.js';
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.9.0/firebase-app.js';
+import { getFirestore, doc, getDoc, collection, addDoc } from 'https://www.gstatic.com/firebasejs/11.9.0/firebase-firestore.js';
 import {
-    getAuth, connectAuthEmulator, signInWithEmailAndPassword
+    getAuth, signInWithEmailAndPassword
 } from 'https://www.gstatic.com/firebasejs/11.9.0/firebase-auth.js';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -24,26 +24,34 @@ const firebaseConfig = {
   measurementId: "G-XXWEQL8VN1"
 };
 
-// Attempt to get log in code started...
-
-
-
-// watched video "Getting Started with Firebase Authentication on the Web"
-const auth = getAuth(firebaseConfig);
-connectAuthEmulator(auth,"http://localhost:5500");
-
-const loginEmailPassword = async () => {
-    const loginEmail = txtEmail.value;
-    const loginPassword = txtPassword.value;
-
-    const userCredential = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
-    console.log(userCredential.user);
-}
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 const db = getFirestore(app);  // Note: getFirestore instead of getDatabase
 
+// create a button variable
+const loginButton = document.getElementById("submit");
+
+// create an event listener for the button
+loginButton.addEventListener("click", async () => {
+
+    const loginEmail = document.getElementById("userEmail").value;
+    const password = document.getElementById("password").value;
+
+    try {
+        const userCredential = await signInWithEmailAndPassword(auth, loginEmail, password);
+        console.log("login successful!", userCredential.loginEmail);
+
+        alert("Login Successful!");
+    } catch (error) {
+        console.error("login error:", error.code, error.message);
+        alert('Login Failed');
+    }
+
+});
+
+
+// Code for writing and reading from the db
 // get the button by its ID
 const button = document.getElementById("connect"); 
 
