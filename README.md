@@ -10,11 +10,16 @@ Method: Code first and attempt to acomplish my goal without AI, if I run into a 
 The overall purpose of this exercise is to leverage AI to speed up my learning not to use it as a shortcut.
 
 
-6/8/25 -
+6/9/25
+After attempting to have two html pages utilize a shared .js file a ran into a problem. I suspected that there was an issue with having two html pages calling the same JavaScript File. 
 
-I watcehd a tutorial called "Getting Started with Firebase Authentication on the web" from Google's Firebase Authentication page. I walked through the processes but ran into an bug where ater I tried logging in, the console returned an error stating that there was no 'heartbeat.' Something to to with getProvider in the Firebase code. 
+I consulted Claude and it said that First my JS was running before the HTML elements are loaded. So when my script runs, t he DOM elements don't exist yet (document.getElementById("connect") returns null. The quick fix is to Wrap your code in DOMContentLoaded.
 
-After some troubleshooting I turned to Claude for a possible solution and it informed me that the code that I had used from the tutorial was incorrect and that I used getAuth() incorrectly and the order of operations was wrong.
+
+I was correct, but specified that the HTML pages which have different elements:
+    specifically - Login.html has form elements but no button with id="connect"
+                 - index.html has buttons with id="connect" but different form structure
+                 - firebase.js is looking for different elements from BOTH pages at the same time. Claude suggests that I split my JS into separate files (which I thought would be approprate at first, but wanted to test what would happen if all my js code was in the same file...)
 
 ## Acomplishments
 - Achieved multiple doc additions to my db by switching out the setDoc method to addDoc method.
@@ -27,4 +32,6 @@ After some troubleshooting I turned to Claude for a possible solution and it inf
 ## TODO
 
 - Have the info from the db print to the window
-- Improve user experience
+- Improve authentication state 
+- Add a signout button
+
