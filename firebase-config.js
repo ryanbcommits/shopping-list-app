@@ -1,7 +1,7 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.9.0/firebase-app.js';
 import { getFirestore, doc, getDoc, collection, addDoc } from 'https://www.gstatic.com/firebasejs/11.9.0/firebase-firestore.js';
 import {
-    getAuth, signInWithEmailAndPassword
+    getAuth,  
 } from 'https://www.gstatic.com/firebasejs/11.9.0/firebase-auth.js';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -19,6 +19,7 @@ const firebaseConfig = {
   appId: "1:565826875429:web:cc2d539e7ba4484fa8cfcc",
   measurementId: "G-XXWEQL8VN1"
 };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
