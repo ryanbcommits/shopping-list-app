@@ -50,16 +50,16 @@ document.addEventListener("DOMContentLoaded", () => {
    
     });
 
-    logOut.addEventListener("submit", async (e) => {
+    logOut.addEventListener("click", async (e) => {
         e.preventDefault();
 
-    /* Firebase code on signing out didin't quite work... going to try a try catch
-    const auth = getAuth();
-    signOut(auth).then(() => {
-        console.log("signed out");
-    }).catch((error) => {
-        console.log("An error happened");
-    });
-    */
+    try {
+        await signOut(auth);
+        console.log("user logged out");
+        window.location.href = 'login.html';
+    } catch (error) {
+        console.log("An error occured with logout")
+    }
+
     });
 });
