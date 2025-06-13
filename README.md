@@ -26,12 +26,11 @@ I was correct, but specified that the HTML pages which have different elements:
 
 ## Known Issues
 - [] Fields allow any text to be entered
-- [] No login yet
-- 
+- [] UI needs improving
 
 ## TODO
 
 - Have the info from the db print to the window
 - Improve authentication state 
-- Add a signout button
+- 
 
