@@ -29,8 +29,8 @@ I was correct, but specified that the HTML pages which have different elements:
 - [] UI needs improving
 
 ## TODO
-
+- For 6/16/25 The goal for today is to add a sign up button
 - Have the info from the db print to the window
 - Improve authentication state 
-- 
+
 

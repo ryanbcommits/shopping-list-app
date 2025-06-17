@@ -19,8 +19,38 @@
             <button type="submit" id="submit">Login</button>
         
         </div>
-
     </form>
+
+    <div>Click the button to sign up!</div>
+    <button type="submit" id="modalButton">Sign Up</button>
+
+    <!--Modal content retreived from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal2-->
+
+    <!--The Modal-->
+    <div id="myModal" class="modal">
+
+        <!--Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Enter Your Details Below</h2>
+            </div>
+            <div class="modal-body">
+                <form id="sign-up form">
+                    <div>
+                        <label for="newUser">Username</label>
+                        <input type="text" id="newUser">
+                        <label for="email">Email</label>
+                        <input type="email" id="newEmail">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="signUp">Sign Up</button>
+            </div>
+        </div> 
+
+    </div>
     <script type="module" src="login.js"></script>
 </body>
 </html>

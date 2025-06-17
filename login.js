@@ -25,7 +25,24 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error("login error:", error.code, error.message);
             alert('Login Failed');
-        }    s
+        }    
     });    
 
+    // sign up code
+    // Get the modal
+    const modal = document.getElementById("modal"); 
+    const btn = document.getElementById("myBtn");  
+    
+    // Get the <span> element that closes the modal
+    const span = document.getElementById("close")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    //When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
 });
