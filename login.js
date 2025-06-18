@@ -7,6 +7,30 @@ import { auth } from './firebase-config.js';
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
 
+    
+    // sign up code (works if above the login code?)
+    // Get the modal
+    const modal = document.getElementById("myModal"); 
+    const btn = document.getElementById("myBtn");  
+    
+    // Get the <span> element that closes the modal
+    const span = document.getElementsByClassName("close")[0];
+    
+    //getElementById("close")[0];
+
+    // When the user clicks the button, open the modal
+    // error is being thrown
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+
+    //When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+
     loginForm.addEventListener("submit", async (e) => {
         e.preventDefault();
 
@@ -28,23 +52,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }    
     });    
 
-    // sign up code
-    // Get the modal
-    const modal = document.getElementById("modal"); 
-    const btn = document.getElementById("myBtn");  
-    
-    // Get the <span> element that closes the modal
-    const span = document.getElementsByClassName("close")[0];
-    
-    //getElementById("close")[0];
-
-    // When the user clicks the button, open the modal
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-
-    //When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
 });
