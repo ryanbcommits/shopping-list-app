@@ -1,0 +1,23 @@
+{
+  "name": "connect-to-db",
+  "version": "1.0.0",
+  "description": "Building off of the code I created that establishes a connection to a firestore db on a button click I plan to build off of the foundation and make this more complex.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryanthekind/Connect-to-db.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ryanthekind/Connect-to-db/issues"
+  },
+  "homepage": "https://github.com/ryanthekind/Connect-to-db#readme",
+  "dependencies": {
+    "firebase": "^11.9.1"
+  }
+}

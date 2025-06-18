@@ -16,10 +16,7 @@ After attempting to have two html pages utilize a shared .js file a ran into a p
 I consulted Claude and it said that First my JS was running before the HTML elements are loaded. So when my script runs, t he DOM elements don't exist yet (document.getElementById("connect") returns null. The quick fix is to Wrap your code in DOMContentLoaded.
 
 
-I was correct, but specified that the HTML pages which have different elements:
-    specifically - Login.html has form elements but no button with id="connect"
-                 - index.html has buttons with id="connect" but different form structure
-                 - firebase.js is looking for different elements from BOTH pages at the same time. Claude suggests that I split my JS into separate files (which I thought would be approprate at first, but wanted to test what would happen if all my js code was in the same file...)
+
 
 ## Acomplishments
 - Achieved multiple doc additions to my db by switching out the setDoc method to addDoc method.
@@ -29,7 +26,9 @@ I was correct, but specified that the HTML pages which have different elements:
 - [] UI needs improving
 
 ## TODO
-- For 6/16/25 The goal for today is to add a sign up button
+- For this week the primary goal is to create a working sign up modal (rank 3)
+- Next week have it so the users data is written on the DOM (rank 7)
+- Next Adjust the authorization standards to meet Firestore's guidelines - i think reg email is going away (rank 12)
 - Have the info from the db print to the window
 - Improve authentication state 
 
