@@ -1,6 +1,7 @@
-import { addDoc, collection, getDoc } from 'firebase/firestore';
+import { 
+    addDoc, collection, getDoc } from 'firebase/firestore';
 import { db } from './firebase-config.js';
-import { auth } from './firebase-config.js';
+import { auth } from './firebase-config.js'
 import { signOut } from 'firebase/auth';
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -9,8 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const button = document.getElementById("connect"); 
     const logOut = document.getElementById("logOut");
     
-    button.addEventListener("submit", async () => {
-    
+    button.addEventListener("click", async () => {
+        
         const username = document.getElementById("username").value;
         const userAge = document.getElementById("userAge").value;
         const email = document.getElementById("email").value;
