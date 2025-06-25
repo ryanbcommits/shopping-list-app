@@ -16,7 +16,8 @@ After attempting to have two html pages utilize a shared .js file a ran into a p
 I consulted Claude and it said that First my JS was running before the HTML elements are loaded. So when my script runs, t he DOM elements don't exist yet (document.getElementById("connect") returns null. The quick fix is to Wrap your code in DOMContentLoaded.
 
 
-
+## Development Notes
+Some Firebase authentication logic was developed with assistance from Claude AI.
 
 ## Acomplishments
 - Achieved multiple doc additions to my db by switching out the setDoc method to addDoc method.
@@ -26,7 +27,7 @@ I consulted Claude and it said that First my JS was running before the HTML elem
 - [] UI needs improving
 
 ## TODO
-- For this week the primary goal is to create a working sign up modal (rank 3)
+- Finish with creating the registration page with Claude.
 - Next week have it so the users data is written on the DOM (rank 7)
 - Next Adjust the authorization standards to meet Firestore's guidelines - i think reg email is going away (rank 12)
 - Have the info from the db print to the window

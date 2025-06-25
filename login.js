@@ -1,11 +1,13 @@
 import {
  signInWithEmailAndPassword,
-} from 'https://www.gstatic.com/firebasejs/11.9.0/firebase-auth.js';
+} from 'firebase/auth';
 import { auth } from './firebase-config.js';
 
 // DOMContentLoaded ensures DOM elements exist before we try to access them
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
+
+    // Modal setup with AI assistance..
     // sign up code (works if above the login code?)
     // Get the modal
     const modal = document.getElementById("myModal"); 
@@ -37,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
             const userCredential = await signInWithEmailAndPassword(auth, loginEmail, password);
             console.log("login successful!", userCredential.user.email);
+            
     
             alert("Login Successful!");
 

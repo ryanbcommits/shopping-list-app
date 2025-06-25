@@ -25,6 +25,7 @@
     <div>Click the button to sign up!</div>
     <button id="myBtn">Sign Up</button>
 
+    
     <!--Modal content retreived from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal2-->
 
     <!--The Modal-->
@@ -33,16 +34,18 @@
         <!--Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <span class="close">&times;</span>
-                <h2>Enter Your Details Below</h2>
+              <span class="close">&times;</span>
+              <h2>Enter Your Details Below</h2>
             </div>
             <div class="modal-body">
-                <form id="sign-up form">
+              <form id="sign-up form">
+                <div>
+                       <label for="newUser">Username</label>
+                       <input type="text" id="newUser">                        
+                </div>
                     <div>
-                        <label for="newUser">Username</label>
-                        <input type="text" id="newUser">
-                        <label for="email">Email</label>
-                        <input type="email" id="newEmail">
+                      <label for="email">Email</label>
+                      <input type="email" id="newEmail">
                     </div>
                 </form>
             </div>

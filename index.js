@@ -1,7 +1,7 @@
-import { addDoc, collection, getDoc } from 'https://www.gstatic.com/firebasejs/11.9.0/firebase-firestore.js';
+import { addDoc, collection, getDoc } from 'firebase/firestore';
 import { db } from './firebase-config.js';
 import { auth } from './firebase-config.js';
-import { signOut } from 'https://www.gstatic.com/firebasejs/11.9.0/firebase-auth.js';
+import { signOut } from 'firebase/auth';
 
 document.addEventListener("DOMContentLoaded", () => {
     // Code for writing and reading from the db
