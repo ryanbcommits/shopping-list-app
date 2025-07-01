@@ -6,7 +6,7 @@ import { auth } from './firebase-config.js';
 
 // DOMContentLoaded ensures DOM elements exist before we try to access them
 document.addEventListener('DOMContentLoaded', () => {
-    //const loginForm = document.getElementById('loginForm');
+    const loginForm = document.getElementById('loginForm');
 
     // Modal setup with AI assistance..
     // sign up code (works if above the login code?)
@@ -14,25 +14,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById("myModal"); 
     const btn = document.getElementById("signUp");  
     const regBtn = document.getElementById("register"); 
-    
-    console.log("modal:", modal);
-    console.log("signUp btn:", btn);
-    console.log("register btn:", regBtn);
 
-    if (regBtn) {
-        console.log("Register button found!");
-        regBtn.onclick = () => {
-            console.log("Register button clicked!");
-        }
-    } else {
-        console.log("Register button Not Found!"); //  register btn not found - hidden in modal
-    }
+    // Debugging
+    // console.log("modal:", modal);
+    // console.log("signUp btn:", btn);
+    // console.log("register btn:", regBtn);
 
+    // The Register button works here, but isn't really necessary
+    // because you can call the regBtn later in the code 
+    // if (regBtn) {
+    //    regBtn.addEventListener('click', () => {
+    //     console.log("Register button clicked");
+    //    })
+    // } 
 
     // Get the <span> element that closes the modal
     const span = document.getElementsByClassName("close")[0];
 
-    // When the user clicks the button, open the modal
+    // ***When the user clicks the button, open the modal***
     btn.onclick = () => {
         modal.style.display = "block";
     }
@@ -48,8 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    
-    // Log in form logic 
+    // ***Log in with user name and password logic*** 
     loginForm.addEventListener("submit", async (e) => {
         e.preventDefault();
 
@@ -71,4 +69,38 @@ document.addEventListener('DOMContentLoaded', () => {
         }    
     });    
 
+    // *** Create users with email and password***
+    // create variable for the registration form 
+    const regForm = document.getElementById("sign-up-form");
+    // add an event listener on click like i had for the login button
+    regForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        // define the variables for the modal fields.. 
+        const newUser = document.getElementById("newUserEmail").value;
+        const newPassword = document.getElementById("newPassword").value;
+        // const newPasswordAgain = document.getElementById("verifyPassword").value; maybe I have to create a separate check for passwords?
+
+    try {
+        
+        const userCredential = await createUserWithEmailAndPassword(auth, newUser, newPassword);
+        console.log("user successfully signed up", userCredential.user.email);
+        const user = userCredential.user;
+        console.log("User:" + userCredential.user);
+    } catch (error) {
+        console.error("sign up error:", error.code, error.message);
+        alert("Login Failed 😟");
+    }
+        
+    })
+    // get the modal 'form' 
+
+    
+
+
+
+    // Register button works fine here without an if Statement
+    // regBtn.addEventListener('click', ()=> {
+    //     console.log("this button was clicked later in the code.")
+    // })
 });
