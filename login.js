@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const loginEmail = document.getElementById("userEmail").value;
         const password = document.getElementById("password").value;
+
     try {
             const userCredential = await signInWithEmailAndPassword(auth, loginEmail, password);
             console.log("login successful!", userCredential.user.email);
@@ -70,8 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });    
 
     // *** Create users with email and password***
+ 
     // create variable for the registration form 
     const regForm = document.getElementById("sign-up-form");
+
     // add an event listener on click like i had for the login button
     regForm.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -86,16 +89,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const userCredential = await createUserWithEmailAndPassword(auth, newUser, newPassword);
         console.log("user successfully signed up", userCredential.user.email);
         const user = userCredential.user;
-        console.log("User:" + userCredential.user);
+        console.log("User:" + userCredential.user.displayName);
     } catch (error) {
         console.error("sign up error:", error.code, error.message);
         alert("Login Failed 😟");
     }
         
     })
-    // get the modal 'form' 
-
-    
 
 
 
