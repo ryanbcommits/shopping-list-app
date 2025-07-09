@@ -41,13 +41,15 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.style.display = "none";
     }
 
-    window.onclick = (event) => {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
+    // this code will allow the user to click outside the modal
+    // window.onclick = (event) => {
+    //     if (event.target == modal) {
+    //         modal.style.display = "none";
+    //     }
+    // }
     
-    // ***Log in with user name and password logic*** 
+
+    // ***User already has a Log in and password*** 
     loginForm.addEventListener("submit", async (e) => {
         e.preventDefault();
 
@@ -82,14 +84,30 @@ document.addEventListener('DOMContentLoaded', () => {
         // define the variables for the modal fields.. 
         const newUser = document.getElementById("newUserEmail").value;
         const newPassword = document.getElementById("newPassword").value;
-        // const newPasswordAgain = document.getElementById("verifyPassword").value; maybe I have to create a separate check for passwords?
+        const newPasswordAgain = document.getElementById("verifyPassword").value;
+
+        // check if new password is valid then
+        const validatePassword = () => {
+            let isValid = true;
+            if (newPassword != "" && newPasswordAgain != ""){
+                if (newPassword != newPasswordAgain) {
+                    isValid = false;
+                }
+            }
+            return isValid;
+        }
 
     try {
         
         const userCredential = await createUserWithEmailAndPassword(auth, newUser, newPassword);
         console.log("user successfully signed up", userCredential.user.email);
         const user = userCredential.user;
-        console.log("User:" + userCredential.user.displayName);
+        console.log("User: " + user.email);
+
+        alert("Registration was a success!")
+        // redirects user to index.html after sucessful login
+        window.location.href = 'index.html';
+
     } catch (error) {
         console.error("sign up error:", error.code, error.message);
         alert("Login Failed 😟");

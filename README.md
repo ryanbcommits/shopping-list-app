@@ -23,6 +23,16 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 
 **6/9/25** - After attempting to have two HTML pages utilize a shared .js file, I ran into a problem. I suspected that there was an issue with having two HTML pages calling the same JavaScript file. I consulted Claude and it said that my JS was running before the HTML elements are loaded, so when my script runs, the DOM elements don't exist yet (`document.getElementById("connect")` returns null). The quick fix was to wrap the code in `DOMContentLoaded`.
 
+**7/1/25**
+- Register button must be inside the form for submit events (unless you create a variable for the button itself)
+- Modal elements are accessible via getElementById even when hidden
+- Firebase auth errors are clearer with proper error.code logging
+- Deleted register.js since the code was used in login.js instead
+
+**7/8/25**
+- Fixed the user experience after registration, the app takes them to index.html
+- Found a small bug in the code that allowed the user to click outside the modal which is not desireable for registration purposes, so I commented out code which was allowing the user to hide the modal on click events outside the modal.
+
 ## Accomplishments
 
 - ✅ Achieved multiple document additions to my database by switching from the `setDoc` method to `addDoc` method
@@ -32,11 +42,15 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 
 ## Known Issues
 
-- [ ] Fields allow any text to be entered (no validation)
+- [ ] Fields allow any text to be entered (no validation) and resubmitted multiple times
 - [ ] UI needs improving
 - [ ] Security rules need to be properly configured for production
 
 ## TODO
+
+ - Set a timeout while logged in
+ - add code that verifies password when creating a username & set password standards
+ - Work on transitioning index.html to be more of a shopping list. Once that's complete I can make it more complex.
 
 **Priority Ranking:**
 - **Rank 3:** Complete the registration process with Sign Up button.
