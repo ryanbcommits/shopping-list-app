@@ -9,7 +9,14 @@ Building off of the code I created that establishes a connection to a Firestore 
 npx vite
 ```
 
+
 Then open your browser to the localhost URL that Vite provides (usually `http://localhost:5173`).
+
+**To close project in dev mode:**
+```bash
+Ctrl + c
+```
+
 
 ## AI Disclosure
 
