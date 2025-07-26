@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById("myModal"); 
     const btn = document.getElementById("signUp");  
     const regBtn = document.getElementById("register"); 
+    
 
     // Debugging
     // console.log("modal:", modal);
@@ -41,13 +42,14 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.style.display = "none";
     }
 
-    // this code will allow the user to click outside the modal
+    // this code will allow the user to click outside the modal (currently commented out)
     // window.onclick = (event) => {
     //     if (event.target == modal) {
     //         modal.style.display = "none";
     //     }
     // }
     
+
 
     // ***User already has a Log in and password*** 
     loginForm.addEventListener("submit", async (e) => {
@@ -88,13 +90,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // check if new password is valid then
         const validatePassword = () => {
-            let isValid = true;
-            if (newPassword != "" && newPasswordAgain != ""){
-                if (newPassword != newPasswordAgain) {
-                    isValid = false;
-                }
+            if (newPassword === "" || newPaswordAgain === "") {
+                alert("Please fill in both password fields");
+                return false;
             }
-            return isValid;
+            if (newPassword !== newPaswordAgain) {
+                alert("Passwords do not match!");
+                return false;
+            }
+            return true;
+
+        };
+
+        // CALL the validation function before proceeding
+        if (!validatePassword()) {
+            return; // Stop here if validation fails
         }
 
     try {
@@ -115,10 +125,5 @@ document.addEventListener('DOMContentLoaded', () => {
         
     })
 
-
-
-    // Register button works fine here without an if Statement
-    // regBtn.addEventListener('click', ()=> {
-    //     console.log("this button was clicked later in the code.")
-    // })
+   
 });
