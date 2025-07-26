@@ -46,6 +46,7 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 - ✅ Successfully implemented Firebase authentication with registration/login
 - ✅ Converted from CDN imports to npm imports for better development experience
 - ✅ Set up Vite for modern development workflow
+- ✅ Added password validation at login
 
 ## Known Issues
 

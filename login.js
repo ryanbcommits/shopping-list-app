@@ -90,11 +90,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // check if new password is valid then
         const validatePassword = () => {
-            if (newPassword === "" || newPaswordAgain === "") {
+            if (newPassword === "" || newPasswordAgain === "") {
                 alert("Please fill in both password fields");
                 return false;
             }
-            if (newPassword !== newPaswordAgain) {
+            if (newPassword !== newPasswordAgain) {
                 alert("Passwords do not match!");
                 return false;
             }
