@@ -1,7 +1,9 @@
 import {
  signInWithEmailAndPassword, createUserWithEmailAndPassword
 } from 'firebase/auth';
-import { auth } from './firebase-config.js';
+import { setDoc, doc } from 'firebas/firestore';
+import { auth, db } from './firebase-config.js';
+
 
 
 // DOMContentLoaded ensures DOM elements exist before we try to access them
@@ -112,7 +114,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const userCredential = await createUserWithEmailAndPassword(auth, newUser, newPassword);
         console.log("user successfully signed up", userCredential.user.email);
         const user = userCredential.user;
-        console.log("User: " + user.email);
+        // console.log("User: " + user.email);
+        // console.log("UserID:" + user.uid);
+
+        // this creates a collection called users in the firestore db
+        await setDoc(doc(db, 'users', userCredential.user.uid), {
+            email: userCredential.user.email,
+            createdAt: new Date().toISOString()
+        });
 
         alert("Registration was a success!")
         // redirects user to index.html after sucessful login
