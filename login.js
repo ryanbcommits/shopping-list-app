@@ -118,13 +118,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // console.log("UserID:" + user.uid);
 
         // this creates a collection called users in the firestore db
-        await setDoc(doc(db, 'users', userCredential.user.uid), {
-            email: userCredential.user.email,
-            createdAt: new Date().toISOString()
+        await setDoc(doc(db, 'users', user.uid), {
+            email: user.email,
+            createdAt: new Date().toISOString(),
+            // additional data later.
         });
 
         alert("Registration was a success!")
-        // redirects user to index.html after sucessful login
         window.location.href = 'index.html';
 
     } catch (error) {

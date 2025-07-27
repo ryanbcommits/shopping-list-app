@@ -40,6 +40,9 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 - Fixed the user experience after registration, the app takes them to index.html
 - Found a small bug in the code that allowed the user to click outside the modal which is not desireable for registration purposes, so I commented out code which was allowing the user to hide the modal on click events outside the modal.
 
+**7/26/25**
+- Added password validation at registration
+
 ## Accomplishments
 
 - ✅ Achieved multiple document additions to my database by switching from the `setDoc` method to `addDoc` method
