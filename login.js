@@ -1,7 +1,7 @@
 import {
  signInWithEmailAndPassword, createUserWithEmailAndPassword
 } from 'firebase/auth';
-import { setDoc, doc } from 'firebas/firestore';
+import { setDoc, doc } from 'firebase/firestore';
 import { auth, db } from './firebase-config.js';
 
 
@@ -44,16 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.style.display = "none";
     }
 
-    // this code will allow the user to click outside the modal (currently commented out)
-    // window.onclick = (event) => {
-    //     if (event.target == modal) {
-    //         modal.style.display = "none";
-    //     }
-    // }
-    
-
-
-    // ***User already has a Log in and password*** 
+    // This code is for the log in form
     loginForm.addEventListener("submit", async (e) => {
         e.preventDefault();
 
@@ -76,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }    
     });    
 
-    // *** Create users with email and password***
+    // Registreation code below
  
     // create variable for the registration form 
     const regForm = document.getElementById("sign-up-form");
@@ -117,12 +108,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // console.log("User: " + user.email);
         // console.log("UserID:" + user.uid);
 
-        // this creates a collection called users in the firestore db
+        // this creates a collection for each user in the db identified by their UID.
         await setDoc(doc(db, 'users', user.uid), {
             email: user.email,
             createdAt: new Date().toISOString(),
             // additional data later.
         });
+        console.log(user.uid);
 
         alert("Registration was a success!")
         window.location.href = 'index.html';
