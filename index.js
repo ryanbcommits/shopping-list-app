@@ -53,11 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 timestamp: new Date().toISOString(),
             })
 
-            // Clear form
-            username = "";
-            userAge = "";
-            email = "";
-
             showSubmittedData({
                 name: username,
                 age: userAge,
@@ -69,7 +64,11 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error('Firestore error:', error);
             
         }
-   
+        
+        // Clear form
+            username = "";
+            userAge = "";
+            email = "";
 
         function showSubmittedData(data) {
             const displayDiv = document.createElement("div");

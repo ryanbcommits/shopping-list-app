@@ -43,25 +43,45 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 **7/26/25**
 - Added password validation at registration
 
+**7/30/25**
+- Successfully implemented user-specific data storage using Firebase UID
+- Added visual feedback system - submitted data now populates in a dynamic list
+- Improved user experience with form clearing after successful submission
+- Learned the difference between setDoc() and addDoc() for document creation
+- Implemented proper data structure organization (users collection with individual user documents)
+
+
 ## Accomplishments
 
 - ✅ Achieved multiple document additions to my database by switching from the `setDoc` method to `addDoc` method
 - ✅ Successfully implemented Firebase authentication with registration/login
 - ✅ Converted from CDN imports to npm imports for better development experience
 - ✅ Set up Vite for modern development workflow
-- ✅ Added password validation at login
+- ✅ Added password validation at registration
+- ✅ Implemented user-specific data storage using Firebase user authentication
+- ✅ Added dynamic list display for submitted data with visual feedback
+- ✅ Organized database structure with proper user document hierarchy
+- ✅ Successfully separated JavaScript into modular files (login.js, index.js, firebase-config.js)
+
+
 
 ## Known Issues
 
-- [ ] Fields allow any text to be entered (no validation) and resubmitted multiple times
+- [x] ~~Fields allow any text to be entered (no validation) and resubmitted multiple times~~ - Partially resolved: password validation added
 - [ ] UI needs improving
 - [ ] Security rules need to be properly configured for production
+- [ ] Form validation for other fields besides password
+- [ ] List items don't persist on page reload (only show current session submissions)
 
 ## TODO
 
- - Set a timeout while logged in
- - add code that verifies password when creating a username & set password standards
- - Work on transitioning index.html to be more of a shopping list. Once that's complete I can make it more complex.
+- [ ] Load and display user's existing data when they log in
+- [ ] Add ability to edit/delete list items
+- [ ] Set a timeout while logged in
+- [ ] Work on transitioning index.html to be more of a shopping list
+- [ ] Add form validation for name and email fields
+- [ ] Improve authentication state management
+- [ ] Improve UI/UX design
 
 **Priority Ranking:**
 - **Rank 3:** Complete the registration process with Sign Up button.
