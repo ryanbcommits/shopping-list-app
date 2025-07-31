@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert("Login Successful!");
 
             // redirects user to index.html after sucessful login
-            window.location.href = 'index.html';
+            window.location.href = 'home.html';
             
         } catch (error) {
             console.error("login error:", error.code, error.message);
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(user.uid);
 
         alert("Registration was a success!")
-        window.location.href = 'index.html';
+        window.location.href = 'home.html';
 
     } catch (error) {
         console.error("sign up error:", error.code, error.message);
