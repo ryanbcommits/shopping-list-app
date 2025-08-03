@@ -50,6 +50,9 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 - Learned the difference between setDoc() and addDoc() for document creation
 - Implemented proper data structure organization (users collection with individual user documents)
 
+**8/3/25**
+- Sucessfully implemented writing inputs to the window, but this will need to be changed as the data will need to be a live pull from the db not just a temp imput for the purposes of this app.
+
 
 ## Accomplishments
 
