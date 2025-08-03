@@ -51,13 +51,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 age: parseInt(userAge),
                 email: email,
                 timestamp: new Date().toISOString(),
-            })
+            });
 
-            showSubmittedData({
+            // Clear form
+            document.getElementById("username").value = "";
+            document.getElementById("userAge").value = "";
+            document.getElementById("email").value = "";
+
+
+            addToList({
                 name: username,
                 age: userAge,
                 email: email,
-                id: docRef.id,
+                id: docRef.id
             });
 
         } catch (error) {
@@ -65,32 +71,30 @@ document.addEventListener("DOMContentLoaded", () => {
             
         }
         
-        // Clear form
-            username = "";
-            userAge = "";
-            email = "";
-
-        function showSubmittedData(data) {
-            const displayDiv = document.createElement("div");
-            displayDiv.style.cssText = `
-            background-color: #e8f5e8;
-            border: 1px solid #4CAF50;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 5px;
+        // Success functions:
+        
+        function addToList(data) {
+            //get the list container
+            const myList = document.getElementById("myList");
+            
+            //create a new list item
+            const listItem = document.createElement("li");
+         
+            // Add content to the list item
+            listItem.innerHTML = `
+            <strong>${data.name}</stong> - Age: ${data.age}, Email: ${data.email}
+            <small> (ID; ${data.id})</small>
             `;
 
-             displayDiv.innerHTML = `
-                <h4>✅ Successfully Saved:</h4>
-                <p><strong>Name:</strong> ${data.name}</p>
-                <p><strong>Age:</strong> ${data.age}</p>
-                <p><strong>Email:</strong> ${data.email}</p>
-                <p><strong>Document ID:</strong> ${data.id}</p>
+            listItem.style.cssText = `
+                padding: 10px;
+                margin: 5px 0;
+                background-color: #f0f8ff;
+                border-left: 4px solid #4CAF50;
+                border-radius: 4px;
             `;
 
-            // Add to page
-            const form = document.getElementById("userForm");
-            form.parentNode.insertBefore(displayDiv, form.nextSibling);
+            myList.appendChild(listItem);
         }
     });
 
