@@ -45,7 +45,7 @@ import { signOut } from 'firebase/auth';
 
             console.log("Found", querySnapshot.size, 'documents');
 
-            // Use regular for loop as you wanted to practice
+            // Use regular for loop as you wanted to practice to write all data written to the db to the window.
             const docs = querySnapshot.docs;
         
             for (let i = 0; i < docs.length; i++) {
@@ -54,14 +54,14 @@ import { signOut } from 'firebase/auth';
 
                 addToList({
                     name: data.name, // From DB
-                    age: data.age,
-                    email: data.email,
-                    id: doc.id
+                    age: data.age, // From DB
+                    email: data.email, // From DB
+                    id: doc.id // From DB
                 });
             }
 
             console.log('Loaded', querySnapshot.size, 'items from database');
-
+            
         } catch (error) {
             console.error("Error loading user data:", error);
         }
@@ -79,11 +79,16 @@ import { signOut } from 'firebase/auth';
                 window.location.href = "index.html"
             } else {
                 console.log("User is logged in:", user.email);
+
+                const welcomeHeading = document.getElementById("greeting");
+                if (welcomeHeading) {
+                    welcomeHeading.textContent = `Welcome back, ${user.email}!`;
+                }
+
                 // load their existing data
                 loadUserData();
             }
         });
-            
             
         button.addEventListener("click", async () => {
             
@@ -94,8 +99,9 @@ import { signOut } from 'firebase/auth';
 
 
         try {
-
-                const user = auth.currentUser; // Get currently logged-in user
+                // Get currently logged-in user
+                const user = auth.currentUser; 
+                
 
                 const docRef = await addDoc(collection(db, 'users', user.uid, 'posts'), {
                     name: username,
