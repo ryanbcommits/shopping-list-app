@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, doc, getDoc, collection, addDoc } from 'firebase/firestore'
+import { getFirestore, doc, getDoc, collection, addDoc, getDocs  } from 'firebase/firestore'
 import {
-    getAuth,  
+    getAuth, onAuthStateChanged 
 } from 'firebase/auth';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -25,6 +25,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);  // Note: getFirestore instead of getDatabase
+export { onAuthStateChanged };
 
 
 
