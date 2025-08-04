@@ -51,7 +51,13 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 - Implemented proper data structure organization (users collection with individual user documents)
 
 **8/3/25**
-- Sucessfully implemented writing inputs to the window, but this will need to be changed as the data will need to be a live pull from the db not just a temp imput for the purposes of this app.
+- Successfully implemented dynamic list display with real-time database loading using getDocs()
+- Added authentication state management with onAuthStateChanged() - users now see their existing data when logging back in
+- Implemented user-specific data persistence - list items now survive page reloads and logout/login cycles
+- Added personalized welcome message using template literals with user.email
+- Learned difference between getDoc() (single) vs getDocs() (multiple documents)
+- Fixed function scope issues by moving reusable functions outside event listeners
+- TODO: Add delete functionality for list items and transition to shopping list format
 
 
 ## Accomplishments
@@ -69,21 +75,17 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 
 
 ## Known Issues
-
-- [x] ~~Fields allow any text to be entered (no validation) and resubmitted multiple times~~ - Partially resolved: password validation added
+- [x] ~~List items don't persist on page reload~~ - RESOLVED: Now loads from database
 - [ ] UI needs improving
 - [ ] Security rules need to be properly configured for production
 - [ ] Form validation for other fields besides password
-- [ ] List items don't persist on page reload (only show current session submissions)
 
 ## TODO
-
-- [ ] Load and display user's existing data when they log in
-- [ ] Add ability to edit/delete list items
+- [x] ~~Load and display user's existing data when they log in~~ - COMPLETED
+- [ ] Add ability to edit/delete list items (IN PROGRESS)
 - [ ] Set a timeout while logged in
-- [ ] Work on transitioning index.html to be more of a shopping list
+- [ ] Work on transitioning to shopping list functionality
 - [ ] Add form validation for name and email fields
-- [ ] Improve authentication state management
 - [ ] Improve UI/UX design
 
 **Priority Ranking:**
@@ -99,11 +101,11 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 ## Project Structure
 
 ```
-├── index.html          # Main app page
-├── login.html          # Login/registration page
-├── index.js           # Main app logic
-├── login.js           # Authentication logic
+├── index.html          # Login/registration page (renamed from login.html)
+├── home.html           # Main app page (renamed from index.html)
+├── login.js            # Authentication logic
+├── index.js            # Main app logic (serves home.html)
 ├── firebase-config.js  # Firebase configuration
-├── style.css          # Styling
-└── package.json       # Dependencies
+├── style.css           # Styling
+└── package.json        # Dependencies
 
