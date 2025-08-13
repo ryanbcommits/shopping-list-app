@@ -17,7 +17,6 @@ Then open your browser to the localhost URL that Vite provides (usually `http://
 Ctrl + c
 ```
 
-
 ## AI Disclosure
 
 As AI is being used more and more with coding, my goal is to leverage LLMs - in this case Claude - to provide me with supplemental knowledge if I run into roadblocks.
@@ -38,7 +37,7 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 
 **7/8/25**
 - Fixed the user experience after registration, the app takes them to index.html
-- Found a small bug in the code that allowed the user to click outside the modal which is not desireable for registration purposes, so I commented out code which was allowing the user to hide the modal on click events outside the modal.
+- Found a small bug in the code that allowed the user to click outside the modal which is not desirable for registration purposes, so I commented out code which was allowing the user to hide the modal on click events outside the modal.
 
 **7/26/25**
 - Added password validation at registration
@@ -59,6 +58,14 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 - Fixed function scope issues by moving reusable functions outside event listeners
 - TODO: Add delete functionality for list items and transition to shopping list format
 
+**8/12/25**
+- Implemented soft delete functionality using updateDoc() instead of permanent deletion
+- Added "hidden" field to database documents to preserve data while removing from user view
+- Learned difference between hard delete (deleteDoc) vs soft delete (updateDoc with hidden flag)
+- Successfully filtered hidden items from display using conditional logic in loadUserData()
+- Chose DOM element creation approach (createElement) over complex template literal event handling
+- Improved code readability by separating HTML creation from event listener attachment
+- Database now preserves all user data while maintaining clean user interface experience
 
 ## Accomplishments
 
@@ -71,14 +78,30 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 - ✅ Added dynamic list display for submitted data with visual feedback
 - ✅ Organized database structure with proper user document hierarchy
 - ✅ Successfully separated JavaScript into modular files (login.js, index.js, firebase-config.js)
-
+- ✅ Implemented soft delete pattern for data preservation while maintaining clean UI
+- ✅ Added updateDoc functionality for non-destructive data operations
+- ✅ Learned multiple approaches to DOM event handling and chose simplest solution
 
 
 ## Known Issues
 - [x] ~~List items don't persist on page reload~~ - RESOLVED: Now loads from database
+- [x] ~~Add ability to edit/delete list items~~ - COMPLETED: Soft delete implemented
 - [ ] UI needs improving
 - [ ] Security rules need to be properly configured for production
 - [ ] Form validation for other fields besides password
+- [ ] Add "Show Hidden Items" toggle feature
+- [ ] Implement edit functionality for existing items
+- [ ] Add categories or tags to list items
+
+## TODO
+- [x] ~~Load and display user's existing data when they log in~~ - COMPLETED
+- [x] ~~Add delete functionality for list items~~ - COMPLETED: Soft delete implemented
+- [ ] Add edit functionality for existing items  
+- [ ] Add "Show Hidden Items" toggle feature
+- [ ] Set a timeout while logged in
+- [ ] Work on transitioning to shopping list functionality
+- [ ] Add form validation for name and email fields
+- [ ] Improve UI/UX design
 
 ## TODO
 - [x] ~~Load and display user's existing data when they log in~~ - COMPLETED
@@ -88,15 +111,10 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 - [ ] Add form validation for name and email fields
 - [ ] Improve UI/UX design
 
-**Priority Ranking:**
-- **Rank 3:** Complete the registration process with Sign Up button.
-- **Rank 7:** Have the user's data written to the DOM (display on page)
-- **Rank 12:** Adjust the authorization standards to meet Firestore's guidelines
-- [ ] Finish creating the registration page with Claude
-- [ ] Have the info from the database print to the window
-- [ ] Improve authentication state management
-- [ ] Add form validation
-- [ ] Improve UI/UX design
+**Current Priorities**
+- **Next:** Transition to shopping list functionality
+- **Soon:** Add edit functionality for existing items
+- **Future:** Improve UI/UX design and add form validation
 
 ## Project Structure
 
@@ -108,4 +126,6 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 ├── firebase-config.js  # Firebase configuration
 ├── style.css           # Styling
 └── package.json        # Dependencies
+
+
 

@@ -1,21 +1,21 @@
 import { 
-    addDoc, collection, getDoc, deleteDoc, getDocs, doc  } from 'firebase/firestore';
+    addDoc, collection, getDoc, deleteDoc, getDocs, doc,  
+    updateDoc} from 'firebase/firestore';
 import { db } from './firebase-config.js';
 import { auth, onAuthStateChanged } from './firebase-config.js'
-import { signOut } from 'firebase/auth';
+import { multiFactor, signOut } from 'firebase/auth';
 
     // Moved addtoList function to top because  it was defined inside the button click event, so loadUserData can't see it.
     // Success functions:
     function addToList(data) {
-        //get the list container
-        const myList = document.getElementById("myList");
         
-        //create a new list item
-        const listItem = document.createElement("li");
-        
+        const myList = document.getElementById("myList"); //get the list container        
+        const listItem = document.createElement("li"); //create a new list item
+        const deleteButton = document.createElement("button");
+
         // Add content to the list item
         listItem.innerHTML = `
-        <strong>${data.name}</strong> - Age: ${data.age}, Email: ${data.email}
+        <strong>${data.name}</strong> - Age: ${data.age}, Email: ${data.email}, 
         <small> (ID: ${data.id})</small>
         `;
 
@@ -27,6 +27,29 @@ import { signOut } from 'firebase/auth';
             border-radius: 4px;
         `;
 
+        // Simple click handler
+        deleteButton.addEventListener('click', async () => {
+            try {
+                const user = auth.currentUser;
+                await updateDoc(doc(db, 'users', user.uid, 'posts', data.id), {
+                    hidden: true
+                });
+                
+                listItem.remove(); // still removes from view
+                console.log("item hidden");
+            } catch (error) {
+                console.error("Delete failed:", error);
+            }
+        })
+        
+
+        // Set up the delete button
+        deleteButton.textContent = "Delete";
+        deleteButton.style.marginLeft = "10px";
+        deleteButton.style.background = "";
+        deleteButton.style.color = "black";
+
+        listItem.appendChild(deleteButton);
         myList.appendChild(listItem);
     }
 
@@ -34,8 +57,7 @@ import { signOut } from 'firebase/auth';
     async function loadUserData(){
         try {
             const user = auth.currentUser;
-            // if there is no user exit the function immediately
-            if (!user) return;
+            if (!user) return;   // if there is no user exit the function immediately
 
             const querySnapshot = await getDocs(collection(db, 'users', user.uid, 'posts'));
 
@@ -52,12 +74,16 @@ import { signOut } from 'firebase/auth';
                 const doc = docs[i];
                 const data = doc.data();
 
-                addToList({
-                    name: data.name, // From DB
-                    age: data.age, // From DB
-                    email: data.email, // From DB
-                    id: doc.id // From DB
-                });
+                // only show unhidden data
+                if (!data.hidden) {
+                    addToList({
+                        name: data.name, // From DB
+                        age: data.age, // From DB
+                        email: data.email, // From DB
+                        id: doc.id // From DB
+                    });
+                }
+                
             }
 
             console.log('Loaded', querySnapshot.size, 'items from database');
@@ -108,6 +134,7 @@ import { signOut } from 'firebase/auth';
                     age: parseInt(userAge),
                     email: email,
                     timestamp: new Date().toISOString(),
+                    hidden: false
                 });
 
                 // Clear form
