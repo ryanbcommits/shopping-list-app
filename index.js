@@ -13,7 +13,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         const listItem = document.createElement("li"); //create a new list item
         const deleteButton = document.createElement("button");
 
-        // Add content to the list item
+        // Add content to the list item - the ${} you see below are template literals
         listItem.innerHTML = `
         <strong>${data.name}</strong> - Age: ${data.age}, Email: ${data.email}, 
         <small> (ID: ${data.id})</small>

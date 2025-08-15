@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.style.display = "none";
     }
 
-    // This code is for the log in form
+    // This code is for the log in form for users who already have a registered email and pw
     loginForm.addEventListener("submit", async (e) => {
         e.preventDefault();
 
@@ -77,6 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
 
         // define the variables for the modal fields.. 
+        const firstName = document.getElementById("firstName").value;
+        const lastName = document.getElementById("lastName").value;
         const newUser = document.getElementById("newUserEmail").value;
         const newPassword = document.getElementById("newPassword").value;
         const newPasswordAgain = document.getElementById("verifyPassword").value;
@@ -102,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
         
-        const userCredential = await createUserWithEmailAndPassword(auth, newUser, newPassword);
+        const userCredential = await createUserWithEmailAndPassword(auth, firstName, lastName, newUser, newPassword);
         console.log("user successfully signed up", userCredential.user.email);
         const user = userCredential.user;
         // console.log("User: " + user.email);
@@ -110,6 +112,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // this creates a collection for each user in the db identified by their UID.
         await setDoc(doc(db, 'users', user.uid), {
+            firstName: user.firstName,
+            lastName: user.lastName,
             email: user.email,
             createdAt: new Date().toISOString(),
             // additional data later.
