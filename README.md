@@ -67,6 +67,9 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 - Improved code readability by separating HTML creation from event listener attachment
 - Database now preserves all user data while maintaining clean user interface experience
 
+**8/17/25***
+- Included first name and last name at point of registration so that the home screen could be more personalized.
+
 ## Accomplishments
 
 - ✅ Achieved multiple document additions to my database by switching from the `setDoc` method to `addDoc` method

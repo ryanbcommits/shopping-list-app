@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = document.getElementById("password").value;
 
     try {
+            // this sign up process only accepts email and passwords ( if you want to store names in db you have to add a new collection to the db)
             const userCredential = await signInWithEmailAndPassword(auth, loginEmail, password);
             console.log("login successful!", userCredential.user.email);
             
@@ -104,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
         
-        const userCredential = await createUserWithEmailAndPassword(auth, firstName, lastName, newUser, newPassword);
+        const userCredential = await createUserWithEmailAndPassword(auth, newUser, newPassword);
         console.log("user successfully signed up", userCredential.user.email);
         const user = userCredential.user;
         // console.log("User: " + user.email);
@@ -112,9 +113,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // this creates a collection for each user in the db identified by their UID.
         await setDoc(doc(db, 'users', user.uid), {
-            firstName: user.firstName,
-            lastName: user.lastName,
             email: user.email,
+            firstName: firstName, // from input
+            lastName: lastName, // from input
             createdAt: new Date().toISOString(),
             // additional data later.
         });

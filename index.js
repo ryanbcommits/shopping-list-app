@@ -99,19 +99,44 @@ import { multiFactor, signOut } from 'firebase/auth';
         const button = document.getElementById("connect"); 
         const logOut = document.getElementById("logOut");
 
-        // Check authentication and load data
-        onAuthStateChanged(auth, (user) => {
+
+        // get user profile 'first name' from Firestore
+        async function getUserProfile(userId) {
+            try {
+                const userDocRef = doc(db, "users", userId);
+                const userDocSnap = await getDoc(userDocRef);
+
+                if (userDocSnap.exists()) {
+                    return userDocSnap.data();
+                } else {
+                    console.log("No user profile found");
+                    return null;
+                } 
+            } catch (error) {
+                console.error("Error getting user profile:", error);
+                return null;
+            }
+        }
+
+        // Check authentication and load data (remember use async when querying a db)
+        onAuthStateChanged(auth, async (user) => {
             if (!user) {
                 window.location.href = "index.html"
             } else {
-                console.log("User is logged in:", user.email);
+                console.log("The User is logged in:", user.email);
 
-                const welcomeHeading = document.getElementById("greeting");
-                if (welcomeHeading) {
-                    welcomeHeading.textContent = `Welcome back, ${user.email}!`;
+                // get the user's profile data from Firestore
+                const userProfile = await getUserProfile(user.uid);
+
+                // greet the user with their first name
+                const greeting = document.getElementById("greeting");
+                if (greeting && userProfile) {
+                    greeting.textContent = `Welcome back, ${userProfile.firstName}!`;
+                } else if (greeting) {
+                    // Fallback to email if no profile found
+                    greeting.textContent = `Welcome back, ${userProfile.email}!`;
                 }
 
-                // load their existing data
                 loadUserData();
             }
         });
