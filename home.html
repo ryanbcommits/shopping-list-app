@@ -3,32 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connecting to A DB with a Button</title>
+    <title>My Shopping List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        button {
+            margin: 5px;
+        }
+        #logOut {
+            float: right;  /* Puts logout in corner */
+        }
+    </style>
 </head>
 <body>
-    <form id="userForm">
-        <div>Fill in the fields and hit Submit - the data will be added to the Firestore DB.</div>
-        <div>
-            <label for="username">Name</label>
-            <input type="text" id="username" name="username">
-        </div>
+    <h1 id="greeting"></h1>
 
+    <form id="userForm">
+        <div>Add items to your shopping list!</div>
         <div>
-            <label for="userAge">Age</label>
-            <input type="number" id="userAge" name="userAge"> 
-        </div>
-        <div>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email">
+            <label for="itemName">Enter Item Here: </label>
+            <input type="text" id="itemName" placeholder="Milk, Eggs, Cheese..." autofocus>
         </div>
     </form>
 
-    <button id="connect">Submit</button>
+    <button id="connect">Add to List</button>
 
     <button id="logOut">Log out</button>
     
 
-    <h1 id="greeting"></h1>
+    
     <h1>Your List</h1>
     <ul id="myList">
         <!--List items will be added here dynamically-->

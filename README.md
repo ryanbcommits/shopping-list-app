@@ -27,6 +27,28 @@ As AI is being used more and more with coding, my goal is to leverage LLMs - in 
 
 Some Firebase authentication logic was developed with assistance from Claude AI.
 
+## Key Learnings
+
+### JavaScript Concepts
+- **Event Listeners**: Learned about DOMContentLoaded and why scripts need to wait for HTML
+- **Async/Await**: Understanding asynchronous operations with Firebase
+- **Scope**: Fixed function scope issues by moving reusable functions outside event listeners
+
+### Firebase Skills
+- **Authentication**: User registration, login, and session management
+- **Firestore**: Difference between setDoc() vs addDoc(), soft delete patterns
+- **Data Structure**: Organizing user-specific data with proper hierarchy
+
+## How The App Works
+
+1. User registers/logs in (login.js handles authentication)
+2. Redirects to home.html after successful login
+3. Shopping list loads from Firestore (user-specific data)
+4. User can add items (stores in Firestore with timestamp)
+5. User can delete items (soft delete - marks as hidden)
+6. Data persists across sessions
+
+
 **6/9/25** - After attempting to have two HTML pages utilize a shared .js file, I ran into a problem. I suspected that there was an issue with having two HTML pages calling the same JavaScript file. I consulted Claude and it said that my JS was running before the HTML elements are loaded, so when my script runs, the DOM elements don't exist yet (`document.getElementById("connect")` returns null). The quick fix was to wrap the code in `DOMContentLoaded`.
 
 **7/1/25**
@@ -67,8 +89,23 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 - Improved code readability by separating HTML creation from event listener attachment
 - Database now preserves all user data while maintaining clean user interface experience
 
-**8/17/25***
-- Included first name and last name at point of registration so that the home screen could be more personalized.
+**8/17/25**
+- Included first name and last name at point of registration
+- Changed code to be more in line with a shopping list app
+- Added Enter key support with preventDefault() to stop form refresh
+- Learned about strict equality (===) vs loose equality (==)
+- Understood difference between DOM, document, and window objects
+
+## Challenges Overcome
+
+- **Problem**: JavaScript running before DOM loaded
+  - **Solution**: Wrapped code in DOMContentLoaded
+
+- **Problem**: List items disappearing on page reload
+  - **Solution**: Implemented loadUserData() with getDocs()
+
+- **Problem**: Delete button events in template literals
+  - **Solution**: Used createElement approach instead
 
 ## Accomplishments
 
@@ -96,28 +133,27 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 - [ ] Implement edit functionality for existing items
 - [ ] Add categories or tags to list items
 
-## TODO
-- [x] ~~Load and display user's existing data when they log in~~ - COMPLETED
-- [x] ~~Add delete functionality for list items~~ - COMPLETED: Soft delete implemented
-- [ ] Add edit functionality for existing items  
-- [ ] Add "Show Hidden Items" toggle feature
-- [ ] Set a timeout while logged in
-- [ ] Work on transitioning to shopping list functionality
-- [ ] Add form validation for name and email fields
-- [ ] Improve UI/UX design
 
-## TODO
-- [x] ~~Load and display user's existing data when they log in~~ - COMPLETED
-- [ ] Add ability to edit/delete list items (IN PROGRESS)
-- [ ] Set a timeout while logged in
-- [ ] Work on transitioning to shopping list functionality
-- [ ] Add form validation for name and email fields
-- [ ] Improve UI/UX design
+## Roadmap
 
-**Current Priorities**
-- **Next:** Transition to shopping list functionality
-- **Soon:** Add edit functionality for existing items
-- **Future:** Improve UI/UX design and add form validation
+### ✅ Completed
+- User authentication
+- Add items to list
+- Soft delete functionality
+- Data persistence
+- Enter key support for adding items
+
+### 🔄 In Progress
+
+- UI/UX improvements
+
+### 📋 Planned
+- Edit existing items
+- Categories/tags for items
+- "Show hidden items" toggle
+- Session timeout
+- Form validation for all fields
+
 
 ## Project Structure
 
