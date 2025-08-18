@@ -18,19 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const regBtn = document.getElementById("register"); 
     
 
-    // Debugging
-    // console.log("modal:", modal);
-    // console.log("signUp btn:", btn);
-    // console.log("register btn:", regBtn);
-
-    // The Register button works here, but isn't really necessary
-    // because you can call the regBtn later in the code 
-    // if (regBtn) {
-    //    regBtn.addEventListener('click', () => {
-    //     console.log("Register button clicked");
-    //    })
-    // } 
-
     // Get the <span> element that closes the modal
     const span = document.getElementsByClassName("close")[0];
 
@@ -83,6 +70,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const newUser = document.getElementById("newUserEmail").value;
         const newPassword = document.getElementById("newPassword").value;
         const newPasswordAgain = document.getElementById("verifyPassword").value;
+
+        // verify first name and last names are entered in modal
+        if (!firstName.trim() || !lastName.trim()) {
+            alert("Please enter your first and last name");
+            return;
+        }
 
         // check if new password is valid then
         const validatePassword = () => {

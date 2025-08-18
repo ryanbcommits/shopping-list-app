@@ -21,7 +21,13 @@ import { multiFactor, signOut } from 'firebase/auth';
         const capitalizedItem = data.item.charAt(0).toUpperCase() + data.item.slice(1);
 
         // Add content to the list item - the ${} you see below are template literals
-        listItem.innerHTML = `<strong>${capitalizedItem}</strong>`;
+        // listItem.innerHTML = `<strong>${capitalizedItem}</strong>`;
+        
+        // above code has a vulnerability. Claude flagged (input validation/sanitization) 
+        // Safer approach - use textContent
+        const strong = document.createElement("strong");
+        strong.textContent = capitalizedItem;
+        listItem.appendChild(strong);
 
         listItem.style.cssText = `
             padding: 10px;
@@ -54,6 +60,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         deleteButton.style.color = "black";
 
         listItem.appendChild(deleteButton);
+
         myList.appendChild(listItem);
     }
 
@@ -207,12 +214,12 @@ import { multiFactor, signOut } from 'firebase/auth';
                     // email: email,
                     // id: docRef.id
                     item: itemName,
-                    //id: docRef.id,
+                    id: docRef.id,
                 });
 
             } catch (error) {
                 console.error('Firestore error:', error);
-                
+                alert("Failed to add an item. Pleaes try again");
             }
         
         });
@@ -226,9 +233,10 @@ import { multiFactor, signOut } from 'firebase/auth';
         try {
             await signOut(auth);
             console.log("user logged out");
-            window.location.href = 'login.html';
+            window.location.href = 'index.html';
         } catch (error) {
-            console.log("An error occured with logout")
+            console.log("An error occured with logout");
+            alert("Log out failed. Please try again");
         }
 
         });
