@@ -5,6 +5,58 @@ import { db } from './firebase-config.js';
 import { auth, onAuthStateChanged } from './firebase-config.js'
 import { multiFactor, signOut } from 'firebase/auth';
 
+    // Adding a setTimout to my code:
+
+    // setting a rate limiting variable
+    let lastSubmitTime = 0;
+    let warningTimer;
+    let inactivityTimer;
+
+    const TIMEOUT_DURATION = 15 * 60 * 1000; // 15 min in milliseconds
+    const WARNING_DURATION = 14 * 60 * 1000; // Warning at 14 minutes
+
+    function resetInactivityTimer(){
+        // Clear existing timer with clearTimeout() method - see MDN webdocs
+        clearTimeout(inactivityTimer); // clearTimeout 
+        clearTimeout(warningTimer); // Clear warning too
+
+        // Warning timer
+        warningTimer = setTimeout(() => {
+            if (confirm("You'll be logged out in 1 minute due to inactivity. Click OK to stay logged in.")) {
+                resetInactivityTimer();
+            }
+        }, WARNING_DURATION);
+
+        // Start a new timer
+        inactivityTimer = setTimeout(() => {
+            alert("You've been logged out due to inactivity");
+            signOut(auth);
+            window.location.href = "index.html";
+        }, TIMEOUT_DURATION);
+    }
+
+    // Function to start monitoring activity
+    function startInactivityMonitor() {
+        // Listen for any user activity
+        document.addEventListener('click', resetInactivityTimer);
+        document.addEventListener('keypress', resetInactivityTimer);
+        document.addEventListener('mousemove', resetInactivityTimer);
+        document.addEventListener('scroll', resetInactivityTimer);
+
+        // start timer
+        resetInactivityTimer();
+    }
+
+    // Function to stop monitoring (for cleanup)
+    function stopInactivityMonitor() {
+        clearTimeout(inactivityTimer);
+        document.removeEventListener('click', resetInactivityTimer);
+        document.removeEventListener('keypress', resetInactivityTimer);
+        document.removeEventListener('mousemove', resetInactivityTimer);
+        document.removeEventListener('scroll', resetInactivityTimer);
+    }
+
+
     // Moved addtoList function to top because  it was defined inside the button click event, so loadUserData can't see it.
     // Success functions:
 
@@ -109,7 +161,6 @@ import { multiFactor, signOut } from 'firebase/auth';
 
     document.addEventListener("DOMContentLoaded", () => {
         // Code for writing and reading from the db
-        // get the button by its ID
         const button = document.getElementById("connect"); 
         const logOut = document.getElementById("logOut");
         const itemInput = document.getElementById("itemName");
@@ -147,9 +198,14 @@ import { multiFactor, signOut } from 'firebase/auth';
         // Check authentication and load data (remember use async when querying a db)
         onAuthStateChanged(auth, async (user) => {
             if (!user) {
+                // User is not logged in
+                stopInactivityMonitor();
                 window.location.href = "index.html"
             } else {
                 console.log("The User is logged in:", user.email);
+
+                // Start inactivity timer
+                startInactivityMonitor();
 
                 // get the user's profile data from Firestore
                 const userProfile = await getUserProfile(user.uid);
@@ -170,9 +226,12 @@ import { multiFactor, signOut } from 'firebase/auth';
         // The button even is the meat and potatoes of this app. 
         button.addEventListener("click", async () => {
             
-            // let username = document.getElementById("username").value;
-            // let userAge = document.getElementById("userAge").value;
-            // let email = document.getElementById("email").value;
+            // Rate limiting code here
+            const now = Date.now();
+            if (now - lastSubmitTime < 1000) { // 1 second cooldown
+                return; // Exit if clicked too fast 
+            }
+            lastSubmitTime = now;
             
             const itemName = document.getElementById("itemName").value;
 
@@ -182,18 +241,18 @@ import { multiFactor, signOut } from 'firebase/auth';
                 return;
             }
 
+            if (itemName.length > 50) {
+                alert("Item name is too long! Please keep it under 50 characters.");
+                return;
+            }
+
+            button.disabled = true;
+            button.textContent = "Adding...";
+
         try {
                 // Get currently logged-in user
                 const user = auth.currentUser; 
                 
-                // defines the docRef to add 'name', 'age', etc. to the 'posts' collection in the db
-                // const docRef = await addDoc(collection(db, 'users', user.uid, 'posts'), {
-                //     name: username,
-                //     age: parseInt(userAge),
-                //     email: email,
-                //     timestamp: new Date().toISOString(),
-                //     hidden: false
-                // });
 
                 const docRef = await addDoc(collection(db, 'users', user.uid, 'shoppingList'), {
                     item: itemName,
@@ -219,9 +278,11 @@ import { multiFactor, signOut } from 'firebase/auth';
 
             } catch (error) {
                 console.error('Firestore error:', error);
-                alert("Failed to add an item. Pleaes try again");
+                alert("Failed to add an item. Please try again");
+            } finally {
+                button.disabled = false;
+                button.textContent = "Add to List";
             }
-        
         });
 
 

@@ -1,5 +1,5 @@
 import {
- signInWithEmailAndPassword, createUserWithEmailAndPassword
+ signInWithEmailAndPassword, createUserWithEmailAndPassword, setPersistence, browserSessionPersistence
 } from 'firebase/auth';
 import { setDoc, doc } from 'firebase/firestore';
 import { auth, db } from './firebase-config.js';
@@ -39,15 +39,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = document.getElementById("password").value;
 
     try {
-            // this sign up process only accepts email and passwords ( if you want to store names in db you have to add a new collection to the db)
-            const userCredential = await signInWithEmailAndPassword(auth, loginEmail, password);
-            console.log("login successful!", userCredential.user.email);
-            
-    
-            alert("Login Successful!");
 
-            // redirects user to index.html after sucessful login
-            window.location.href = 'home.html';
+        // Adding session persistance
+        await setPersistence(auth, browserSessionPersistence);
+
+        // this sign up process only accepts email and passwords ( if you want to store names in db you have to add a new collection to the db)
+        const userCredential = await signInWithEmailAndPassword(auth, loginEmail, password);
+        console.log("login successful!", userCredential.user.email);
+        
+
+        alert("Login Successful!");
+
+        // redirects user to index.html after sucessful login
+        window.location.href = 'home.html';
             
         } catch (error) {
             console.error("login error:", error.code, error.message);
@@ -71,14 +75,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const newPassword = document.getElementById("newPassword").value;
         const newPasswordAgain = document.getElementById("verifyPassword").value;
 
+
         // verify first name and last names are entered in modal
         if (!firstName.trim() || !lastName.trim()) {
             alert("Please enter your first and last name");
             return;
         }
 
-        // check if new password is valid then
+        // Password validation logic
         const validatePassword = () => {
+            if (newPassword.length < 6) { // including password requirements 
+                alert("Password must be at least 6 characters");
+                return false;
+            }
             if (newPassword === "" || newPasswordAgain === "") {
                 alert("Please fill in both password fields");
                 return false;
@@ -124,5 +133,4 @@ document.addEventListener('DOMContentLoaded', () => {
         
     })
 
-   
 });

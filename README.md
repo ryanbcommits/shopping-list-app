@@ -96,17 +96,30 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 - Learned about strict equality (===) vs loose equality (==)
 - Understood difference between DOM, document, and window objects
 
+**8/18/25**
+- Implemented comprehensive security improvements with environment variables for Firebase config
+- Added rate limiting to prevent spam (1 second cooldown between submissions)
+- Fixed XSS vulnerability by replacing innerHTML with textContent for user input
+- Added inactivity timeout with warning (logs out after 15 minutes, warns at 14 minutes)
+- Implemented loading states for better UX when adding items
+- Added input validation for item name length (50 character limit)
+- Fixed Enter key support to prevent form submission page refresh
+- Added user feedback for all error states
+- Learned about JavaScript constants vs enums and naming conventions
+- Understood TypeScript influences on JavaScript conventions (ALL_CAPS for constants)
+
 ## Challenges Overcome
 
-- **Problem**: JavaScript running before DOM loaded
-  - **Solution**: Wrapped code in DOMContentLoaded
+- **Problem**: Enter key refreshing the page instead of adding items
+  - **Solution**: Added preventDefault() in keypress event listener
 
-- **Problem**: List items disappearing on page reload
-  - **Solution**: Implemented loadUserData() with getDocs()
+- **Problem**: XSS vulnerability with innerHTML
+  - **Solution**: Switched to createElement and textContent approach
 
-- **Problem**: Delete button events in template literals
-  - **Solution**: Used createElement approach instead
+- **Problem**: Users staying logged in indefinitely
+  - **Solution**: Implemented inactivity timer with warning system
 
+  
 ## Accomplishments
 
 - ✅ Achieved multiple document additions to my database by switching from the `setDoc` method to `addDoc` method
@@ -124,14 +137,10 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 
 
 ## Known Issues
-- [x] ~~List items don't persist on page reload~~ - RESOLVED: Now loads from database
-- [x] ~~Add ability to edit/delete list items~~ - COMPLETED: Soft delete implemented
-- [ ] UI needs improving
-- [ ] Security rules need to be properly configured for production
-- [ ] Form validation for other fields besides password
-- [ ] Add "Show Hidden Items" toggle feature
-- [ ] Implement edit functionality for existing items
-- [ ] Add categories or tags to list items
+- [ ] Minor typos in code (clearTimeout duplication, "Pleaes" spelling)
+- [ ] Missing warningTimer variable declaration
+- [ ] Modal login link points to wrong page (login.html instead of index.html)
+- [ ] Firestore Security Rules still need to be configured for production
 
 
 ## Roadmap
@@ -142,6 +151,11 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 - Soft delete functionality
 - Data persistence
 - Enter key support for adding items
+- Rate limiting for spam prevention
+- Inactivity timeout with warning
+- Loading states for async operations
+- Input validation and sanitization
+- Environment variables for sensitive config
 
 ### 🔄 In Progress
 
