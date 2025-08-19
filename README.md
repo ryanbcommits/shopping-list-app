@@ -23,6 +23,18 @@ As AI is being used more and more with coding, my goal is to leverage LLMs - in 
 
 **Method:** Code first and attempt to accomplish my goal without AI. If I run into a roadblock where I would typically have used Google or Stack Overflow, I am using Claude to help me work through the problem. The overall purpose of this exercise is to leverage AI to speed up my learning, not to use it as a shortcut.
 
+**How I Use AI:**
+- As a tutor to explain concepts I don't understand
+- To debug error messages when stuck
+- To learn best practices and security improvements
+- To understand differences between similar methods (like setDoc vs addDoc)
+
+**What's My Own Work:**
+- All initial code attempts and logic
+- Project structure and design decisions  
+- Problem-solving approach
+- Implementation of learned concepts
+
 ## Development Notes
 
 Some Firebase authentication logic was developed with assistance from Claude AI.
@@ -119,7 +131,7 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 - **Problem**: Users staying logged in indefinitely
   - **Solution**: Implemented inactivity timer with warning system
 
-  
+
 ## Accomplishments
 
 - ✅ Achieved multiple document additions to my database by switching from the `setDoc` method to `addDoc` method
