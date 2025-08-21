@@ -84,17 +84,75 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Password validation logic
         const validatePassword = () => {
+            // displays any errors
+            const errorDiv = document.getElementById("password-error");
+
+            // Helper function to show error
+            const showError = (message) => {
+                errorDiv.textContent = message;
+                errorDiv.style.display = "block";
+                return false; // I don't have to write "return fails" after each if statement
+            };
+            
+            // Helper function to clear error
+            const clearError = () => {
+                errorDiv.style.display = "none";
+            };
+            
+            // Start fresh - clear any old errors
+            clearError();
+
+            // Step 1. Check if password is long enough
             if (newPassword.length < 6) { // including password requirements 
-                alert("Password must be at least 6 characters");
-                return false;
+                return showError("Password must be at least 6 characters");
+                //return false;
             }
+
+            // Step 2. Check for uppercase
+            let hasUpperCase = false;
+            for( let i = 0; i < newPassword.length; i++) {
+                if (newPassword[i] >= 'A' && newPassword[i] <= 'Z') {
+                    hasUpperCase = true;
+                    break;
+                }
+            }
+            if (!hasUpperCase) {
+                return showError("Password needs at least one UPPERCASE letter");
+            }
+
+            // Step 3. check for lowercase
+            let hasLowerCase = false;
+            for (let i = 0; i < newPassword.length; i++) {
+                if (newPassword[i] >= 'a' && newPassword[i] <= 'z') {
+                    hasLowerCase = true;
+                    break; // found one, stop looking
+                }
+            }
+            if (!hasLowerCase) {
+                return showError("Password needs at least one lowercase letter");
+            }
+            
+            // Step 4. look for a number
+            let hasNumber = false;
+            for (let i = 0; i < newPassword.length; i++) {
+                if (newPassword[i] >= '0' && newPassword[i] <= '9') {
+                    hasNumber = true;
+                    break;  // Found one, stop looking
+                }
+            }
+            if (!hasNumber) {
+                return showError("Password needs at least one number");
+            }
+            
             if (newPassword === "" || newPasswordAgain === "") {
-                alert("Please fill in both password fields");
-                return false;
+                return showError("Please fill in both password fields");
+                //return false;
             }
+
+            // Last Step: check if passwords match
             if (newPassword !== newPasswordAgain) {
-                alert("Passwords do not match!");
-                return false;
+                return showError("Passwords do not match!");
+                //return false;
             }
             return true;
 

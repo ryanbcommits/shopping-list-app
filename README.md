@@ -120,6 +120,14 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 - Learned about JavaScript constants vs enums and naming conventions
 - Understood TypeScript influences on JavaScript conventions (ALL_CAPS for constants)
 
+**8/20/25**
+- Created password policy in Firebase requiring uppercase, lowercase, and numeric characters
+- Implemented frontend password validation using for loops to check each character
+- Added visual error messages in modal instead of using alerts for better UX
+- Learned about ASCII values and how character comparisons work in JavaScript
+- Fixed syntax errors and improved error handling in registration flow
+
+
 ## Challenges Overcome
 
 - **Problem**: Enter key refreshing the page instead of adding items
@@ -179,6 +187,7 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 - "Show hidden items" toggle
 - Session timeout
 - Form validation for all fields
+- Create a forgot password
 
 
 ## Project Structure
