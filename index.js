@@ -12,8 +12,8 @@ import { multiFactor, signOut } from 'firebase/auth';
     let warningTimer;
     let inactivityTimer;
 
-    const TIMEOUT_DURATION = 15 * 60 * 1000; // 15 min in milliseconds
-    const WARNING_DURATION = 14 * 60 * 1000; // Warning at 14 minutes
+    const TIMEOUT_DURATION = 1 * 60 * 1000; // 15 min in milliseconds
+    const WARNING_DURATION = .5 * 60 * 1000; // Warning at 14 minutes
 
     function resetInactivityTimer(){
         // Clear existing timer with clearTimeout() method - see MDN webdocs

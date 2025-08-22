@@ -1,5 +1,5 @@
 import {
- signInWithEmailAndPassword, createUserWithEmailAndPassword, setPersistence, browserSessionPersistence
+ signInWithEmailAndPassword, createUserWithEmailAndPassword, setPersistence, browserSessionPersistence, signInWithPopup,GoogleAuthProvider
 } from 'firebase/auth';
 import { setDoc, doc } from 'firebase/firestore';
 import { auth, db } from './firebase-config.js';
@@ -10,12 +10,13 @@ import { auth, db } from './firebase-config.js';
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
 
+
     // Modal setup with AI assistance..
     // sign up code (works if above the login code?)
     // Get the modal
     const modal = document.getElementById("myModal"); 
     const btn = document.getElementById("signUp");  
-    const regBtn = document.getElementById("register"); 
+    const gBtn = document.getElementById("gmail"); 
     
 
     // Get the <span> element that closes the modal
@@ -31,7 +32,73 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.style.display = "none";
     }
 
-    // This code is for the log in form for users who already have a registered email and pw
+    // [Log in with Gmail]
+    // add an event lisener for the button id = gmail
+    gBtn.addEventListener("click", async (e) => {
+        e.preventDefault();
+        // console.log("button clicked!"); // btn works
+
+        // const credential = GoogleAuthProvider.credential(id_token);
+        // lines 43 - 55 throws an error "Cannon read properties of undefined (reading 'email')
+        // try {
+        //     await signInWithCredential(auth, credential);
+        //     console.log("login with gmail sucessful!");
+        // } catch (error) {
+        //     // Handle Errors here.
+        //     const errorCode = error.code;
+        //     const errorMessage = error.message;
+        //     // The email of the user's account used.
+        //     const email = error.customData.email;
+        //     // The AuthCredential type that was used.
+        //     const credential = GoogleAuthProvider.credentialFromError(error);
+        //     console.error(errorCode, errorMessage, email, credential); 
+        // }
+
+        const provider = new GoogleAuthProvider();
+        const credential = GoogleAuthProvider.credential(id_token);
+        provider.setCustomParameters({
+            'login_hint': 'user@example.com'
+        });
+        provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+
+        signInWithCredential(auth, credential).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The credential that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+        });
+
+        // source is: snippets/auth-next/google-signin/auth_google_signin_popup.js
+        signInWithPopup(auth, provider)
+        .then((result) => {
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            // The signed-in user info.
+            const user = result.user;
+            // IdP data available using getAdditionalUserInfo(result)
+            // ...
+        }).catch((error) => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            const email = error.customData.email;
+            // The AuthCredential type that was used.
+            const credential = GoogleAuthProvider.credentialFromError(error);
+            // ...
+        });
+
+        // the code above threw an error stating that the id_token is not defined.
+
+    });
+
+
+    // [Log in with fully authenticated with Email and Password]
     loginForm.addEventListener("submit", async (e) => {
         e.preventDefault();
 
@@ -83,6 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Password validation logic
+
         const validatePassword = () => {
             // displays any errors
             const errorDiv = document.getElementById("password-error");
@@ -165,6 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
         
+
         const userCredential = await createUserWithEmailAndPassword(auth, newUser, newPassword);
         console.log("user successfully signed up", userCredential.user.email);
         const user = userCredential.user;

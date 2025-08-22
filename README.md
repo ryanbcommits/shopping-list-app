@@ -84,7 +84,7 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 - Implemented proper data structure organization (users collection with individual user documents)
 
 **8/3/25**
-- Successfully implemented dynamic list display with real-time database loading using getDocs()
+- Successfully implemented dynamic list display with a relational (NoSQL) database - Cloud Firestore -  loading using getDocs()
 - Added authentication state management with onAuthStateChanged() - users now see their existing data when logging back in
 - Implemented user-specific data persistence - list items now survive page reloads and logout/login cycles
 - Added personalized welcome message using template literals with user.email
