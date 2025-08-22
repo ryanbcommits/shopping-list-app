@@ -60,6 +60,14 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 5. User can delete items (soft delete - marks as hidden)
 6. Data persists across sessions
 
+## Features
+- Multiple authentication methods (Email/Password and Google Sign-In)
+- Real-time data synchronization with Firestore
+- Automatic session timeout for security
+- Rate limiting to prevent spam
+- Soft delete for data recovery
+- Responsive error handling with visual feedback
+
 
 **6/9/25** - After attempting to have two HTML pages utilize a shared .js file, I ran into a problem. I suspected that there was an issue with having two HTML pages calling the same JavaScript file. I consulted Claude and it said that my JS was running before the HTML elements are loaded, so when my script runs, the DOM elements don't exist yet (`document.getElementById("connect")` returns null). The quick fix was to wrap the code in `DOMContentLoaded`.
 
@@ -127,6 +135,12 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 - Learned about ASCII values and how character comparisons work in JavaScript
 - Fixed syntax errors and improved error handling in registration flow
 
+**8/21/25**
+- Implemented Google Sign-In authentication using signInWithPopup
+- Added user profile creation for first-time Google sign-ins  
+- Learned about optional chaining operator (?) as shorthand for checking if properties exist
+- Completed the setTimeout implementation for 15-minute inactivity logout
+- Discovered difference between firebase-config.js (setup) vs importing Firestore functions where needed
 
 ## Challenges Overcome
 
@@ -157,11 +171,8 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 
 
 ## Known Issues
-- [ ] Minor typos in code (clearTimeout duplication, "Pleaes" spelling)
-- [ ] Missing warningTimer variable declaration
-- [ ] Modal login link points to wrong page (login.html instead of index.html)
+- [ ] Minor typo in code ("Pleaes" spelling in index.js)
 - [ ] Firestore Security Rules still need to be configured for production
-
 
 ## Roadmap
 

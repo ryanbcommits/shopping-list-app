@@ -1,7 +1,7 @@
 import {
  signInWithEmailAndPassword, createUserWithEmailAndPassword, setPersistence, browserSessionPersistence, signInWithPopup,GoogleAuthProvider
 } from 'firebase/auth';
-import { setDoc, doc } from 'firebase/firestore';
+import { getDoc, setDoc, doc } from 'firebase/firestore';
 import { auth, db } from './firebase-config.js';
 
 
@@ -38,12 +38,74 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         // console.log("button clicked!"); // btn works
 
-        // const credential = GoogleAuthProvider.credential(id_token);
-        // lines 43 - 55 throws an error "Cannon read properties of undefined (reading 'email')
-        // try {
-        //     await signInWithCredential(auth, credential);
-        //     console.log("login with gmail sucessful!");
-        // } catch (error) {
+        // create a new Google provider
+        const provider = new GoogleAuthProvider();
+        
+        try {
+            
+            const result = await signInWithPopup(auth, provider);
+
+            // Get the signed-in user
+            const user = result.user;
+            console.log("Signed in with Google:", user.email);
+
+            // Check if the user exists in your database
+            const userDoc = await getDoc(doc(db, 'users', user.uid));
+            
+            if (!userDoc.exists()) {
+                // user has never signed in before, so create their profile
+
+                // get their full name from Google
+                let fullName = user.displayName;
+                let firstName = "Google"; // default value
+                let lastName = "User";
+
+                // Check if Google gave us a name
+                if (fullName) {
+                    // Split the name into two parts
+                    let nameParts = fullName.split(' '); // ["Ryan", "Green"]
+
+                    // Get first name (first part)
+                    if (nameParts[0]) {
+                        firstName  = nameParts[0]; // "Ryan"
+                    }
+
+                    // Get last name 
+                    if (nameParts[1]) {
+                        lastName = nameParts[1]; // "Green"
+                    }
+                }
+
+                 await setDoc(doc(db, 'users', user.uid), {
+                    email: user.email,
+                    firstName: firstName,
+                    lastName: lastName,
+                    createdAt: new Date().toISOString(),
+                });
+                
+                console.log("Created new user profile for Google user");
+            }
+
+            alert("Login with Google successful!");
+            window.location.href = 'home.html';
+
+        } catch (error) {
+            console.error("Google sign-in error:", error.code, error.message);
+            alert("Google sign-in failed. Please try again.");
+        }
+
+
+        // source is: snippets/auth-next/google-signin/auth_google_signin_popup.js
+        // signInWithPopup(auth, provider)
+        // .then((result) => {
+        //     // This gives you a Google Access Token. You can use it to access the Google API.
+        //     const credential = GoogleAuthProvider.credentialFromResult(result);
+        //     const token = credential.accessToken;
+        //     // The signed-in user info.
+        //     const user = result.user;
+        //     // IdP data available using getAdditionalUserInfo(result)
+        //     // ...
+        // }).catch((error) => {
         //     // Handle Errors here.
         //     const errorCode = error.code;
         //     const errorMessage = error.message;
@@ -51,47 +113,8 @@ document.addEventListener('DOMContentLoaded', () => {
         //     const email = error.customData.email;
         //     // The AuthCredential type that was used.
         //     const credential = GoogleAuthProvider.credentialFromError(error);
-        //     console.error(errorCode, errorMessage, email, credential); 
-        // }
-
-        const provider = new GoogleAuthProvider();
-        const credential = GoogleAuthProvider.credential(id_token);
-        provider.setCustomParameters({
-            'login_hint': 'user@example.com'
-        });
-        provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-
-        signInWithCredential(auth, credential).catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The credential that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-        });
-
-        // source is: snippets/auth-next/google-signin/auth_google_signin_popup.js
-        signInWithPopup(auth, provider)
-        .then((result) => {
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
-            // The signed-in user info.
-            const user = result.user;
-            // IdP data available using getAdditionalUserInfo(result)
-            // ...
-        }).catch((error) => {
-            // Handle Errors here.
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // The email of the user's account used.
-            const email = error.customData.email;
-            // The AuthCredential type that was used.
-            const credential = GoogleAuthProvider.credentialFromError(error);
-            // ...
-        });
+        //     // ...
+        // });
 
         // the code above threw an error stating that the id_token is not defined.
 
