@@ -214,3 +214,4 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 
 
 
+
