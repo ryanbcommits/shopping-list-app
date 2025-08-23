@@ -12,6 +12,7 @@ import { multiFactor, signOut } from 'firebase/auth';
     let warningTimer;
     let inactivityTimer;
 
+    // setTimeout variables
     const TIMEOUT_DURATION = 15 * 60 * 1000; // 15 min in milliseconds
     const WARNING_DURATION = 14 * 60 * 1000; // Warning at 14 minutes
 
@@ -69,14 +70,10 @@ import { multiFactor, signOut } from 'firebase/auth';
         const listItem = document.createElement("li"); //create a new list item
         const deleteButton = document.createElement("button");
 
-        //Have the first letter be uppercase
+        // This variable will set the first letter in the string to uppercase.
         const capitalizedItem = data.item.charAt(0).toUpperCase() + data.item.slice(1);
 
-        // Add content to the list item - the ${} you see below are template literals
-        // listItem.innerHTML = `<strong>${capitalizedItem}</strong>`;
-        
-        // above code has a vulnerability. Claude flagged (input validation/sanitization) 
-        // Safer approach - use textContent
+        // Safer approach -  textContent
         const strong = document.createElement("strong");
         strong.textContent = capitalizedItem;
         listItem.appendChild(strong);
@@ -89,7 +86,7 @@ import { multiFactor, signOut } from 'firebase/auth';
             border-radius: 4px;
         `;
 
-        // Simple click handler
+        // this will allow the user to hide (soft delete)  the item from the window, but will remain in the db.
         deleteButton.addEventListener('click', async () => {
             try {
                 const user = auth.currentUser;
@@ -167,7 +164,7 @@ import { multiFactor, signOut } from 'firebase/auth';
 
         // Listen for when a user presses akey in the text field
         itemInput.addEventListener("keypress", function(event) {
-                // check if the key they pressed was Enter
+                // check if the key they pressed was Enter (strict equality) - checks if the vals are equal AND the same type.
                 if (event.key === "Enter") {
                     // stop the page from refreshing
                     event.preventDefault();
