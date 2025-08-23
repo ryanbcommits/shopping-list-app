@@ -94,30 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
             alert("Google sign-in failed. Please try again.");
         }
 
-
-        // source is: snippets/auth-next/google-signin/auth_google_signin_popup.js
-        // signInWithPopup(auth, provider)
-        // .then((result) => {
-        //     // This gives you a Google Access Token. You can use it to access the Google API.
-        //     const credential = GoogleAuthProvider.credentialFromResult(result);
-        //     const token = credential.accessToken;
-        //     // The signed-in user info.
-        //     const user = result.user;
-        //     // IdP data available using getAdditionalUserInfo(result)
-        //     // ...
-        // }).catch((error) => {
-        //     // Handle Errors here.
-        //     const errorCode = error.code;
-        //     const errorMessage = error.message;
-        //     // The email of the user's account used.
-        //     const email = error.customData.email;
-        //     // The AuthCredential type that was used.
-        //     const credential = GoogleAuthProvider.credentialFromError(error);
-        //     // ...
-        // });
-
-        // the code above threw an error stating that the id_token is not defined.
-
     });
 
 
