@@ -142,6 +142,10 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 - Completed the setTimeout implementation for 15-minute inactivity logout
 - Discovered difference between firebase-config.js (setup) vs importing Firestore functions where needed
 
+**8/24/25**
+- Updated package.json file and I am getting reddy to deploy an MVP.
+- Deploying a beta version of the app on my personal domain.
+
 ## Challenges Overcome
 
 - **Problem**: Enter key refreshing the page instead of adding items
