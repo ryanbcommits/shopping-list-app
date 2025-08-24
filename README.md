@@ -2,6 +2,28 @@
 
 Building off of the code I created that establishes a connection to a Firestore database on a button click, I plan to build off of the foundation and make this more complex. I was successful at hard coding data into the async method in the db.js file to get the data to be written and later read by the console.
 
+## 📦 Installation
+
+1. Clone the repository
+   ```bash
+   git clone https://github.com/ryanbcommits/shopping-list-app.git
+   cd shopping-list-app
+   ```
+
+2. Install dependencies
+   ```bash
+   npm install
+   ```
+3. Set up environment variables
+   ```bash
+   cp .env.example .env
+   ```
+   
+4. Run Development server
+
+  
+
+
 ## Development Setup
 
 **To get the project running in dev mode:**
@@ -143,8 +165,11 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 - Discovered difference between firebase-config.js (setup) vs importing Firestore functions where needed
 
 **8/24/25**
-- Updated package.json file and I am getting reddy to deploy an MVP.
-- Deploying a beta version of the app on my personal domain.
+- Updated package.json file and prepared for first production deployment
+- Successfully deployed beta version to personal domain for testing
+- Resolved build issues with Firebase environment variables in production
+- Identified mobile compatibility issues on iOS Chrome - investigated solutions and likely resolved with resolving the build issue in the statement above.
+- Released first MVP with core shopping list functionality! 🎉
 
 ## Challenges Overcome
 
@@ -196,13 +221,31 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 
 - UI/UX improvements
 
+
 ### 📋 Planned
 - Edit existing items
 - Categories/tags for items
 - "Show hidden items" toggle
-- Session timeout
+- HTTPS/SSL certificate for production deployment
+- Mobile compatibility improvements
 - Form validation for all fields
 - Create a forgot password
+
+## 🚀 Deployment
+
+The app is deployed at: [app.ryanbcommits.com]
+
+**Current Status:** Beta/MVP
+- Uses environment variables for Firebase config
+- Implements proper authentication flow
+- Mobile compatibility being tested
+
+**Production Checklist:**
+- [ ] HTTPS/SSL certificate
+- [ ] Mobile browser testing complete
+- [ ] Firebase security rules review
+- [ ] Performance optimization
+- [ ] Possible Mobile compatibility issues on iOS Chrome (investigating)
 
 
 ## Project Structure
