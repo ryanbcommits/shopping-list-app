@@ -110,14 +110,21 @@ document.addEventListener('DOMContentLoaded', () => {
         await setPersistence(auth, browserSessionPersistence);
 
         // this sign up process only accepts email and passwords ( if you want to store names in db you have to add a new collection to the db)
-        //const userCredential = await signInWithEmailAndPassword(auth, loginEmail, password);
+        const userCredential = await signInWithEmailAndPassword(auth, loginEmail, password);
         //console.log("login successful!", userCredential.user.email);
         
+        if(userCredential.user.email === loginEmail) {
+            alert("Login Successful!");
+            window.location.href = 'home.html';
+        } else {
+            alert("login failed!")
+            window.location.hash = "index.html";
+        }
 
-        alert("Login Successful!");
+        
 
         // redirects user to index.html after sucessful login
-        window.location.href = 'home.html';
+        //window.location.href = 'home.html';
             
         } catch (error) {
             console.error("login error:", error.code, error.message);
