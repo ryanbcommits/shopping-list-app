@@ -1,23 +1,29 @@
 {
-  "name": "connect-to-db",
+  "name": "shopping-list-app",
   "version": "1.0.0",
-  "description": "Building off of the code I created that establishes a connection to a firestore db on a button click I plan to build off of the foundation and make this more complex.",
+  "description": "A firebase-powered shopping list application.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ryanthekind/Connect-to-db.git"
+    "url": "git+https://github.com/ryanbcommits/shopping-list-app.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ryanthekind/Connect-to-db/issues"
+    "url": "https://github.com/ryanbcommits/shopping-list-app/issues"
   },
-  "homepage": "https://github.com/ryanthekind/Connect-to-db#readme",
+  "homepage": "https://github.com/ryanbcommits/shopping-list-app#readme",
   "dependencies": {
     "firebase": "^11.9.1"
+  },
+  "devDependencies": {
+    "vite": "^7.1.3"
   }
 }

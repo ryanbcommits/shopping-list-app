@@ -126,7 +126,7 @@ import { multiFactor, signOut } from 'firebase/auth';
             const myList = document.getElementById("myList");
             myList.innerHTML = "";
 
-            console.log("Found", querySnapshot.size, 'documents');
+            //console.log("Found", querySnapshot.size, 'documents');
 
             // Use regular for loop as you wanted to practice to write all data written to the db to the window.
             const docs = querySnapshot.docs;
@@ -149,7 +149,7 @@ import { multiFactor, signOut } from 'firebase/auth';
                 
             }
 
-            console.log('Loaded ShoppingList from DB', querySnapshot.size, 'items from database');
+            //console.log('Loaded ShoppingList from DB', querySnapshot.size, 'items from database');
             
         } catch (error) {
             console.error("Error loading user data:", error);

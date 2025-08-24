@@ -110,8 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
         await setPersistence(auth, browserSessionPersistence);
 
         // this sign up process only accepts email and passwords ( if you want to store names in db you have to add a new collection to the db)
-        const userCredential = await signInWithEmailAndPassword(auth, loginEmail, password);
-        console.log("login successful!", userCredential.user.email);
+        //const userCredential = await signInWithEmailAndPassword(auth, loginEmail, password);
+        //console.log("login successful!", userCredential.user.email);
         
 
         alert("Login Successful!");
@@ -234,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
 
         const userCredential = await createUserWithEmailAndPassword(auth, newUser, newPassword);
-        console.log("user successfully signed up", userCredential.user.email);
+        //console.log("user successfully signed up", userCredential.user.email);
         const user = userCredential.user;
         // console.log("User: " + user.email);
         // console.log("UserID:" + user.uid);
@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
             createdAt: new Date().toISOString(),
             // additional data later.
         });
-        console.log(user.uid);
+        //console.log(user.uid);
 
         alert("Registration was a success!")
         window.location.href = 'home.html';
