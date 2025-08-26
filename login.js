@@ -148,14 +148,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const newPassword = document.getElementById("newPassword").value;
         const newPasswordAgain = document.getElementById("verifyPassword").value;
 
-
-        // verify first name and last names are entered in modal
-        // Tim had feedback here.
-        if (!firstName.trim() || !lastName.trim()) {
-            alert("Please enter your first and last name");
-            return;
-        }
-
         // Password validation logic
 
         const validatePassword = () => {
@@ -177,6 +169,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // Start fresh - clear any old errors
             clearError();
 
+            // check the name
+            if (!firstName.trim() || !lastName.trim()) {
+            //alert("Please enter your first and last name"); // change this to an errordiv too
+            return showError("Please enter your first and last name");
+        }
+
+
+            // Begin checking createUserWithEmailAndPassword
             // Step 1. Check if password is long enough
             if (newPassword.length < 6) { // including password requirements 
                 return showError("Password must be at least 6 characters");
