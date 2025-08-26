@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log("Created new user profile for Google user");
             }
 
-            alert("Login with Google successful!");
+            //alert("Login with Google successful!");
             window.location.href = 'home.html';
 
         } catch (error) {
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         //console.log("login successful!", userCredential.user.email);
         
         if(userCredential.user.email === loginEmail) {
-            alert("Login Successful!");
+            //alert("Login Successful!");
             window.location.href = 'home.html';
         } else {
             alert("login failed!")
@@ -150,6 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         // verify first name and last names are entered in modal
+        // Tim had feedback here.
         if (!firstName.trim() || !lastName.trim()) {
             alert("Please enter your first and last name");
             return;
