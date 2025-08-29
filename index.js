@@ -27,7 +27,7 @@ import { multiFactor, signOut } from 'firebase/auth';
                 resetInactivityTimer();
             }
         }, WARNING_DURATION);
-
+        
         // Start a new timer
         inactivityTimer = setTimeout(() => {
             alert("You've been logged out due to inactivity");
