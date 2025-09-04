@@ -1,0 +1,41 @@
+
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  border: 2px solid blue;
+}
+
+
+
+.box {
+    border: 2px solid red;
+    height: 300px;
+    display: flex;
+    /*   */
+    flex-wrap: wrap;
+}
+
+.box > * {
+    border: 2px solid rgb(96 139 168);
+    border-radius: 5px;
+    background-color: rgb(96 139 168 / 0.2);
+    flex: 1 1 80px;
+} 
+
+
+
+/* Approach A *
+p { width: 100%; } /*no change*/
+
+ 
+/*p { width: 600px; } /*paragraph doesn't extend to end of window but 70%*/
+
+/*
+p { max-width: 600px; } no change
+
+/* Footer */
+.footer {
+  padding: 10px;
+  text-align: center;
+  background: #ddd;
+}

@@ -1,9 +1,27 @@
-body {font-family: Arial, Helvetica, sans-serif;}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  border: 2px solid blue;
+}
 
 .container {
+  border: 2px solid red;
   display: flex;
-  justify-content: flex-end;
+  /* flex-wrap: wrap; */
+  /*justify-content: flex-end;*/ 
+  /*justify-content: space-around; /*goes to center of screen */
+  /* justify-content: space-between; nothing happens. */
+  /* justify-content: center; /*same as space around, but space around might behave differently if different elements are in the same container... */
+
 }
+
+/* Approach A *
+p { width: 100%; } /*no change*/
+
+ 
+p { width: 600px; } /*paragraph doesn't extend to end of window but 70%*/
+
+/*
+p { max-width: 600px; } /*no change*/
 
 .gsi-material-button {
   -moz-user-select: none;

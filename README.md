@@ -171,6 +171,11 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 - Identified mobile compatibility issues on iOS Chrome - investigated solutions and likely resolved with resolving the build issue in the statement above.
 - Released first MVP with core shopping list functionality! 🎉
 
+
+**8/27/25**
+- Got HTTPS working on Netlify. 🎉
+- Added a favicon to my project.
+
 **8/28/25**
 - Implemented Google's official sign-in button following their branding guidelines for better UX consistency
 - Experimented with flexbox containers for layout improvements - discovered conflicts with existing app layout
