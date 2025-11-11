@@ -69,6 +69,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         const myList = document.getElementById("myList"); //get the list container        
         const listItem = document.createElement("li"); //create a new list item
         const deleteButton = document.createElement("button");
+        const editButton = document.createElement("button");
 
         // This variable will set the first letter in the string to uppercase.
         const capitalizedItem = data.item.charAt(0).toUpperCase() + data.item.slice(1);
