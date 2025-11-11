@@ -79,7 +79,9 @@ import { multiFactor, signOut } from 'firebase/auth';
         strong.textContent = capitalizedItem;
         listItem.appendChild(strong);
 
-        listItem.style.cssText = `
+        // This formats how the list will look (inline css)
+        listItem.style.cssText = 
+        `
             padding: 10px;
             margin: 5px 0;
             background-color: #f0f8ff;
@@ -101,9 +103,8 @@ import { multiFactor, signOut } from 'firebase/auth';
                 console.error("Delete failed:", error);
             }
         })
-        
 
-        // Set up the delete button
+        // Set up the delete button - eventually this should be in it's own css.
         deleteButton.textContent = "Delete";
         deleteButton.style.marginLeft = "10px";
         deleteButton.style.background = "";
@@ -111,6 +112,24 @@ import { multiFactor, signOut } from 'firebase/auth';
 
         listItem.appendChild(deleteButton);
 
+        // set up the edit button
+        editButton.addEventListener('click', async () => {
+            try {
+                // code for edit logic here
+            } catch (error) {
+                console.error("Edit Failed:", error);
+            }
+        })
+
+        // set up edit button
+        editButton.textContent = "Edit";
+        editButton.style.marginLeft = "10px";
+        editButton.style.background = "";
+        editButton.style.color = "black";
+
+        listItem.appendChild(editButton);
+
+        // this function should be called last
         myList.appendChild(listItem);
     }
 
