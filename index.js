@@ -115,7 +115,10 @@ import { multiFactor, signOut } from 'firebase/auth';
         // set up the edit button
         editButton.addEventListener('click', async () => {
             try {
-                // code for edit logic here
+                // how do I get the code to edit something here?
+                /**
+                 * make the <strong></strong> elements editable, and updateable...
+                 */
             } catch (error) {
                 console.error("Edit Failed:", error);
             }
