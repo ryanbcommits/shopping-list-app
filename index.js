@@ -110,14 +110,15 @@ import { multiFactor, signOut } from 'firebase/auth';
         deleteButton.style.background = "";
         deleteButton.style.color = "black";
 
-        listItem.appendChild(deleteButton);
+        
 
         // set up the edit button
         editButton.addEventListener('click', async () => {
             try {
+                //console.log("button clicked");
                 // how do I get the code to edit something here?
                 /**
-                 * make the <strong></strong> elements editable, and updateable...
+                 * make the <strong></strong> elements editable, and updateable perhaps
                  */
             } catch (error) {
                 console.error("Edit Failed:", error);
@@ -130,6 +131,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         editButton.style.background = "";
         editButton.style.color = "black";
 
+        listItem.appendChild(deleteButton);
         listItem.appendChild(editButton);
 
         // this function should be called last
