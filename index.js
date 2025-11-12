@@ -71,6 +71,9 @@ import { multiFactor, signOut } from 'firebase/auth';
         const deleteButton = document.createElement("button");
         const editButton = document.createElement("button");
 
+        // Sets up edit/update mode tracking.
+        listItem.setAttribute('data-edit-mode', 'false');
+
         // This variable will set the first letter in the string to uppercase.
         const capitalizedItem = data.item.charAt(0).toUpperCase() + data.item.slice(1);
 
@@ -116,10 +119,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         editButton.addEventListener('click', async () => {
             try {
                 //console.log("button clicked");
-                // how do I get the code to edit something here?
-                /**
-                 * make the <strong></strong> elements editable, and updateable perhaps
-                 */
+                
             } catch (error) {
                 console.error("Edit Failed:", error);
             }
@@ -136,7 +136,11 @@ import { multiFactor, signOut } from 'firebase/auth';
 
         // this function should be called last
         myList.appendChild(listItem);
+
+        
     }
+
+    
 
     // Function to load existing user data
     async function loadUserData(){
@@ -171,7 +175,6 @@ import { multiFactor, signOut } from 'firebase/auth';
                         id: doc.id // From DB
                     });
                 }
-                
             }
 
             //console.log('Loaded ShoppingList from DB', querySnapshot.size, 'items from database');
@@ -180,6 +183,10 @@ import { multiFactor, signOut } from 'firebase/auth';
             console.error("Error loading user data:", error);
         }
     }
+
+    
+    
+
 
     document.addEventListener("DOMContentLoaded", () => {
         // Code for writing and reading from the db
