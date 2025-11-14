@@ -1,6 +1,4 @@
-import { 
-    addDoc, collection, getDoc, deleteDoc, getDocs, doc,  
-    updateDoc} from 'firebase/firestore';
+import { addDoc, collection, getDoc, deleteDoc, getDocs, doc, updateDoc} from 'firebase/firestore';
 import { db } from './firebase-config.js';
 import { auth, onAuthStateChanged } from './firebase-config.js'
 import { multiFactor, signOut } from 'firebase/auth';
@@ -57,7 +55,13 @@ import { multiFactor, signOut } from 'firebase/auth';
         document.removeEventListener('scroll', resetInactivityTimer);
     }
 
-
+    // Edit item function
+    function toggleEditMode(itemId) {
+        // Get the List item by id
+        // Check current edit mode value
+        // Toggle it (false -> true, or tru -> false)
+        // Console.log the new state
+    }
     // Moved addtoList function to top because  it was defined inside the button click event, so loadUserData can't see it.
     // Success functions:
 
@@ -118,7 +122,9 @@ import { multiFactor, signOut } from 'firebase/auth';
         // set up the edit button
         editButton.addEventListener('click', async () => {
             try {
-                //console.log("button clicked");
+                console.log("Current item text:", strong.textContent);
+                console.log("Item ID", data.id);
+                console.log("Edit mode status:", listItem.getAttribute('data-edit-mode'));
                 
             } catch (error) {
                 console.error("Edit Failed:", error);
@@ -137,10 +143,9 @@ import { multiFactor, signOut } from 'firebase/auth';
         // this function should be called last
         myList.appendChild(listItem);
 
-        
+    // end of addToList(data) function    
     }
 
-    
 
     // Function to load existing user data
     async function loadUserData(){
@@ -182,6 +187,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         } catch (error) {
             console.error("Error loading user data:", error);
         }
+    // end of loadUserData function    
     }
 
     
@@ -252,7 +258,7 @@ import { multiFactor, signOut } from 'firebase/auth';
             }
         });
         
-        // The button even is the meat and potatoes of this app. 
+        // The button event is the meat and potatoes of this app. 
         button.addEventListener("click", async () => {
             
             // Rate limiting code here
@@ -278,11 +284,10 @@ import { multiFactor, signOut } from 'firebase/auth';
             button.disabled = true;
             button.textContent = "Adding...";
 
-        try {
+            try {
                 // Get currently logged-in user
                 const user = auth.currentUser; 
                 
-
                 const docRef = await addDoc(collection(db, 'users', user.uid, 'shoppingList'), {
                     item: itemName,
                     timestamp: new Date().toISOString(),
@@ -305,13 +310,13 @@ import { multiFactor, signOut } from 'firebase/auth';
                     id: docRef.id,
                 });
 
-            } catch (error) {
-                console.error('Firestore error:', error);
-                alert("Failed to add an item. Please try again");
-            } finally {
-                button.disabled = false;
-                button.textContent = "Add to List";
-            }
+                } catch (error) {
+                    console.error('Firestore error:', error);
+                    alert("Failed to add an item. Please try again");
+                } finally {
+                    button.disabled = false;
+                    button.textContent = "Add to List";
+                }
         });
 
 
