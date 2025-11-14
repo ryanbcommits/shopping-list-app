@@ -86,6 +86,10 @@ import { multiFactor, signOut } from 'firebase/auth';
         strong.textContent = capitalizedItem;
         listItem.appendChild(strong);
 
+        const input = document.createElement("input");
+        input.type = "text";
+        input.name = "updatedItem";
+
         // This formats how the list will look (inline css)
         listItem.style.cssText = 
         `
@@ -125,6 +129,8 @@ import { multiFactor, signOut } from 'firebase/auth';
                 console.log("Current item text:", strong.textContent);
                 console.log("Item ID", data.id);
                 console.log("Edit mode status:", listItem.getAttribute('data-edit-mode'));
+                listItem.appendChild(input);
+                // Need to change the button funtion or add an update button
                 
             } catch (error) {
                 console.error("Edit Failed:", error);
