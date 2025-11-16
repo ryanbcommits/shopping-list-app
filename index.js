@@ -74,6 +74,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         const listItem = document.createElement("li"); //create a new list item
         const deleteButton = document.createElement("button");
         const editButton = document.createElement("button");
+        const saveEditsBtn = document.createElement("button");
         const cancelEditButton = document.createElement("button");
 
         // Sets up edit/update mode tracking.
@@ -103,6 +104,33 @@ import { multiFactor, signOut } from 'firebase/auth';
             border-radius: 4px;
         `;
 
+        //btn css
+        // Set up the delete button - eventually this should be in it's own css.
+        deleteButton.textContent = "Delete";
+        deleteButton.style.marginLeft = "10px";
+        deleteButton.style.background = "";
+        deleteButton.style.color = "black";
+
+        // set up edit button
+        editButton.textContent = "Edit";
+        editButton.style.marginLeft = "10px";
+        editButton.style.background = "";
+        editButton.style.color = "black";
+
+        // save edits btn
+        
+        saveEditsBtn.textContent = "Add";
+        saveEditsBtn.style.marginLeft = "10px";
+        saveEditsBtn.style.background = "";
+        saveEditsBtn.style.color = "black";
+
+        
+        // cancel button style:
+        cancelEditButton.textContent = "Cancel";
+        cancelEditButton.style.marginLeft = "10px";
+        cancelEditButton.style.background = "";
+        cancelEditButton.style.color = "black";
+
         // this will allow the user to hide (soft delete)  the item from the window, but will remain in the db.
         deleteButton.addEventListener('click', async () => {
             try {
@@ -118,50 +146,72 @@ import { multiFactor, signOut } from 'firebase/auth';
             }
         })
 
-        // Set up the delete button - eventually this should be in it's own css.
-        deleteButton.textContent = "Delete";
-        deleteButton.style.marginLeft = "10px";
-        deleteButton.style.background = "";
-        deleteButton.style.color = "black";
-
+        saveEditsBtn.addEventListener('click', async () => {
+            try {
+                console.log("Save Button clicked")
+                
+            } catch (error) {
+                console.log("Save failed:", error);
+            }
+        })
         cancelEditButton.addEventListener('click', async () => {
             try {
                 strong.style.display = "";
                 cancelEditButton.style.display = "none";
+                saveEditsBtn.style.display = "none";
+                newInput.style.display = "none";
             } catch (error) {
-                console.error("Edit Failed:", error);
+                console.error("Cancel Failed:", error);
             }
         })
-
-        // cancel button style:
-        cancelEditButton.textContent = "Cancel";
-        cancelEditButton.style.marginLeft = "10px";
-        cancelEditButton.style.background = "";
-        cancelEditButton.style.color = "black";
-
 
         // set up the edit button
         editButton.addEventListener('click', async () => {
+            //testing if I could force the spefic item to be true.
+            listItem.setAttribute('data-edit-mode', 'true');
+            
+            // check if we're currently editing, basically if data-edit-mode is true or false.
+            const isEditing = listItem.getAttribute('data-edit-mode') === 'true';
+            console.log("Before if statement");
+            console.log("-----------");
+            console.log("Edit mode status:", listItem.getAttribute('data-edit-mode')); // now it's false
+            
+            if (!isEditing) {
+                // ENTERING edit mode
+                strong.style.display = "none";
+                listItem.appendChild(newInput);
+                // - Change button text to "Save"
+                editButton.textContent = "Save";
+                listItem.setAttribute('data-edit-mode', 'true');
+
+            } else {
+                console.log("nothing to see here");
+                // EXITING edit mode (saving)
+                // - Get the new value from input
+                // - Update database
+                // - Update the strong element
+                // - Hide input, show strong
+                // - Change button text back to "Edit"
+                // - Update data-edit-mode
+            }
+
             try {
+                
                 console.log("Current item text:", strong.textContent); // Finde the text element that needs to be editable  and get it's value ✅
                 console.log("Item ID", data.id);
                 console.log("Edit mode status:", listItem.getAttribute('data-edit-mode'));
-                strong.style.display = "none";
-                listItem.appendChild(newInput);
-                editButton.style.display = "none";
-                listItem.appendChild(cancelEditButton);
+                // strong.style.display = "none";
+                // listItem.appendChild(newInput);
+                // editButton.style.display = "none"; // if canceled this will dissapear.
+                // listItem.appendChild(saveEditsBtn);
+                // listItem.appendChild(cancelEditButton);
 
             } catch (error) {
                 console.error("Edit Failed:", error);
             }
         })
 
-        // set up edit button
-        editButton.textContent = "Edit";
-        editButton.style.marginLeft = "10px";
-        editButton.style.background = "";
-        editButton.style.color = "black";
-
+        
         
 
         listItem.appendChild(deleteButton);
@@ -170,6 +220,10 @@ import { multiFactor, signOut } from 'firebase/auth';
 
         // this function should be called last
         myList.appendChild(listItem);
+    
+
+
+    
 
     // end of addToList(data) function    
     }
