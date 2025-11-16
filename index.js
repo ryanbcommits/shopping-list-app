@@ -172,10 +172,9 @@ import { multiFactor, signOut } from 'firebase/auth';
             
             // check if we're currently editing, basically if data-edit-mode is true or false.
             const isEditing = listItem.getAttribute('data-edit-mode') === 'true';
-            console.log("Before if statement");
-            console.log("-----------");
+            console.log("Before if statement:");
             console.log("Edit mode status:", listItem.getAttribute('data-edit-mode')); // now it's false
-            
+            console.log("-----------");
             if (!isEditing) {
                 // ENTERING edit mode
                 strong.style.display = "none";
@@ -183,6 +182,8 @@ import { multiFactor, signOut } from 'firebase/auth';
                 // - Change button text to "Save"
                 editButton.textContent = "Save";
                 listItem.setAttribute('data-edit-mode', 'true');
+                console.log("After if statement:");
+                console.log("Edit mode status:", listItem.getAttribute('data-edit-mode')); // should now be 'true'
 
             } else {
                 // EXITING edit mode (saving)
@@ -316,7 +317,7 @@ import { multiFactor, signOut } from 'firebase/auth';
                 stopInactivityMonitor();
                 window.location.href = "index.html"
             } else {
-                console.log("The User is logged in:", user.email);
+                console.log("The User currntly logged in:", user.email);
 
                 // Start inactivity timer
                 startInactivityMonitor();
