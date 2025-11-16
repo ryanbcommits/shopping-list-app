@@ -167,8 +167,8 @@ import { multiFactor, signOut } from 'firebase/auth';
 
         // set up the edit button
         editButton.addEventListener('click', async () => {
-            //testing if I could force the spefic item to be true.
-            listItem.setAttribute('data-edit-mode', 'true');
+            // //testing if I could force the spefic item to be true.
+            // listItem.setAttribute('data-edit-mode', 'true');
             
             // check if we're currently editing, basically if data-edit-mode is true or false.
             const isEditing = listItem.getAttribute('data-edit-mode') === 'true';
@@ -185,7 +185,6 @@ import { multiFactor, signOut } from 'firebase/auth';
                 listItem.setAttribute('data-edit-mode', 'true');
 
             } else {
-                console.log("nothing to see here");
                 // EXITING edit mode (saving)
                 // - Get the new value from input
                 // - Update database
@@ -197,9 +196,9 @@ import { multiFactor, signOut } from 'firebase/auth';
 
             try {
                 
-                console.log("Current item text:", strong.textContent); // Finde the text element that needs to be editable  and get it's value ✅
-                console.log("Item ID", data.id);
-                console.log("Edit mode status:", listItem.getAttribute('data-edit-mode'));
+                // console.log("Current item text:", strong.textContent); // Finde the text element that needs to be editable  and get it's value ✅
+                // console.log("Item ID", data.id);
+                // console.log("Edit mode status:", listItem.getAttribute('data-edit-mode'));
                 // strong.style.display = "none";
                 // listItem.appendChild(newInput);
                 // editButton.style.display = "none"; // if canceled this will dissapear.
