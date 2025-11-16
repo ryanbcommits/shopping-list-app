@@ -74,6 +74,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         const listItem = document.createElement("li"); //create a new list item
         const deleteButton = document.createElement("button");
         const editButton = document.createElement("button");
+        const cancelEditButton = document.createElement("button");
 
         // Sets up edit/update mode tracking.
         listItem.setAttribute('data-edit-mode', 'false');
@@ -123,18 +124,32 @@ import { multiFactor, signOut } from 'firebase/auth';
         deleteButton.style.background = "";
         deleteButton.style.color = "black";
 
-        
+        cancelEditButton.addEventListener('click', async () => {
+            try {
+                strong.style.display = "";
+                cancelEditButton.style.display = "none";
+            } catch (error) {
+                console.error("Edit Failed:", error);
+            }
+        })
+
+        // cancel button style:
+        cancelEditButton.textContent = "Cancel";
+        cancelEditButton.style.marginLeft = "10px";
+        cancelEditButton.style.background = "";
+        cancelEditButton.style.color = "black";
+
 
         // set up the edit button
         editButton.addEventListener('click', async () => {
             try {
-                console.log("Current item text:", strong.textContent);
+                console.log("Current item text:", strong.textContent); // Finde the text element that needs to be editable  and get it's value ✅
                 console.log("Item ID", data.id);
                 console.log("Edit mode status:", listItem.getAttribute('data-edit-mode'));
                 strong.style.display = "none";
                 listItem.appendChild(newInput);
                 editButton.style.display = "none";
-
+                listItem.appendChild(cancelEditButton);
 
             } catch (error) {
                 console.error("Edit Failed:", error);
@@ -147,8 +162,11 @@ import { multiFactor, signOut } from 'firebase/auth';
         editButton.style.background = "";
         editButton.style.color = "black";
 
+        
+
         listItem.appendChild(deleteButton);
         listItem.appendChild(editButton);
+        
 
         // this function should be called last
         myList.appendChild(listItem);
