@@ -67,6 +67,9 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 - **Event Listeners**: Learned about DOMContentLoaded and why scripts need to wait for HTML
 - **Async/Await**: Understanding asynchronous operations with Firebase
 - **Scope**: Fixed function scope issues by moving reusable functions outside event listeners
+- **Element Visibility**: Mastered using `style.display` to show/hide DOM elements
+- **Attribute Manipulation**: Learned setAttribute/getAttribute work with strings
+- **State Management**: Implemented local state tracking using data attributes
 
 ### Firebase Skills
 - **Authentication**: User registration, login, and session management
@@ -181,6 +184,17 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 - Experimented with flexbox containers for layout improvements - discovered conflicts with existing app layout
 - TODO: Investigate CSS Grid as alternative to flexbox, or consider modular CSS approach before adding Bootstrap
 
+**11/15/25**
+- Successfully implemented edit functionality for shopping list items
+- Created toggle system using `data-edit-mode` attribute to track editing state
+- Implemented show/hide coordination between text display and input field
+- Edit button dynamically changes to "Save" when entering edit mode
+- Added Cancel button that appears only during editing
+- Learned that `getAttribute()` returns strings, requiring strict equality (`===`) for comparisons
+- Discovered how to manipulate element visibility using `style.display` property
+- Built edit mode toggle using conditional logic (if/else) based on current state
+- Understood the importance of breaking down complex features into smaller, manageable pieces
+- TODO: Complete save functionality to persist edited items to Firestore
 
 ## Challenges Overcome
 
@@ -231,7 +245,7 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 ### 🔄 In Progress
 
 - UI/UX improvements
-
+- Edit existing items (90% complete - save functionality remaining)
 
 ### 📋 Planned
 - Edit existing items
