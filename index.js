@@ -19,7 +19,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         clearTimeout(inactivityTimer); // clearTimeout 
         clearTimeout(warningTimer); // Clear warning too
 
-        // Warning timer
+        // Warning timer - but found, the pop up will keep a user logged in if they do not click anything beyond the timer.
         warningTimer = setTimeout(() => {
             if (confirm("You'll be logged out in 1 minute due to inactivity. Click OK to stay logged in.")) {
                 resetInactivityTimer();
@@ -86,9 +86,11 @@ import { multiFactor, signOut } from 'firebase/auth';
         strong.textContent = capitalizedItem;
         listItem.appendChild(strong);
 
-        const input = document.createElement("input");
-        input.type = "text";
-        input.name = "updatedItem";
+        const newInput = document.createElement("input");
+        newInput.type = "text";
+        newInput.id = "newItemName" // input value
+        newInput.name = "updatedItem";
+        newInput.placeholder  = strong.textContent;
 
         // This formats how the list will look (inline css)
         listItem.style.cssText = 
@@ -129,9 +131,11 @@ import { multiFactor, signOut } from 'firebase/auth';
                 console.log("Current item text:", strong.textContent);
                 console.log("Item ID", data.id);
                 console.log("Edit mode status:", listItem.getAttribute('data-edit-mode'));
-                listItem.appendChild(input);
-                // Need to change the button funtion or add an update button
-                
+                strong.style.display = "none";
+                listItem.appendChild(newInput);
+                editButton.style.display = "none";
+
+
             } catch (error) {
                 console.error("Edit Failed:", error);
             }
@@ -197,8 +201,6 @@ import { multiFactor, signOut } from 'firebase/auth';
     }
 
     
-    
-
 
     document.addEventListener("DOMContentLoaded", () => {
         // Code for writing and reading from the db
@@ -264,7 +266,7 @@ import { multiFactor, signOut } from 'firebase/auth';
             }
         });
         
-        // The button event is the meat and potatoes of this app. 
+        // The button event is the meat and potatoes of this app. This button once cliced adds an item to the user's shopping list
         button.addEventListener("click", async () => {
             
             // Rate limiting code here
