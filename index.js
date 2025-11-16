@@ -90,9 +90,9 @@ import { multiFactor, signOut } from 'firebase/auth';
 
         const newInput = document.createElement("input");
         newInput.type = "text";
-        newInput.id = "newItemName" // input value
+        newInput.id = "newItemName" 
         newInput.name = "updatedItem";
-        newInput.placeholder  = strong.textContent;
+        newInput.value = strong.textContent;
 
         // This formats how the list will look (inline css)
         listItem.style.cssText = 
