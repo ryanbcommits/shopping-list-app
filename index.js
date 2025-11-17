@@ -197,8 +197,8 @@ import { multiFactor, signOut } from 'firebase/auth';
                 // - Get the new value from input
                 const newItem = document.getElementById("newItem");
                 console.log(`New item: ${newItem.value}`) 
-                // - Update database - but doesn't this muddy the db by adding more items to the list in the backend?
-                const user = auth.currentUser;
+                // - Update database - but doesn't this muddy the db by adding more items to the list in the
+                // const user = auth.currentUser;
                 // await updateDoc(doc(db, 'users', user.uid, 'shoppingList', data.id), {
                 //     item: data.newItem,
                 //     timestamp: new Date().toISOString(),
