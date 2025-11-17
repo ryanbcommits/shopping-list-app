@@ -73,9 +73,9 @@ import { multiFactor, signOut } from 'firebase/auth';
         const myList = document.getElementById("myList"); //get the list container        
         const listItem = document.createElement("li"); //create a new list item
         const deleteButton = document.createElement("button");
-        const editButton = document.createElement("button");
-        const saveEditsBtn = document.createElement("button");
-        const cancelEditButton = document.createElement("button"); 
+        const editButton = document.createElement("button"); 
+        const saveEditsBtn = document.createElement("button"); // not being used right now
+        const cancelEditButton = document.createElement("button"); // not being used right now - may be useful later...
 
         // Sets up edit/update mode tracking.
         listItem.setAttribute('data-edit-mode', 'false');
@@ -121,7 +121,8 @@ import { multiFactor, signOut } from 'firebase/auth';
         editButton.type = "button";
         editButton.id = "edit"
 
-
+        // commenting save and cancel buttons styles out for now for readability
+        /*
         // save edits btn - might not be neccessary - but not using now
         saveEditsBtn.textContent = "Add";
         saveEditsBtn.style.marginLeft = "10px";
@@ -133,6 +134,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         cancelEditButton.style.marginLeft = "10px";
         cancelEditButton.style.background = "";
         cancelEditButton.style.color = "black";
+        */
 
         // this will allow the user to hide (soft delete)  the item from the window, but will remain in the db.
         deleteButton.addEventListener('click', async () => {
@@ -149,6 +151,8 @@ import { multiFactor, signOut } from 'firebase/auth';
             }
         })
 
+        // commenting out event liseners for buttons not being used for readability
+        /* 
         saveEditsBtn.addEventListener('click', async () => {
             try {
                 console.log("Save Button clicked")
@@ -157,6 +161,7 @@ import { multiFactor, signOut } from 'firebase/auth';
                 console.log("Save failed:", error);
             }
         })
+
         cancelEditButton.addEventListener('click', async () => {
             try {
                 strong.style.display = "";
@@ -167,6 +172,7 @@ import { multiFactor, signOut } from 'firebase/auth';
                 console.error("Cancel Failed:", error);
             }
         })
+        */
 
         // set up the edit button
         editButton.addEventListener('click', async () => {
@@ -190,14 +196,19 @@ import { multiFactor, signOut } from 'firebase/auth';
                 // EXITING edit mode (saving)
                 // - Get the new value from input
                 const newItem = document.getElementById("newItem");
-                // console.log(`New item: ${newItem.value}`) 
-                console.log(newItem); // it's important that .value is used
-
-                // - Update database
+                console.log(`New item: ${newItem.value}`) 
+                // - Update database - but doesn't this muddy the db by adding more items to the list in the backend?
+                const user = auth.currentUser;
+                await updateDoc(doc(db, 'users', user.uid, 'shoppingList', data.id), {
+                    item: data.newItem,
+                    timestamp: new Date().toISOString(),
+                    hidden: false
+                });
                 // - Update the strong element
                 // - Hide input, show strong
                 // - Change button text back to "Edit"
                 // - Update data-edit-mode
+                listItem.setAttribute('data-edit-mode', 'false');
             }
 
             try {
@@ -223,9 +234,6 @@ import { multiFactor, signOut } from 'firebase/auth';
 
         // this function should be called last
         myList.appendChild(listItem);
-    
-
-
     
 
     // end of addToList(data) function    
