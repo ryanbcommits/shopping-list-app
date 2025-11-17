@@ -199,11 +199,11 @@ import { multiFactor, signOut } from 'firebase/auth';
                 console.log(`New item: ${newItem.value}`) 
                 // - Update database - but doesn't this muddy the db by adding more items to the list in the backend?
                 const user = auth.currentUser;
-                await updateDoc(doc(db, 'users', user.uid, 'shoppingList', data.id), {
-                    item: data.newItem,
-                    timestamp: new Date().toISOString(),
-                    hidden: false
-                });
+                // await updateDoc(doc(db, 'users', user.uid, 'shoppingList', data.id), {
+                //     item: data.newItem,
+                //     timestamp: new Date().toISOString(),
+                //     hidden: false
+                // });
                 // - Update the strong element
                 // - Hide input, show strong
                 // - Change button text back to "Edit"
