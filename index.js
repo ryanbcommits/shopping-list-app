@@ -75,7 +75,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         const deleteButton = document.createElement("button");
         const editButton = document.createElement("button");
         const saveEditsBtn = document.createElement("button");
-        const cancelEditButton = document.createElement("button");
+        const cancelEditButton = document.createElement("button"); 
 
         // Sets up edit/update mode tracking.
         listItem.setAttribute('data-edit-mode', 'false');
@@ -90,7 +90,7 @@ import { multiFactor, signOut } from 'firebase/auth';
 
         const newInput = document.createElement("input");
         newInput.type = "text";
-        newInput.id = "newItemName" 
+        newInput.id = "newItem" 
         newInput.name = "updatedItem";
         newInput.value = strong.textContent;
 
@@ -117,16 +117,19 @@ import { multiFactor, signOut } from 'firebase/auth';
         editButton.style.background = "";
         editButton.style.color = "black";
 
-        // save edits btn
-        
+        // edit btn properties
+        editButton.type = "button";
+        editButton.id = "edit"
+
+
+        // save edits btn - might not be neccessary - but not using now
         saveEditsBtn.textContent = "Add";
         saveEditsBtn.style.marginLeft = "10px";
         saveEditsBtn.style.background = "";
         saveEditsBtn.style.color = "black";
 
         
-        // cancel button style:
-        cancelEditButton.textContent = "Cancel";
+        // cancel button style: - might be useful later for the user if that accidentally hit cancel, but not using now
         cancelEditButton.style.marginLeft = "10px";
         cancelEditButton.style.background = "";
         cancelEditButton.style.color = "black";
@@ -167,27 +170,29 @@ import { multiFactor, signOut } from 'firebase/auth';
 
         // set up the edit button
         editButton.addEventListener('click', async () => {
-            // //testing if I could force the spefic item to be true.
-            // listItem.setAttribute('data-edit-mode', 'true');
-            
-            // check if we're currently editing, basically if data-edit-mode is true or false.
+
+            // check if we're currently editing, this variable establishes a baseline that isEditing must equal 'true'
             const isEditing = listItem.getAttribute('data-edit-mode') === 'true';
-            console.log("Before if statement:");
-            console.log("Edit mode status:", listItem.getAttribute('data-edit-mode')); // now it's false
-            console.log("-----------");
+   
             if (!isEditing) {
-                // ENTERING edit mode
+                // User is not editing, so they click the Edit button
                 strong.style.display = "none";
+                deleteButton.style.display = "none"; // maybe change this button to cancel later...
                 listItem.appendChild(newInput);
                 // - Change button text to "Save"
                 editButton.textContent = "Save";
                 listItem.setAttribute('data-edit-mode', 'true');
                 console.log("After if statement:");
-                console.log("Edit mode status:", listItem.getAttribute('data-edit-mode')); // should now be 'true'
+                console.log("Edit mode status:", listItem.getAttribute('data-edit-mode')); // should now be 'true' which breaks user from this condition
+
 
             } else {
                 // EXITING edit mode (saving)
                 // - Get the new value from input
+                const newItem = document.getElementById("newItem");
+                // console.log(`New item: ${newItem.value}`) 
+                console.log(newItem); // it's important that .value is used
+
                 // - Update database
                 // - Update the strong element
                 // - Hide input, show strong
@@ -211,8 +216,6 @@ import { multiFactor, signOut } from 'firebase/auth';
             }
         })
 
-        
-        
 
         listItem.appendChild(deleteButton);
         listItem.appendChild(editButton);
@@ -273,10 +276,10 @@ import { multiFactor, signOut } from 'firebase/auth';
     }
 
     
-
+    // Code for writing and reading from the db
     document.addEventListener("DOMContentLoaded", () => {
-        // Code for writing and reading from the db
-        const button = document.getElementById("connect"); 
+        
+        const button = document.getElementById("connect"); // Add to List button
         const logOut = document.getElementById("logOut");
         const itemInput = document.getElementById("itemName");
 
@@ -317,7 +320,8 @@ import { multiFactor, signOut } from 'firebase/auth';
                 stopInactivityMonitor();
                 window.location.href = "index.html"
             } else {
-                console.log("The User currntly logged in:", user.email);
+                // This log will tell you who is logged in at the moment.
+                // console.log("The User currntly logged in:", user.email);
 
                 // Start inactivity timer
                 startInactivityMonitor();
@@ -368,6 +372,7 @@ import { multiFactor, signOut } from 'firebase/auth';
                 // Get currently logged-in user
                 const user = auth.currentUser; 
                 
+                
                 const docRef = await addDoc(collection(db, 'users', user.uid, 'shoppingList'), {
                     item: itemName,
                     timestamp: new Date().toISOString(),
@@ -375,9 +380,6 @@ import { multiFactor, signOut } from 'firebase/auth';
                 });
 
                 // Clear form
-                // document.getElementById("username").value = "";
-                // document.getElementById("userAge").value = "";
-                // document.getElementById("email").value = "";
                 document.getElementById("itemName").value = "";
                 
                 // add to list display
