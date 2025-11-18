@@ -21,8 +21,6 @@ Building off of the code I created that establishes a connection to a Firestore 
    
 4. Run Development server
 
-  
-
 
 ## Development Setup
 
@@ -196,6 +194,24 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 - Understood the importance of breaking down complex features into smaller, manageable pieces
 - TODO: Complete save functionality to persist edited items to Firestore
 
+**11/17/25**
+- Successfully implemented complete edit/save functionality for shopping list items
+- Edit button toggles between "Edit" and "Save" modes using data-edit-mode attribute
+- Implemented inline editing - text becomes input field when editing
+- Successfully updates Firestore database using updateDoc() when saving changes
+- Hide delete button during edit mode to prevent accidental deletions
+- Used loadUserData() refresh strategy to ensure UI stays synced with database
+- Learned about element ID management (discovered IDs must be unique per element)
+- Simplified UX by reusing edit button as save button instead of adding multiple buttons
+- Cleaned up code by commenting out unused save/cancel button implementations
+- Learned about different approaches: direct DOM updates vs. refresh strategy
+- TODO: Consider adding cancel functionality and optimizing to avoid full list refresh
+
+### Problem-Solving Approaches for 11/17/25
+- **Incremental Development**: Built edit feature step-by-step, testing each part
+- **Refresh Strategy**: Used loadUserData() to ensure UI consistency with database
+- **Code Simplification**: Started with multiple buttons, simplified to single toggle button
+
 ## Challenges Overcome
 
 - **Problem**: Enter key refreshing the page instead of adding items
@@ -222,7 +238,8 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 - ✅ Implemented soft delete pattern for data preservation while maintaining clean UI
 - ✅ Added updateDoc functionality for non-destructive data operations
 - ✅ Learned multiple approaches to DOM event handling and chose simplest solution
-
+- ✅ Implemented full CRUD operations (Create, Read, Update, Delete)
+- ✅ Built inline editing system with dynamic input fields
 
 ## Known Issues
 - [ ] Minor typo in code ("Pleaes" spelling in index.js)
