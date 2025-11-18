@@ -195,36 +195,24 @@ import { multiFactor, signOut } from 'firebase/auth';
             } else {
                 // EXITING edit mode (saving)
                 // - Get the new value from input
-                const newItem = document.getElementById("newItem");
-                console.log(`New item: ${newItem.value}`) 
-                // - Update database - but doesn't this muddy the db by adding more items to the list in the
-                // const user = auth.currentUser;
-                // await updateDoc(doc(db, 'users', user.uid, 'shoppingList', data.id), {
-                //     item: data.newItem,
-                //     timestamp: new Date().toISOString(),
-                //     hidden: false
-                // });
-                // - Update the strong element
-                // - Hide input, show strong
-                // - Change button text back to "Edit"
-                // - Update data-edit-mode
+                const newValue = newInput.value;
+                console.log(`New item: ${newValue}`);
+                // - Update database
+                try {
+                    const user = auth.currentUser;
+                    await updateDoc(doc(db, 'users', user.uid, 'shoppingList', data.id), {
+                    item: newValue
+                    });
+                    
+                    loadUserData();
+                } catch (error) {
+                    console.error("Update to the db failed:", error);
+                }
+
                 listItem.setAttribute('data-edit-mode', 'false');
             }
 
-            try {
-                
-                // console.log("Current item text:", strong.textContent); // Finde the text element that needs to be editable  and get it's value ✅
-                // console.log("Item ID", data.id);
-                // console.log("Edit mode status:", listItem.getAttribute('data-edit-mode'));
-                // strong.style.display = "none";
-                // listItem.appendChild(newInput);
-                // editButton.style.display = "none"; // if canceled this will dissapear.
-                // listItem.appendChild(saveEditsBtn);
-                // listItem.appendChild(cancelEditButton);
 
-            } catch (error) {
-                console.error("Edit Failed:", error);
-            }
         })
 
 
@@ -277,6 +265,7 @@ import { multiFactor, signOut } from 'firebase/auth';
 
             //console.log('Loaded ShoppingList from DB', querySnapshot.size, 'items from database');
             
+            
         } catch (error) {
             console.error("Error loading user data:", error);
         }
@@ -284,7 +273,7 @@ import { multiFactor, signOut } from 'firebase/auth';
     }
 
     
-    // Code for writing and reading from the db
+    // Code for writing to and reading from the db
     document.addEventListener("DOMContentLoaded", () => {
         
         const button = document.getElementById("connect"); // Add to List button
