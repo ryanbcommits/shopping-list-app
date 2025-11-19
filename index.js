@@ -74,8 +74,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         const listItem = document.createElement("li"); //create a new list item
         const deleteButton = document.createElement("button");
         const editButton = document.createElement("button"); 
-        const saveEditsBtn = document.createElement("button"); // not being used right now
-        const cancelEditButton = document.createElement("button"); // not being used right now - may be useful later...
+        const cancelButton = document.createElement("button"); // not being used right now - may be useful later...
 
         // Sets up edit/update mode tracking.
         listItem.setAttribute('data-edit-mode', 'false');
@@ -121,20 +120,16 @@ import { multiFactor, signOut } from 'firebase/auth';
         editButton.type = "button";
         editButton.id = "edit"
 
-        // commenting save and cancel buttons styles out for now for readability
-        /*
-        // save edits btn - might not be neccessary - but not using now
-        saveEditsBtn.textContent = "Add";
-        saveEditsBtn.style.marginLeft = "10px";
-        saveEditsBtn.style.background = "";
-        saveEditsBtn.style.color = "black";
+        // commenting cancel buttons styles out for now for readability
+        
 
         
         // cancel button style: - might be useful later for the user if that accidentally hit cancel, but not using now
-        cancelEditButton.style.marginLeft = "10px";
-        cancelEditButton.style.background = "";
-        cancelEditButton.style.color = "black";
-        */
+        cancelButton.textContent = "Cancel";
+        cancelButton.style.marginLeft = "10px";
+        cancelButton.style.background = "";
+        cancelButton.style.color = "black";
+        
 
         // this will allow the user to hide (soft delete)  the item from the window, but will remain in the db.
         deleteButton.addEventListener('click', async () => {
@@ -151,28 +146,23 @@ import { multiFactor, signOut } from 'firebase/auth';
             }
         })
 
-        // commenting out event liseners for buttons not being used for readability
-        /* 
-        saveEditsBtn.addEventListener('click', async () => {
-            try {
-                console.log("Save Button clicked")
-                
-            } catch (error) {
-                console.log("Save failed:", error);
-            }
-        })
 
-        cancelEditButton.addEventListener('click', async () => {
-            try {
-                strong.style.display = "";
-                cancelEditButton.style.display = "none";
-                saveEditsBtn.style.display = "none";
-                newInput.style.display = "none";
-            } catch (error) {
-                console.error("Cancel Failed:", error);
-            }
-        })
-        */
+     
+
+        // cancelButton.addEventListener('click', async () => {
+        //     try {
+        //         strong.style.display = "";
+        //         cancelButton.style.display = "none";
+        //         newInput.style.display = "none";
+
+        //         onclick = () => {
+                    
+        //         }
+        //     } catch (error) {
+        //         console.error("Cancel Failed:", error);
+        //     }
+        // })
+        
 
         // set up the edit button
         editButton.addEventListener('click', async () => {
@@ -191,6 +181,23 @@ import { multiFactor, signOut } from 'firebase/auth';
                 console.log("After if statement:");
                 console.log("Edit mode status:", listItem.getAttribute('data-edit-mode')); // should now be 'true' which breaks user from this condition
 
+                cancelButton.addEventListener('click', async () => {
+                    try {
+                        strong.style.display = "";
+                        cancelButton.style.display = "none";
+                        newInput.style.display = "none";
+
+                        onclick = () => {
+                            editButton.textContent = "Edit";
+                        }
+                    } catch (error) {
+                        console.error("Cancel Failed:", error);
+                    }
+                })
+
+
+                listItem.appendChild(cancelButton);
+                
 
             } else {
                 // EXITING edit mode (saving)
