@@ -149,19 +149,22 @@ import { multiFactor, signOut } from 'firebase/auth';
 
      
 
-        // cancelButton.addEventListener('click', async () => {
-        //     try {
-        //         strong.style.display = "";
-        //         cancelButton.style.display = "none";
-        //         newInput.style.display = "none";
+        cancelButton.addEventListener('click', async () => {
+            try {
+                // Reset everything back to non-edit mode
+                strong.style.display = "";              // Show the item's text
+                newInput.style.display = "none";        // Hide the input
+                cancelButton.style.display = "none";    // Hide the cancel button   
+                deleteButton.style.display = "";        // Show the delete button
+                editButton.textContent = "Edit";        // Reset the edit button's text to Edit
 
-        //         onclick = () => {
-                    
-        //         }
-        //     } catch (error) {
-        //         console.error("Cancel Failed:", error);
-        //     }
-        // })
+                // Very important: Reset the edit-mode state to 'false'
+                listItem.setAttribute('data-edit-mode', 'false');
+
+            } catch (error) {
+                console.error("Cancel Failed:", error);
+            }
+        })
         
 
         // set up the edit button
@@ -181,21 +184,7 @@ import { multiFactor, signOut } from 'firebase/auth';
                 console.log("After if statement:");
                 console.log("Edit mode status:", listItem.getAttribute('data-edit-mode')); // should now be 'true' which breaks user from this condition
 
-                cancelButton.addEventListener('click', async () => {
-                    try {
-                        strong.style.display = "";
-                        cancelButton.style.display = "none";
-                        newInput.style.display = "none";
-
-                        onclick = () => {
-                            editButton.textContent = "Edit";
-                        }
-                    } catch (error) {
-                        console.error("Cancel Failed:", error);
-                    }
-                })
-
-
+                cancelButton.style.display = ""; // this shows the cancel button if they wish to exit 'data-edit-mode' from true -> false
                 listItem.appendChild(cancelButton);
                 
 
@@ -210,7 +199,7 @@ import { multiFactor, signOut } from 'firebase/auth';
                     await updateDoc(doc(db, 'users', user.uid, 'shoppingList', data.id), {
                     item: newValue
                     });
-                    
+
                     loadUserData();
                 } catch (error) {
                     console.error("Update to the db failed:", error);
@@ -225,6 +214,7 @@ import { multiFactor, signOut } from 'firebase/auth';
 
         listItem.appendChild(deleteButton);
         listItem.appendChild(editButton);
+        
         
 
         // this function should be called last
