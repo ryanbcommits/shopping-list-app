@@ -74,6 +74,11 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 - **Firestore**: Difference between setDoc() vs addDoc(), soft delete patterns
 - **Data Structure**: Organizing user-specific data with proper hierarchy
 
+### State Management Insights
+- **Single Source of Truth**: Discovered that `data-edit-mode` attribute controls entire edit flow
+- **Event Listener Placement**: Learned to define listeners once at creation, not inside other handlers
+- **State-Driven UI**: All UI changes react to state changes rather than direct manipulation
+
 ## How The App Works
 
 1. User registers/logs in (login.js handles authentication)
@@ -206,6 +211,20 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 - Cleaned up code by commenting out unused save/cancel button implementations
 - Learned about different approaches: direct DOM updates vs. refresh strategy
 - TODO: Consider adding cancel functionality and optimizing to avoid full list refresh
+
+**11/18/25**
+- Successfully implemented cancel functionality for edit mode
+- Solved event listener scope issues by defining cancel listener at component level (not nested)
+- Cancel button properly resets all UI elements: shows text, hides input, restores buttons
+- Learned critical lesson about state management - everything depends on `data-edit-mode` state
+- Fixed control flow by ensuring cancel button resets `data-edit-mode` to 'false'
+- Discovered the importance of not nesting event listeners (prevents duplicate listeners)
+- Cancel button now appears/disappears appropriately during edit sessions
+- Realized how single state variable can control entire UI flow (key architecture pattern)
+- Edit feature now complete with full Edit/Save/Cancel functionality
+- TODO: Test edge cases and consider adding input validation for empty values
+
+
 
 ### Problem-Solving Approaches for 11/17/25
 - **Incremental Development**: Built edit feature step-by-step, testing each part
