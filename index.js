@@ -55,13 +55,6 @@ import { multiFactor, signOut } from 'firebase/auth';
         document.removeEventListener('scroll', resetInactivityTimer);
     }
 
-    // Edit item function
-    function toggleEditMode(itemId) {
-        // Get the List item by id
-        // Check current edit mode value
-        // Toggle it (false -> true, or tru -> false)
-        // Console.log the new state
-    }
     // Moved addtoList function to top because  it was defined inside the button click event, so loadUserData can't see it.
     // Success functions:
 
@@ -160,7 +153,8 @@ import { multiFactor, signOut } from 'firebase/auth';
 
                 // Very important: Reset the edit-mode state to 'false'
                 listItem.setAttribute('data-edit-mode', 'false');
-
+                //call the loadUserData function so that if the user wishes not to make any edits, they can click cancel without entering aa new item and avoid experiencing additional bugs in the code.
+                loadUserData(); 
             } catch (error) {
                 console.error("Cancel Failed:", error);
             }
@@ -174,7 +168,7 @@ import { multiFactor, signOut } from 'firebase/auth';
             const isEditing = listItem.getAttribute('data-edit-mode') === 'true';
    
             if (!isEditing) {
-                // User is not editing, so they click the Edit button
+                // User is not editing, and they wish to, they  click the Edit button
                 strong.style.display = "none";
                 deleteButton.style.display = "none"; // maybe change this button to cancel later...
                 listItem.appendChild(newInput);
@@ -186,6 +180,8 @@ import { multiFactor, signOut } from 'firebase/auth';
 
                 cancelButton.style.display = ""; // this shows the cancel button if they wish to exit 'data-edit-mode' from true -> false
                 listItem.appendChild(cancelButton);
+
+                
                 
 
             } else {
