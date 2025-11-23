@@ -212,6 +212,11 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 - Learned about different approaches: direct DOM updates vs. refresh strategy
 - TODO: Consider adding cancel functionality and optimizing to avoid full list refresh
 
+### Problem-Solving Approaches for 11/17/25
+- **Incremental Development**: Built edit feature step-by-step, testing each part
+- **Refresh Strategy**: Used loadUserData() to ensure UI consistency with database
+- **Code Simplification**: Started with multiple buttons, simplified to single toggle button
+
 **11/18/25**
 - Successfully implemented cancel functionality for edit mode
 - Solved event listener scope issues by defining cancel listener at component level (not nested)
@@ -231,14 +236,12 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 - Learned importance of testing edge cases (editing without changes)
 - Cancel button now properly handles all scenarios: with changes, without changes, multiple edits
 - Discovered value of "refresh strategy" for maintaining UI consistency
+- Included the newTimeStamp variable so when a user replaces an item on the list the timestamp is also updated in the database.
 - Edit feature now production-ready with robust Edit/Save/Cancel functionality
 - TODO: Consider optimizing to avoid full refresh while maintaining stability
 
 
-### Problem-Solving Approaches for 11/17/25
-- **Incremental Development**: Built edit feature step-by-step, testing each part
-- **Refresh Strategy**: Used loadUserData() to ensure UI consistency with database
-- **Code Simplification**: Started with multiple buttons, simplified to single toggle button
+
 
 ## Challenges Overcome
 
@@ -272,6 +275,7 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 ## Known Issues
 - [ ] Minor typo in code ("Pleaes" spelling in index.js)
 - [ ] Firestore Security Rules still need to be configured for production
+- [ ] newInput needs to have it's own id and date, it shouldn't just overwrite the previous item with the old date and id.
 
 ## Roadmap
 

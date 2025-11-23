@@ -86,6 +86,8 @@ import { multiFactor, signOut } from 'firebase/auth';
         newInput.name = "updatedItem";
         newInput.value = strong.textContent;
 
+        const newTimeStamp = new Date().toISOString();
+
         // This formats how the list will look (inline css)
         listItem.style.cssText = 
         `
@@ -127,6 +129,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         // this will allow the user to hide (soft delete)  the item from the window, but will remain in the db.
         deleteButton.addEventListener('click', async () => {
             try {
+                // Get currently logged in  user
                 const user = auth.currentUser;
                 await updateDoc(doc(db, 'users', user.uid, 'shoppingList', data.id), {
                     hidden: true
@@ -191,9 +194,12 @@ import { multiFactor, signOut } from 'firebase/auth';
                 console.log(`New item: ${newValue}`);
                 // - Update database
                 try {
+                    //Get currently logged in user
                     const user = auth.currentUser;
+
                     await updateDoc(doc(db, 'users', user.uid, 'shoppingList', data.id), {
-                    item: newValue
+                    item: newValue, // This was original
+                    timestamp: newTimeStamp, // This might work...
                     });
 
                     loadUserData();
@@ -256,7 +262,7 @@ import { multiFactor, signOut } from 'firebase/auth';
                 }
             }
 
-            //console.log('Loaded ShoppingList from DB', querySnapshot.size, 'items from database');
+            console.log('Loaded ShoppingList from DB', querySnapshot.size, 'items from database');
             
             
         } catch (error) {
