@@ -167,6 +167,15 @@ import { multiFactor, signOut } from 'firebase/auth';
         // set up the edit button
         editButton.addEventListener('click', async () => {
 
+            // Rate limiting code here
+            const now = Date.now();
+            if (now - lastSubmitTime < 1000) { // 1 second cooldown
+                return; // Exit if clicked too fast 
+            }
+            lastSubmitTime = now;
+            
+
+
             // check if we're currently editing, this variable establishes a baseline that isEditing must equal 'true'
             const isEditing = listItem.getAttribute('data-edit-mode') === 'true';
    
@@ -265,6 +274,7 @@ import { multiFactor, signOut } from 'firebase/auth';
             console.log('Loaded ShoppingList from DB', querySnapshot.size, 'items from database');
             
             
+            
         } catch (error) {
             console.error("Error loading user data:", error);
         }
@@ -360,6 +370,14 @@ import { multiFactor, signOut } from 'firebase/auth';
                 alert("Item name is too long! Please keep it under 50 characters.");
                 return;
             }
+
+            //console.log(typeof(itemName));
+            console.log(`the item: ${itemName}, is of type: ${typeof(itemName)}`);
+
+            // I need to parse the string to check for illegal characters.
+            // if (itemName ) {
+                
+            // }
 
             button.disabled = true;
             button.textContent = "Adding...";
