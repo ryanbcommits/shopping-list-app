@@ -374,10 +374,15 @@ import { multiFactor, signOut } from 'firebase/auth';
             //console.log(typeof(itemName));
             console.log(`the item: ${itemName}, is of type: ${typeof(itemName)}`);
 
-            // I need to parse the string to check for illegal characters.
-            // if (itemName ) {
+            // Loop through the item entered in list
+            // check for special characters * (35 - )
+            for (let i = 0; i < itemName.length; i++) {
                 
-            // }
+                // if (condition) {
+                //     // code goes here
+                // }
+            }
+
 
             button.disabled = true;
             button.textContent = "Adding...";
