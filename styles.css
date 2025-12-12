@@ -23,16 +23,17 @@ p { width: 600px; } /*paragraph doesn't extend to end of window but 70%*/
 /*
 p { max-width: 600px; } /*no change*/
 
+/* Google button CSS */
 .gsi-material-button {
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
   -webkit-appearance: none;
-  background-color: #f2f2f2;
+  background-color: WHITE;
   background-image: none;
-  border: none;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
+  border: 1px solid #747775;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   color: #1f1f1f;
@@ -57,7 +58,7 @@ p { max-width: 600px; } /*no change*/
 
 .gsi-material-button .gsi-material-button-icon {
   height: 20px;
-  margin-right: 12px;
+  margin-right: 10px;
   min-width: 20px;
   width: 20px;
 }
@@ -100,10 +101,7 @@ p { max-width: 600px; } /*no change*/
 .gsi-material-button:disabled {
   cursor: default;
   background-color: #ffffff61;
-}
-
-.gsi-material-button:disabled .gsi-material-button-state {
-  background-color: #1f1f1f1f;
+  border-color: #1f1f1f1f;
 }
 
 .gsi-material-button:disabled .gsi-material-button-contents {
@@ -116,7 +114,7 @@ p { max-width: 600px; } /*no change*/
 
 .gsi-material-button:not(:disabled):active .gsi-material-button-state, 
 .gsi-material-button:not(:disabled):focus .gsi-material-button-state {
-  background-color: #001d35;
+  background-color: #303030;
   opacity: 12%;
 }
 
@@ -126,7 +124,7 @@ p { max-width: 600px; } /*no change*/
 }
 
 .gsi-material-button:not(:disabled):hover .gsi-material-button-state {
-  background-color: #001d35;
+  background-color: #303030;
   opacity: 8%;
 }
 
