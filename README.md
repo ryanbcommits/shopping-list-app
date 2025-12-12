@@ -1,4 +1,8 @@
-# Connecting the Frontend to a Database
+# Shopping List App
+
+![Status](https://img.shields.io/badge/status-beta-yellow)
+![Version](https://img.shields.io/badge/version-1.0.0-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
 
 Building off of the code I created that establishes a connection to a Firestore database on a button click, I plan to build off of the foundation and make this more complex. I was successful at hard coding data into the async method in the db.js file to get the data to be written and later read by the console.
 
@@ -308,7 +312,7 @@ Some Firebase authentication logic was developed with assistance from Claude AI.
 
 ## 🚀 Deployment
 
-The app is deployed at: [app.ryanbcommits.com]
+The app is deployed at: [https://app.ryanbcommits.com]
 
 **Current Status:** Beta/MVP
 - Uses environment variables for Firebase config
