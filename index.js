@@ -366,11 +366,21 @@ import { multiFactor, signOut } from 'firebase/auth';
                 return;
             }
 
-            if (itemName.length > 50) {
-                alert("Item name is too long! Please keep it under 50 characters.");
+            if (itemName.length > 20) {
+                alert("Item name is too long! Please keep it under 20 characters.");
                 return;
             }
+            // code is not quite right... need all the string to be numbers
+            let test = false;
+            // for(let i=0; i < itemName.length; i++){
+            //     if (itemName[i] >= '102') {
+            //         test = true;
+            //         alert("item cannont contain just numbers");
+            //         return;
+            //     }
+            // }
 
+            // everything input by the user is of type string
             //console.log(typeof(itemName));
             console.log(`the item: ${itemName}, is of type: ${typeof(itemName)}`);
 
