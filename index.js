@@ -280,8 +280,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         }
     // end of loadUserData function    
     }
-
-    
+   
     // Code for writing to and reading from the db
     document.addEventListener("DOMContentLoaded", () => {
         
@@ -348,6 +347,29 @@ import { multiFactor, signOut } from 'firebase/auth';
             }
         });
         
+        // Outside the event listener - pure validation logic
+        function validateItemName(itemName) {
+            if (!itemName.trim()) {
+                return { 
+                    valid: false, 
+                    error: "please add an item" };
+            }
+            if (itemName.length > 20) {
+                return { valid: false, error: "Item name is too long!"};
+            }
+            return { valid: true};
+        }
+
+        // Outside the event listener - database logic
+        async function saveItemToDatabase(userId, itemName) {
+            const docRef = await addDoc(collection(db, 'users', userId, 'shoppingList'), {
+                item: itemName,
+                timestamp: new Date().toISOString(),
+                hidden: false
+            });
+            return docRef;
+}
+
         // The button event is the meat and potatoes of this app. This button once cliced adds an item to the user's shopping list
         button.addEventListener("click", async () => {
             
@@ -361,37 +383,16 @@ import { multiFactor, signOut } from 'firebase/auth';
             const itemName = document.getElementById("itemName").value;
 
             // validate items exist
-            if(!itemName.trim()) {
-                alert("please add an item to the shopping list");
-                return;
-            }
+            validateItemName();
 
-            if (itemName.length > 20) {
-                alert("Item name is too long! Please keep it under 20 characters.");
-                return;
-            }
-            // code is not quite right... need all the string to be numbers
-            let test = false;
-            // for(let i=0; i < itemName.length; i++){
-            //     if (itemName[i] >= '102') {
-            //         test = true;
-            //         alert("item cannont contain just numbers");
-            //         return;
-            //     }
-            // }
 
+
+
+            
             // everything input by the user is of type string
             //console.log(typeof(itemName));
             console.log(`the item: ${itemName}, is of type: ${typeof(itemName)}`);
 
-            // Loop through the item entered in list
-            // check for special characters * (35 - )
-            for (let i = 0; i < itemName.length; i++) {
-                
-                // if (condition) {
-                //     // code goes here
-                // }
-            }
 
 
             button.disabled = true;
