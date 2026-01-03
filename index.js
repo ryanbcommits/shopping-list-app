@@ -61,6 +61,25 @@ import { multiFactor, signOut } from 'firebase/auth';
     /**
      * @param {{item: string, id: string}} data
      */
+
+    // refactoring delete btn
+    
+
+    async function handleDeleteButton () {
+        
+        try {
+            const user = auth.currentUser;
+            await updateDoc(doc(db, 'users', user.uid, 'shoppingList', data.id), {
+                hidden: true
+            });
+            listItem.remove();
+            console.log("item hidden");
+        } catch (error) {
+            console.error("Delete failed", error);
+        }
+
+    }
+
     function addToList(data) {
         
         const myList = document.getElementById("myList"); //get the list container        
@@ -127,19 +146,22 @@ import { multiFactor, signOut } from 'firebase/auth';
         
 
         // this will allow the user to hide (soft delete)  the item from the window, but will remain in the db.
-        deleteButton.addEventListener('click', async () => {
-            try {
-                // Get currently logged in  user
-                const user = auth.currentUser;
-                await updateDoc(doc(db, 'users', user.uid, 'shoppingList', data.id), {
-                    hidden: true
-                });
+        deleteButton.addEventListener('click', () => {
+
+            handleDeleteButton();
+        //     try {
+        //         // Get currently logged in  user
+        //         const user = auth.currentUser;
+        //         await updateDoc(doc(db, 'users', user.uid, 'shoppingList', data.id), {
+        //             hidden: true
+        //         });
                 
-                listItem.remove(); // still removes from view
-                console.log("item hidden");
-            } catch (error) {
-                console.error("Delete failed:", error);
-            }
+        //         listItem.remove(); // still removes from view
+        //         console.log("item hidden");
+        //     } catch (error) {
+        //         console.error("Delete failed:", error);
+        //     }
+        // 
         })
 
 
@@ -368,7 +390,7 @@ import { multiFactor, signOut } from 'firebase/auth';
                 hidden: false
             });
             return docRef;
-}
+        }
 
         // The button event is the meat and potatoes of this app. This button once cliced adds an item to the user's shopping list
         button.addEventListener("click", async () => {
@@ -382,53 +404,39 @@ import { multiFactor, signOut } from 'firebase/auth';
             
             const itemName = document.getElementById("itemName").value;
 
-            // validate items exist
-            validateItemName();
+            // Validation
+            const validation = validateItemName(itemName);
+            if (!validation.valid) {
+                alert(Validation.error);
+                return;
+            }
 
-
-
-
-            
-            // everything input by the user is of type string
-            //console.log(typeof(itemName));
-            console.log(`the item: ${itemName}, is of type: ${typeof(itemName)}`);
-
-
-
+            // Save to Database
             button.disabled = true;
             button.textContent = "Adding...";
 
             try {
-                // Get currently logged-in user
-                const user = auth.currentUser; 
-                
-                
-                const docRef = await addDoc(collection(db, 'users', user.uid, 'shoppingList'), {
-                    item: itemName,
-                    timestamp: new Date().toISOString(),
-                    hidden: false
-                });
-
-                // Clear form
-                document.getElementById("itemName").value = "";
-                
-                // add to list display
+                const user = auth.currentUser;
+                const docRef = await saveItemToDatabase(user.uid, itemName);
                 addToList({
-                    // name: username,
-                    // age: userAge,
-                    // email: email,
-                    // id: docRef.id
                     item: itemName,
-                    id: docRef.id,
+                    id: docRef.id
                 });
 
-                } catch (error) {
-                    console.error('Firestore error:', error);
-                    alert("Failed to add an item. Please try again");
-                } finally {
-                    button.disabled = false;
-                    button.textContent = "Add to List";
-                }
+                // clear the From
+                document.getElementById("itemName").value = "";
+            } catch (error) {
+                console.error("Firestore Error:", error);
+                alert("Failed to add item to list");
+            } finally {
+                button.disabled = false;
+                button.textContent = "Add to List";
+            }
+
+            // everything input by the user is of type string
+            //console.log(typeof(itemName));
+            console.log(`the item: ${itemName}, is of type: ${typeof(itemName)}`);
+
         });
 
 
