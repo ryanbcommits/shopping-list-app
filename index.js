@@ -61,18 +61,15 @@ import { multiFactor, signOut } from 'firebase/auth';
     /**
      * @param {{item: string, id: string}} data
      */
-
-    // refactoring delete btn
-    
-
-    async function handleDeleteButton () {
-        
+     // refactoring delete btn so this function handles the delete button logic instead
+    async function handleDeleteButton (itemId, listItemElement) {
         try {
             const user = auth.currentUser;
-            await updateDoc(doc(db, 'users', user.uid, 'shoppingList', data.id), {
+            
+            await updateDoc(doc(db, 'users', user.uid, 'shoppingList', itemId), {
                 hidden: true
             });
-            listItem.remove();
+            listItemElement.remove();
             console.log("item hidden");
         } catch (error) {
             console.error("Delete failed", error);
@@ -81,6 +78,10 @@ import { multiFactor, signOut } from 'firebase/auth';
     }
 
     function addToList(data) {
+        
+        console.log("item ID:", data.id);
+        console.log("item name:", data.item);
+        console.log("Full data objeect", data);
         
         const myList = document.getElementById("myList"); //get the list container        
         const listItem = document.createElement("li"); //create a new list item
@@ -146,22 +147,10 @@ import { multiFactor, signOut } from 'firebase/auth';
         
 
         // this will allow the user to hide (soft delete)  the item from the window, but will remain in the db.
-        deleteButton.addEventListener('click', () => {
+        deleteButton.addEventListener('click', async () => {
 
-            handleDeleteButton();
-        //     try {
-        //         // Get currently logged in  user
-        //         const user = auth.currentUser;
-        //         await updateDoc(doc(db, 'users', user.uid, 'shoppingList', data.id), {
-        //             hidden: true
-        //         });
-                
-        //         listItem.remove(); // still removes from view
-        //         console.log("item hidden");
-        //     } catch (error) {
-        //         console.error("Delete failed:", error);
-        //     }
-        // 
+            await handleDeleteButton(data.id, listItem);
+   
         })
 
 
