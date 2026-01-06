@@ -211,6 +211,14 @@ import { multiFactor, signOut } from 'firebase/auth';
                 // EXITING edit mode (saving)
                 // - Get the new value from input
                 const newValue = newInput.value;
+
+                // nothing checks if newValue is valid.. hmm the function 
+                // const validation = validateItemName(itemName);
+                // if (!validation.valid) {
+                //     alert(validation.error);
+                //     return;
+                // }
+
                 console.log(`New item: ${newValue}`);
                 // - Update database
                 try {
@@ -393,10 +401,10 @@ import { multiFactor, signOut } from 'firebase/auth';
             
             const itemName = document.getElementById("itemName").value;
 
-            // Validation
+            // Validation - I should create a function to put in the cancel button
             const validation = validateItemName(itemName);
             if (!validation.valid) {
-                alert(Validation.error);
+                alert(validation.error);
                 return;
             }
 
