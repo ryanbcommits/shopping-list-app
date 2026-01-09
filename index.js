@@ -174,7 +174,6 @@ import { multiFactor, signOut } from 'firebase/auth';
             }
         })
         
-
         // set up the edit button
         editButton.addEventListener('click', async () => {
 
@@ -191,15 +190,33 @@ import { multiFactor, signOut } from 'firebase/auth';
             const isEditing = listItem.getAttribute('data-edit-mode') === 'true';
    
             if (!isEditing) {
-                // User is not editing, and they wish to, they  click the Edit button
+                // User is not editing, and they wish to, they  click the Edit button showing the input text field
                 strong.style.display = "none";
-                deleteButton.style.display = "none"; // maybe change this button to cancel later...
+                deleteButton.style.display = "none"; 
                 listItem.appendChild(newInput);
                 // - Change button text to "Save"
                 editButton.textContent = "Save";
                 listItem.setAttribute('data-edit-mode', 'true');
                 console.log("After if statement:");
                 console.log("Edit mode status:", listItem.getAttribute('data-edit-mode')); // should now be 'true' which breaks user from this condition
+
+                function validateItemName(newInput) {
+                    if (!newInput.trim()) {
+                        return { 
+                            valid: false, 
+                            error: "please add an item" };
+                    }
+                    if (newInput.length > 20) {
+                        return { valid: false, error: "Item name is too long!"};
+                    }
+                    return { valid: true };
+                }
+
+                const validation = validateItemName(newInput);
+                if (!validation.valid) {
+                alert(validation.error);
+                return;
+                }
 
                 cancelButton.style.display = ""; // this shows the cancel button if they wish to exit 'data-edit-mode' from true -> false
                 listItem.appendChild(cancelButton);
@@ -213,13 +230,8 @@ import { multiFactor, signOut } from 'firebase/auth';
                 const newValue = newInput.value;
 
                 // nothing checks if newValue is valid.. hmm the function 
-                // const validation = validateItemName(itemName);
-                // if (!validation.valid) {
-                //     alert(validation.error);
-                //     return;
-                // }
 
-                console.log(`New item: ${newValue}`);
+                console.log(`newInput or New item: ${newValue}`);
                 // - Update database
                 try {
                     //Get currently logged in user
@@ -366,7 +378,7 @@ import { multiFactor, signOut } from 'firebase/auth';
             }
         });
         
-        // Outside the event listener - pure validation logic
+        // Outside the event listener - pure validation logic for itemName
         function validateItemName(itemName) {
             if (!itemName.trim()) {
                 return { 
@@ -376,8 +388,10 @@ import { multiFactor, signOut } from 'firebase/auth';
             if (itemName.length > 20) {
                 return { valid: false, error: "Item name is too long!"};
             }
-            return { valid: true};
+            return { valid: true };
         }
+
+        
 
         // Outside the event listener - database logic
         async function saveItemToDatabase(userId, itemName) {
@@ -407,6 +421,8 @@ import { multiFactor, signOut } from 'firebase/auth';
                 alert(validation.error);
                 return;
             }
+
+
 
             // Save to Database
             button.disabled = true;
