@@ -79,9 +79,9 @@ import { multiFactor, signOut } from 'firebase/auth';
 
     function addToList(data) {
         
-        console.log("item ID:", data.id);
-        console.log("item name:", data.item);
-        console.log("Full data objeect", data);
+        // console.log("item ID:", data.id);
+        // console.log("item name:", data.item);
+        // console.log("Full data objeect", data);
         
         const myList = document.getElementById("myList"); //get the list container        
         const listItem = document.createElement("li"); //create a new list item
@@ -173,6 +173,8 @@ import { multiFactor, signOut } from 'firebase/auth';
                 console.error("Cancel Failed:", error);
             }
         })
+
+
         
         // set up the edit button
         editButton.addEventListener('click', async () => {
@@ -197,26 +199,10 @@ import { multiFactor, signOut } from 'firebase/auth';
                 // - Change button text to "Save"
                 editButton.textContent = "Save";
                 listItem.setAttribute('data-edit-mode', 'true');
+                
                 console.log("After if statement:");
                 console.log("Edit mode status:", listItem.getAttribute('data-edit-mode')); // should now be 'true' which breaks user from this condition
 
-                function validateItemName(newInput) {
-                    if (!newInput.trim()) {
-                        return { 
-                            valid: false, 
-                            error: "please add an item" };
-                    }
-                    if (newInput.length > 20) {
-                        return { valid: false, error: "Item name is too long!"};
-                    }
-                    return { valid: true };
-                }
-
-                const validation = validateItemName(newInput);
-                if (!validation.valid) {
-                alert(validation.error);
-                return;
-                }
 
                 cancelButton.style.display = ""; // this shows the cancel button if they wish to exit 'data-edit-mode' from true -> false
                 listItem.appendChild(cancelButton);
@@ -228,10 +214,39 @@ import { multiFactor, signOut } from 'firebase/auth';
                 // EXITING edit mode (saving)
                 // - Get the new value from input
                 const newValue = newInput.value;
+                // const newTextInput = newInput.getElementById("input");
+                const newTextInput = document.getElementById("newItem");
 
-                // nothing checks if newValue is valid.. hmm the function 
+                // nothing checks if newValue is valid.. 
+                
+                function validateItemName(newValue) {
+                    if (!newValue.trim()) {
+                        return { 
+                            valid: false, 
+                            error: "please add an item" };
+                    }
+                    if (newValue.length > 20) {
+                        return { valid: false, error: "Item name is too long!"};
+                    }
+                    return { valid: true };
+                }
+        
+                const validateNewItem = validateItemName(newValue);
 
-                console.log(`newInput or New item: ${newValue}`);
+                // check if this breaks...
+                if(!validateNewItem.valid) {
+                    alert(validateNewItem.error);
+                    return;
+                }
+
+                console.log(`newInput or New item: ${newValue}`); // this is a string
+                console.log(`new Text: ${newTextInput.value}`); // this is an object
+                // console.log(typeof newTextInput);
+                // console.log(typeof newValue);
+
+
+
+
                 // - Update database
                 try {
                     //Get currently logged in user
@@ -415,7 +430,7 @@ import { multiFactor, signOut } from 'firebase/auth';
             
             const itemName = document.getElementById("itemName").value;
 
-            // Validation - I should create a function to put in the cancel button
+            // Validation 
             const validation = validateItemName(itemName);
             if (!validation.valid) {
                 alert(validation.error);
