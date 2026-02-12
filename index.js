@@ -13,6 +13,7 @@ import { multiFactor, signOut } from 'firebase/auth';
     // setTimeout variables
     const TIMEOUT_DURATION = 15 * 60 * 1000; // 15 min in milliseconds
     const WARNING_DURATION = 14 * 60 * 1000; // Warning at 14 minutes
+    const CATEGORIES = ["Dairy", "Produce", "Grocery", "Meat", "Frozen Food", "Fish / Seafood"];
 
     function resetInactivityTimer(){
         // Clear existing timer with clearTimeout() method - see MDN webdocs
@@ -406,9 +407,8 @@ import { multiFactor, signOut } from 'firebase/auth';
             return { valid: true };
         }
 
-        
 
-        // Outside the event listener - database logic
+        // The Database logic - Outside the event listener 
         async function saveItemToDatabase(userId, itemName) {
             const docRef = await addDoc(collection(db, 'users', userId, 'shoppingList'), {
                 item: itemName,
@@ -417,6 +417,12 @@ import { multiFactor, signOut } from 'firebase/auth';
             });
             return docRef;
         }
+        
+        /*
+        ****
+        The code below reads the input from the dom validates the item and pushes it to the db then clears the form
+        ****
+        */
 
         // The button event is the meat and potatoes of this app. This button once cliced adds an item to the user's shopping list
         button.addEventListener("click", async () => {
