@@ -412,6 +412,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         async function saveItemToDatabase(userId, itemName) {
             const docRef = await addDoc(collection(db, 'users', userId, 'shoppingList'), {
                 item: itemName,
+                category: category, // I need to update line 413
                 timestamp: new Date().toISOString(),
                 hidden: false
             });
@@ -454,6 +455,7 @@ import { multiFactor, signOut } from 'firebase/auth';
                 const docRef = await saveItemToDatabase(user.uid, itemName);
                 addToList({
                     item: itemName,
+                    category: category,
                     id: docRef.id
                 });
 
