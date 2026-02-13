@@ -154,9 +154,6 @@ import { multiFactor, signOut } from 'firebase/auth';
    
         })
 
-
-     
-
         cancelButton.addEventListener('click', async () => {
             try {
                 // Reset everything back to non-edit mode
@@ -174,8 +171,6 @@ import { multiFactor, signOut } from 'firebase/auth';
                 console.error("Cancel Failed:", error);
             }
         })
-
-
         
         // set up the edit button
         editButton.addEventListener('click', async () => {
@@ -412,7 +407,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         async function saveItemToDatabase(userId, itemName) {
             const docRef = await addDoc(collection(db, 'users', userId, 'shoppingList'), {
                 item: itemName,
-                category: category, // I need to update line 413
+                category: category, 
                 timestamp: new Date().toISOString(),
                 hidden: false
             });
@@ -436,6 +431,8 @@ import { multiFactor, signOut } from 'firebase/auth';
             lastSubmitTime = now;
             
             const itemName = document.getElementById("itemName").value;
+            const categoryName = document.getElementById("categories").value;
+            console.log(categoryName);
 
             // Validation 
             const validation = validateItemName(itemName);
@@ -455,7 +452,7 @@ import { multiFactor, signOut } from 'firebase/auth';
                 const docRef = await saveItemToDatabase(user.uid, itemName);
                 addToList({
                     item: itemName,
-                    category: category,
+                    category: categoryName,
                     id: docRef.id
                 });
 
@@ -472,6 +469,7 @@ import { multiFactor, signOut } from 'firebase/auth';
             // everything input by the user is of type string
             //console.log(typeof(itemName));
             console.log(`the item: ${itemName}, is of type: ${typeof(itemName)}`);
+            console.log(`the category selected: ${categoryName}`);
 
         });
 
