@@ -404,7 +404,7 @@ import { multiFactor, signOut } from 'firebase/auth';
 
 
         // The Database logic - Outside the event listener 
-        async function saveItemToDatabase(userId, itemName) {
+        async function saveItemToDatabase(userId, itemName, category) {
             const docRef = await addDoc(collection(db, 'users', userId, 'shoppingList'), {
                 item: itemName,
                 category: category, 
@@ -449,7 +449,7 @@ import { multiFactor, signOut } from 'firebase/auth';
 
             try {
                 const user = auth.currentUser;
-                const docRef = await saveItemToDatabase(user.uid, itemName);
+                const docRef = await saveItemToDatabase(user.uid, itemName, categoryName);
                 addToList({
                     item: itemName,
                     category: categoryName,
