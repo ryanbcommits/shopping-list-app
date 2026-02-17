@@ -277,7 +277,10 @@ import { multiFactor, signOut } from 'firebase/auth';
     // end of addToList(data) function    
     }
 
-
+    /**
+     * 
+     * @returns I feel like Category logic needs to go here in order to print to the DOM...
+     */
     // Function to load existing user data
     async function loadUserData(){
         try {
