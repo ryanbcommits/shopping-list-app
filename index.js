@@ -56,7 +56,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         document.removeEventListener('scroll', resetInactivityTimer);
     }
 
-    // Moved addtoList function to top because  it was defined inside the button click event, so loadUserData can't see it.
+    // Moved addtoList function to top because it was defined inside the button click event, so loadUserData can't see it.
     // Success functions:
 
     /**
@@ -83,6 +83,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         // console.log("item ID:", data.id);
         // console.log("item name:", data.item);
         // console.log("Full data objeect", data);
+        //console.log("category name:", data.category); // prior to this, it would not work until I added category to the loadUserData function in line 315
         
         const myList = document.getElementById("myList"); //get the list container        
         const listItem = document.createElement("li"); //create a new list item
@@ -100,6 +101,16 @@ import { multiFactor, signOut } from 'firebase/auth';
         const strong = document.createElement("strong");
         strong.textContent = capitalizedItem;
         listItem.appendChild(strong);
+
+        // category printing to the browser
+
+        const category = document.createElement("span"); // uses color as part of text
+        category.textContent = data.category;
+        listItem.appendChild(category); 
+
+
+        // category css to add padding
+        category.style.marginLeft = "10px";
 
         const newInput = document.createElement("input");
         newInput.type = "text";
@@ -136,7 +147,6 @@ import { multiFactor, signOut } from 'firebase/auth';
         editButton.type = "button";
         editButton.id = "edit"
 
-        // commenting cancel buttons styles out for now for readability
         
 
         
@@ -264,7 +274,6 @@ import { multiFactor, signOut } from 'firebase/auth';
 
         })
 
-
         listItem.appendChild(deleteButton);
         listItem.appendChild(editButton);
         
@@ -311,7 +320,8 @@ import { multiFactor, signOut } from 'firebase/auth';
                         // email: data.email, // From DB
                         // id: doc.id // From DB
                         item: data.item,
-                        id: doc.id // From DB
+                        id: doc.id, // From 
+                        category: data.category 
                     });
                 }
             }
