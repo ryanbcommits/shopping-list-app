@@ -78,12 +78,13 @@ import { multiFactor, signOut } from 'firebase/auth';
 
     }
 
+
     function addToList(data) {
         
         // console.log("item ID:", data.id);
         // console.log("item name:", data.item);
         // console.log("Full data objeect", data);
-        //console.log("category name:", data.category); // prior to this, it would not work until I added category to the loadUserData function in line 315
+        console.log("category name:", data.category); // prior to this, it would not work until I added category to the loadUserData function in line 315
         
         const myList = document.getElementById("myList"); //get the list container        
         const listItem = document.createElement("li"); //create a new list item
@@ -111,6 +112,38 @@ import { multiFactor, signOut } from 'firebase/auth';
 
         // category css to add padding
         category.style.marginLeft = "10px";
+
+        /*
+        put code here to color the categories
+        Try hardcoding the Categories to have colors
+        */
+        if (category.textContent === "Dairy") {
+            category.style.color = "#1F51FF";
+            category.style.fontWeight = "bold";
+        }
+        else if (category.textContent === "Produce") {
+            category.style.color = "Green";
+            category.style.fontWeight = "bold";
+        }
+        else if (category.textContent === "Grocery") {
+            category.style.color = "#4A0404";
+            category.style.fontWeight = "bold";
+        }
+        else if (category.textContent === "Meat") {
+            category.style.color = "#701705";
+            category.style.fontWeight = "bold";
+        }
+        else if (category.textContent === "Frozen Food") {
+            category.style.color = "Blue";
+            category.style.fontWeight = "bold";
+        }
+        else if (category.textContent === "Fish / Seafood") {
+            category.style.color = "#E3735E";
+            category.style.fontWeight = "bold";
+        }
+        else {
+            category.style.color = "light gray";
+        }
 
         const newInput = document.createElement("input");
         newInput.type = "text";
@@ -286,10 +319,7 @@ import { multiFactor, signOut } from 'firebase/auth';
     // end of addToList(data) function    
     }
 
-    /**
-     * 
-     * @returns I feel like Category logic needs to go here in order to print to the DOM...
-     */
+    
     // Function to load existing user data
     async function loadUserData(){
         try {
@@ -327,7 +357,6 @@ import { multiFactor, signOut } from 'firebase/auth';
             }
 
             console.log('Loaded ShoppingList from DB', querySnapshot.size, 'items from database');
-            
             
             
         } catch (error) {
