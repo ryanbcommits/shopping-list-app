@@ -142,7 +142,7 @@ import { multiFactor, signOut } from 'firebase/auth';
             category.style.fontWeight = "bold";
         }
         else {
-            category.style.color = "light gray";
+            category.style.color = "lightgray";
         }
 
         const newInput = document.createElement("input");

@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-02-21
+
+### Added
+- Category system for shopping list items
+- Category dropdown in add-item form (Dairy, Produce, Grocery, Meat, Frozen Food, Fish/Seafood)
+- Category badges display next to each item
+- Color-coded categories for visual distinction
+
+### Changed
+- Firestore data model updated to include category field
+
 ## [1.1.0] - 2025-12-11
 
 ### Added
@@ -72,6 +83,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Version History Summary
 
+- **1.2.0** - Category system for items
 - **1.1.0** - Full CRUD operations with inline editing
 - **1.0.0** - First stable release with production deployment
 - **0.9.0-beta** - Public beta with core features
