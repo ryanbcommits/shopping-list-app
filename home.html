@@ -21,8 +21,9 @@
     <h1 id="greeting"></h1>
 
     <form id="userForm">
-        <div>Add items to your shopping list!</div>
-        <div>
+        <div style="margin-bottom: 10px;">Add items to your shopping list!</div>
+        
+        <div style="margin-bottom: 10px;">
             <label for="itemName">Enter Item Here: </label>
             <input type="text" id="itemName" placeholder="Milk, Eggs, Cheese..." autofocus>
         </div>
@@ -35,7 +36,7 @@
             <option value="Grocery">Grocery</option>
             <option value="Meat">Meat</option>
             <option value="Frozen Food">Frozen Food</option>
-            <option value="Fish / Seafood">Fish/Seafood</option>
+            <option value="Fish / Seafood">Fish / Seafood</option>
         </select>
     </form>
 
@@ -45,11 +46,22 @@
     
 
     
-    <h1>Your List</h1>
+    <h1>Your Current List:</h1>
+
+    <div style="margin-bottom: 10px;" id="sort">
+            <div style="margin-bottom: 10px; font-weight: bold;">Sort by category</div>
+            <button id="All">All</button>
+            <button id="Dairy">Dairy</button>
+            <button id="Produce">Produce</button>
+            <button id="Grocery">Grocery</button>
+            <button id="Meat">Meat</button>
+            <button id="Frozen Food">Frozen Food</button>
+            <button id="Fish / Seafood">Fish / Seafood</button>
+        </div>
     <ul id="myList">
         <!--List items will be added here dynamically-->
     </ul>
-
+        
     <script type="module" src="index.js"></script>
     <footer>
     <p>&copy; 2025 Created by Ryan Burns</p>
