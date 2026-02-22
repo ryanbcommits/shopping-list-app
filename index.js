@@ -515,6 +515,48 @@ import { multiFactor, signOut } from 'firebase/auth';
 
         });
 
+        // Sort Button logic - 
+
+        const allBtn = document.getElementById("all");
+        const dairyBtn = document.getElementById("dairy");
+        const produceBtn = document.getElementById("produce");
+        const groceryBtn = document.getElementById("grocery");
+        const meatBtn = document.getElementById("meat");
+        const frozenBtn = document.getElementById("frozenFood");
+        const fishBtn = document.getElementById("fishSeaFood");
+
+        allBtn.addEventListener("click", async () => {
+            
+            console.log("The all button was clicked");
+            
+        });
+
+        dairyBtn.addEventListener("click", async () => {
+            
+            console.log("The Dairy button was clicked");
+            
+        });
+
+        produceBtn.addEventListener("click", async () => {
+            console.log("produce clicked")
+        });
+
+        groceryBtn.addEventListener("click", async () => {
+            console.log("groceryBtn clicked")
+        });
+
+        meatBtn.addEventListener("click", async () => {
+            console.log("meatBtn clicked")
+        });
+
+        frozenBtn.addEventListener("click", async () => {
+            console.log("frozen clicked")
+        });
+
+        fishBtn.addEventListener("click", async () => {
+            console.log("fishBtn clicked")
+        });
+
 
 
         // Logout functionality
