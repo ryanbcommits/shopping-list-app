@@ -90,7 +90,8 @@ import { multiFactor, signOut } from 'firebase/auth';
         const listItem = document.createElement("li"); //create a new list item
         const deleteButton = document.createElement("button");
         const editButton = document.createElement("button"); 
-        const cancelButton = document.createElement("button"); // not being used right now - may be useful later...
+        const cancelButton = document.createElement("button"); 
+        const categoryButton = document.createElement("button"); 
 
         // Sets up edit/update mode tracking.
         listItem.setAttribute('data-edit-mode', 'false');
@@ -557,8 +558,25 @@ import { multiFactor, signOut } from 'firebase/auth';
             console.log("fishBtn clicked")
         });
 
+        // Task 2 - Create category filter buttons — define your categories array and render a button for each one
+
+        // Below code can print the contents of CATEGORIES to the DOM. but I need buttons...
+        
+        let txt = "";
+        
+        CATEGORIES.forEach(myfunction);
+        document.getElementById("demo").innerHTML = txt;
+               
+        function myfunction(value, index, array) {
+            txt += value + " ";
+        }
 
 
+        /*
+        ************************
+        LOG OUT FUNCTIONALITY BELOW
+        ************************
+        */
         // Logout functionality
         logOut.addEventListener("click", async (e) => {
             e.preventDefault();
