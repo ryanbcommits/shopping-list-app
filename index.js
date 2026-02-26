@@ -14,7 +14,7 @@ import { multiFactor, signOut } from 'firebase/auth';
     // setTimeout variables
     const TIMEOUT_DURATION = 15 * 60 * 1000; // 15 min in milliseconds
     const WARNING_DURATION = 14 * 60 * 1000; // Warning at 14 minutes
-    const CATEGORIES = ["Dairy", "Produce", "Grocery", "Meat", "Frozen Food", "Fish / Seafood"];
+    const CATEGORIES = ["All", "Dairy", "Produce", "Grocery", "Meat", "Frozen Food", "Fish / Seafood"];
 
     function resetInactivityTimer(){
         // Clear existing timer with clearTimeout() method - see MDN webdocs
@@ -92,7 +92,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         const deleteButton = document.createElement("button");
         const editButton = document.createElement("button"); 
         const cancelButton = document.createElement("button"); 
-        const categoryButton = document.createElement("button"); 
+       
 
         
 
@@ -313,17 +313,6 @@ import { multiFactor, signOut } from 'firebase/auth';
         listItem.appendChild(deleteButton);
         listItem.appendChild(editButton);
         
-        const sortDiv = document.getElementById("sort"); // gets the div elemnt in html
-        CATEGORIES.forEach(function(value) {
-            
-            categoryButton.type = "button";
-            categoryButton.textContent = value;
-            categoryButton.dataset.category = value;
-            sortDiv.appendChild(categoryButton);
-        });
-    
-        
-
         // this function should be called last
         myList.appendChild(listItem);
         
@@ -457,6 +446,21 @@ import { multiFactor, signOut } from 'firebase/auth';
             return { valid: true };
         }
 
+        const sortDiv = document.getElementById("sort"); // gets the div elemnt in html
+
+        /*
+        *****
+        SORT Buttons
+        *****
+        */
+        CATEGORIES.forEach(function(value) {
+            const categoryButton = document.createElement("button"); 
+            categoryButton.type = "button";
+            categoryButton.textContent = value;
+            categoryButton.dataset.category = value;
+            sortDiv.appendChild(categoryButton);
+        });
+        
 
         // The Database logic - Outside the event listener 
         async function saveItemToDatabase(userId, itemName, category) {
