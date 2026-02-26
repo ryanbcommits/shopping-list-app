@@ -3,6 +3,7 @@ import { db } from './firebase-config.js';
 import { auth, onAuthStateChanged } from './firebase-config.js'
 import { multiFactor, signOut } from 'firebase/auth';
 
+
     // Adding a setTimout to my code:
 
     // setting a rate limiting variable
@@ -93,6 +94,8 @@ import { multiFactor, signOut } from 'firebase/auth';
         const cancelButton = document.createElement("button"); 
         const categoryButton = document.createElement("button"); 
 
+        
+
         // Sets up edit/update mode tracking.
         listItem.setAttribute('data-edit-mode', 'false');
 
@@ -182,8 +185,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         editButton.id = "edit"
 
         
-
-        
+  
         // cancel button style: - might be useful later for the user if that accidentally hit cancel, but not using now
         cancelButton.textContent = "Cancel";
         cancelButton.style.marginLeft = "10px";
@@ -311,12 +313,22 @@ import { multiFactor, signOut } from 'firebase/auth';
         listItem.appendChild(deleteButton);
         listItem.appendChild(editButton);
         
+        const sortDiv = document.getElementById("sort"); // gets the div elemnt in html
+        CATEGORIES.forEach(function(value) {
+            
+            categoryButton.type = "button";
+            categoryButton.textContent = value;
+            categoryButton.dataset.category = value;
+            sortDiv.appendChild(categoryButton);
+        });
+    
         
 
         // this function should be called last
         myList.appendChild(listItem);
-    
+        
 
+        
     // end of addToList(data) function    
     }
 
@@ -561,15 +573,18 @@ import { multiFactor, signOut } from 'firebase/auth';
         // Task 2 - Create category filter buttons — define your categories array and render a button for each one
 
         // Below code can print the contents of CATEGORIES to the DOM. but I need buttons...
+
+        // let txt = "";
         
-        let txt = "";
-        
-        CATEGORIES.forEach(myfunction);
-        document.getElementById("demo").innerHTML = txt;
+        // CATEGORIES.forEach(myfunction);
+        // document.getElementById("demo").innerHTML = txt;
                
-        function myfunction(value, index, array) {
-            txt += value + " ";
-        }
+        // function myfunction(value, index, array) {
+        //     txt += value + " ";
+        // }
+
+        
+
 
 
         /*
