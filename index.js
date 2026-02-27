@@ -340,9 +340,26 @@ import { multiFactor, signOut } from 'firebase/auth';
             // Use regular for loop as you wanted to practice to write all data written to the db to the window.
             const docs = querySnapshot.docs;
         
+            /**
+             ****
+             This for loop is where you have access to each item's data
+             ****
+             */    
+
+            let allItems = [];
+
             for (let i = 0; i < docs.length; i++) {
                 const doc = docs[i];
                 const data = doc.data();
+
+                if (!data.hidden) {
+                    allItems.push(
+                        {
+                        item: data.item,
+                        id: doc.id, // From 
+                        category: data.category 
+                    });
+                }
 
                 // only show unhidden data
                 if (!data.hidden) {
@@ -450,7 +467,8 @@ import { multiFactor, signOut } from 'firebase/auth';
 
         /*
         *****
-        SORT Buttons
+        SORT BUTTON logic: This is housed within the DOMContentLoaded listener.
+
         *****
         */
         CATEGORIES.forEach(function(value) {
@@ -458,7 +476,15 @@ import { multiFactor, signOut } from 'firebase/auth';
             categoryButton.type = "button";
             categoryButton.textContent = value;
             categoryButton.dataset.category = value;
+
+            // Add click listener 
+            categoryButton.addEventListener("click", function() {
+                console.log("Clicked: ", value);
+                // Filter Logic will go here
+            });
+
             sortDiv.appendChild(categoryButton);
+
         });
         
 
@@ -500,8 +526,6 @@ import { multiFactor, signOut } from 'firebase/auth';
                 return;
             }
 
-
-
             // Save to Database
             button.disabled = true;
             button.textContent = "Adding...";
@@ -531,64 +555,6 @@ import { multiFactor, signOut } from 'firebase/auth';
             console.log(`the category selected: ${categoryName}`);
 
         });
-
-        // Sort Button logic - 
-
-        const allBtn = document.getElementById("all");
-        const dairyBtn = document.getElementById("dairy");
-        const produceBtn = document.getElementById("produce");
-        const groceryBtn = document.getElementById("grocery");
-        const meatBtn = document.getElementById("meat");
-        const frozenBtn = document.getElementById("frozenFood");
-        const fishBtn = document.getElementById("fishSeaFood");
-
-        allBtn.addEventListener("click", async () => {
-            
-            console.log("The all button was clicked");
-            
-        });
-
-        dairyBtn.addEventListener("click", async () => {
-            
-            console.log("The Dairy button was clicked");
-            
-        });
-
-        produceBtn.addEventListener("click", async () => {
-            console.log("produce clicked")
-        });
-
-        groceryBtn.addEventListener("click", async () => {
-            console.log("groceryBtn clicked")
-        });
-
-        meatBtn.addEventListener("click", async () => {
-            console.log("meatBtn clicked")
-        });
-
-        frozenBtn.addEventListener("click", async () => {
-            console.log("frozen clicked")
-        });
-
-        fishBtn.addEventListener("click", async () => {
-            console.log("fishBtn clicked")
-        });
-
-        // Task 2 - Create category filter buttons — define your categories array and render a button for each one
-
-        // Below code can print the contents of CATEGORIES to the DOM. but I need buttons...
-
-        // let txt = "";
-        
-        // CATEGORIES.forEach(myfunction);
-        // document.getElementById("demo").innerHTML = txt;
-               
-        // function myfunction(value, index, array) {
-        //     txt += value + " ";
-        // }
-
-        
-
 
 
         /*
