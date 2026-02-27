@@ -348,31 +348,26 @@ import { multiFactor, signOut } from 'firebase/auth';
 
             let allItems = [];
 
+            
+            // Stage 1: Collect
             for (let i = 0; i < docs.length; i++) {
                 const doc = docs[i];
                 const data = doc.data();
 
                 if (!data.hidden) {
-                    allItems.push(
-                        {
+                    allItems.push({
                         item: data.item,
-                        id: doc.id, // From 
+                        id: doc.id,
                         category: data.category 
                     });
                 }
+            }
 
-                // only show unhidden data
-                if (!data.hidden) {
-                    addToList({
-                        // name: data.name, // From DB
-                        // age: data.age, // From DB
-                        // email: data.email, // From DB
-                        // id: doc.id // From DB
-                        item: data.item,
-                        id: doc.id, // From 
-                        category: data.category 
-                    });
-                }
+            // Stage 2: Filter (we'll add this next)
+
+            // Stage 3: Display
+            for (let i = 0; i < allItems.length; i++) {
+                addToList(allItems[i]);
             }
 
             console.log('Loaded ShoppingList from DB', querySnapshot.size, 'items from database');
