@@ -347,7 +347,7 @@ import { multiFactor, signOut } from 'firebase/auth';
              */    
 
             let allItems = [];
-
+            
             
             // Stage 1: Collect
             for (let i = 0; i < docs.length; i++) {
@@ -364,6 +364,23 @@ import { multiFactor, signOut } from 'firebase/auth';
             }
 
             // Stage 2: Filter (we'll add this next)
+            //First attempt 368-373, solution on 374
+            // function filterByID(category) {
+            //     if (allItems. === "category") {
+            //         return true;
+            //     }
+            // }
+            // filterByID(category);
+            let filtered = allItems.filter(function(item) {
+                return item.category === category;
+            });
+
+            console.log(filtered);
+
+         
+
+            // problem the allItems array holds all the item data including the item name and id as wall as category
+
 
             // Stage 3: Display
             for (let i = 0; i < allItems.length; i++) {

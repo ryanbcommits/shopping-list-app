@@ -1,5 +1,43 @@
 ## Development Log
 
+### 2026-03-01
+**Why not one loop**
+
+
+Old Loop in the loadUserData() function.
+
+```
+
+    for (let i = 0; i < docs.length; i++) {
+        const doc = docs[i];
+        const data = doc.data();
+        if (!data.hidden) {
+            addToList({
+                item: data.item,
+                id: doc.id, 
+                category: data.category 
+            });
+        }
+    }
+```
+
+If I try to filter inside the Firestore loop, I can't apply a second filter without another if statement. Separating collect/filter/display keeps each stage focused on one job."
+
+
+// 1. Collect
+let allItems = [];
+rawData.forEach(item => allItems.push(item));
+
+// 2. Filter
+let filtered = allItems.filter(/* your condition */);
+
+// 3. Display
+filtered.forEach(item => renderItem(item));
+
+The array between collect and display is a pause point. It's where I can ask questions about all the data before committing to rendering anything.
+
+What's breaking without this - Without the pause point, adding a second filter (like search) would require nesting more if statements inside the Firestore loop, making the code fragile and hard to read.
+
 ### 2026-01-08: Edit Validation Complete
 **What I built:** Added input validation to the edit/save flow
 
