@@ -377,6 +377,8 @@ import { multiFactor, signOut } from 'firebase/auth';
             for (let j = 0; j < filtered.length; j++) {
                 addToList(filtered[j]);
             }
+
+            
             console.log('Loaded ShoppingList from DB', querySnapshot.size, 'items from database');
             
             
