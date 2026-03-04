@@ -1,5 +1,28 @@
 ## Development Log
 
+### 2026-03-03
+Filtering has two steps: update the state variablel, then re-render. The variable remembers the choice, the function does the work.
+
+Original code:
+
+```
+let filtered = allItems.filter(function(item) {
+    return item.category === currentFilter;
+});
+
+
+// Stage 3: Display, I loooped through allItems instead of the filtered variable I created.
+
+    for (let i = 0; i < allItems.length; i++) {
+        addToList(allItems[i]);
+    }
+
+    console.log('Loaded ShoppingList from DB', querySnapshot.size, 'items from database');
+
+```
+
+
+
 ### 2026-03-01
 **Why not one loop**
 

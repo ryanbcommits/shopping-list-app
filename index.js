@@ -4,12 +4,12 @@ import { auth, onAuthStateChanged } from './firebase-config.js'
 import { multiFactor, signOut } from 'firebase/auth';
 
 
-    // Adding a setTimout to my code:
-
     // setting a rate limiting variable
     let lastSubmitTime = 0;
     let warningTimer;
     let inactivityTimer;
+    let currentFilter = "All";
+    
 
     // setTimeout variables
     const TIMEOUT_DURATION = 15 * 60 * 1000; // 15 min in milliseconds
@@ -349,7 +349,7 @@ import { multiFactor, signOut } from 'firebase/auth';
             let allItems = [];
             
             
-            // Stage 1: Collect
+            // Stage 1: Collect, loops through the firestore doc and gather ething not hidden, no rendereing just raw data.
             for (let i = 0; i < docs.length; i++) {
                 const doc = docs[i];
                 const data = doc.data();
@@ -362,40 +362,36 @@ import { multiFactor, signOut } from 'firebase/auth';
                     });
                 }
             }
-
-            // Stage 2: Filter (we'll add this next)
-            //First attempt 368-373, solution on 374
-            // function filterByID(category) {
-            //     if (allItems. === "category") {
-            //         return true;
-            //     }
-            // }
-            // filterByID(category);
+            
+            // filter() hands me one item at a time. I describe what makes a single item pass. JavaScript handles the looping.
             let filtered = allItems.filter(function(item) {
-                return item.category === category;
+                return item.category === currentFilter;
             });
 
-            console.log(filtered);
-
-         
-
-            // problem the allItems array holds all the item data including the item name and id as wall as category
-
-
-            // Stage 3: Display
+            
+            // Stage 3: Display - if currentFilter is assigned to Dairy then dairy will load to list Dairy button is pressed
             for (let i = 0; i < allItems.length; i++) {
                 addToList(allItems[i]);
             }
 
+            for (let j = 0; j < filtered.length; j++) {
+                addToList(filtered[j]);
+            }
             console.log('Loaded ShoppingList from DB', querySnapshot.size, 'items from database');
             
             
         } catch (error) {
             console.error("Error loading user data:", error);
         }
+
     // end of loadUserData function    
     }
    
+    /**
+     * ****
+     * DOMCONTENT LOADED
+     * ****
+     */
     // Code for writing to and reading from the db
     document.addEventListener("DOMContentLoaded", () => {
         
@@ -493,6 +489,9 @@ import { multiFactor, signOut } from 'firebase/auth';
             categoryButton.addEventListener("click", function() {
                 console.log("Clicked: ", value);
                 // Filter Logic will go here
+                // I want to see if I can get Dairy to filter here
+                // assign a value to currentFilter
+                currentFilter = value;          
             });
 
             sortDiv.appendChild(categoryButton);
