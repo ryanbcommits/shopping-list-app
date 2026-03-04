@@ -1,9 +1,45 @@
 ## Development Log
 
-### 2026-03-03
+
+
+### 2026-03-03 at 11:20 PM
+**Solved:** Category filter is now working. Here's what was missing:
+
+The following code shows I was on the right path, but I was missing some important code to get the code working the way I needed it to, see comments that say missing
+
+```
+let currentFilter = "All": // code I had right...
+
+let filtered = allItems.filter(function(item) {
+                if (currentFilter === "All") { // missing
+                    return true; // missing
+                }
+                return item.category === currentFilter;
+            });
+
+//lines 488 - 496
+
+// Add click listener 
+categoryButton.addEventListener("click", function() {
+    console.log("Clicked: ", value);
+    // Filter Logic will go here
+    // I want to see if I can get Dairy to filter here
+    // assign a value to currentFilter
+    currentFilter = value;         
+    loadUserData();  // Missing 
+});
+
+The two missing pieces were the `currentFilter === "All"` guard clause 
+so every item passes through by default, and calling `loadUserData()` 
+inside the click listener — because updating a variable alone doesn't 
+re-render anything, you have to explicitly trigger the work.
+
+```
+
+
 Filtering has two steps: update the state variablel, then re-render. The variable remembers the choice, the function does the work.
 
-Original code:
+
 
 ```
 let filtered = allItems.filter(function(item) {
@@ -18,6 +54,9 @@ let filtered = allItems.filter(function(item) {
     }
 
     console.log('Loaded ShoppingList from DB', querySnapshot.size, 'items from database');
+
+
+
 
 ```
 

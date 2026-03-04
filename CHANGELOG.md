@@ -7,20 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-03-03
+
 ### Added
 - Category system for shopping list items
 - Category dropdown in add-item form (Dairy, Produce, Grocery, Meat, Frozen Food, Fish / Seafood)
 - Category field saved to Firestore with each item
 - Category badge displayed on each list item with color coding
 - Category filter buttons generated dynamically from CATEGORIES array
+- `currentFilter` state variable to track active category selection
+- Category filter buttons dynamically filter the shopping list on click
 
 ### Changed
 - Updated `saveItemToDatabase` function to accept category parameter
 - Updated `addToList` function to display category data
 - Updated `loadUserData` to pass category from Firestore to `addToList`
+- Refactored `loadUserData()` into a three-stage collect → filter → display pipeline
+- Stage 3 now renders from filtered array, not raw Firestore data
 
-### In Progress
-- Filter logic implementation (render only items matching selected category)
+
 
 ## [1.1.0] - 2025-12-11
 
@@ -89,7 +94,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Version History Summary
 
-- **1.2.0** - Category system for items
+- **1.2.0** - Category system with filter buttons and collect → filter → display pipeline
 - **1.1.0** - Full CRUD operations with inline editing
 - **1.0.0** - First stable release with production deployment
 - **0.9.0-beta** - Public beta with core features

@@ -365,19 +365,17 @@ import { multiFactor, signOut } from 'firebase/auth';
             
             // filter() hands me one item at a time. I describe what makes a single item pass. JavaScript handles the looping.
             let filtered = allItems.filter(function(item) {
+                if (currentFilter === "All") {
+                    return true; // pass everything through
+                }
                 return item.category === currentFilter;
             });
 
             
             // Stage 3: Display - if currentFilter is assigned to Dairy then dairy will load to list Dairy button is pressed
-            for (let i = 0; i < allItems.length; i++) {
-                addToList(allItems[i]);
+            for (let i = 0; i < filtered.length; i++) {
+                addToList(filtered[i]);
             }
-
-            for (let j = 0; j < filtered.length; j++) {
-                addToList(filtered[j]);
-            }
-
             
             console.log('Loaded ShoppingList from DB', querySnapshot.size, 'items from database');
             
@@ -493,7 +491,8 @@ import { multiFactor, signOut } from 'firebase/auth';
                 // Filter Logic will go here
                 // I want to see if I can get Dairy to filter here
                 // assign a value to currentFilter
-                currentFilter = value;          
+                currentFilter = value;         
+                loadUserData(); 
             });
 
             sortDiv.appendChild(categoryButton);
