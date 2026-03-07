@@ -1,5 +1,12 @@
 ## Development Log
 
+### 2026-03-04
+
+### Known UX issue — filter + add item
+When a category filter is active, newly added items appear in the list 
+even if they don't match the filter. Two possible fixes to consider later:
+- Reset currentFilter to "All" after adding an item
+- Call loadUserData() after adding instead of calling addToList() directly
 
 
 ### 2026-03-03 at 11:20 PM

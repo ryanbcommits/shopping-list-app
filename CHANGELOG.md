@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Known Issues
+- Adding an item while a category filter is active appends it to the 
+  visible list regardless of whether it matches the current filter
+- User is not logged out after alotted time after hitting ok on the alert button.
+- Session timeout alert does not reliably log the user out — clicking OK 
+  on the alert triggers the document click listener, resetting the 
+  inactivity timer. Needs a custom modal to fix properly.
+
 ## [1.2.0] - 2026-03-03
 
 ### Added

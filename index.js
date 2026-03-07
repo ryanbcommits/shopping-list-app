@@ -484,6 +484,11 @@ import { multiFactor, signOut } from 'firebase/auth';
             categoryButton.type = "button";
             categoryButton.textContent = value;
             categoryButton.dataset.category = value;
+        
+            // button style
+            // Left off here
+
+            
 
             // Add click listener 
             categoryButton.addEventListener("click", function() {
