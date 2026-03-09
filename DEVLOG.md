@@ -1,5 +1,12 @@
 ## Development Log
 
+### 2026-03-08 — CSS IDs can't have spaces
+Tried to use the category name as the button ID for styling. Worked for 
+"Dairy" and "Produce" but broke on "Frozen Food". 
+Root cause: CSS IDs and classes cannot contain spaces.
+Fix: use classList.add("category-btn") — one shared class for all buttons, 
+styled once in CSS. Individual IDs per button weren't needed anyway.
+
 ### 2026-03-04
 
 ### Known UX issue — filter + add item

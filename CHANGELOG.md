@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### In Progress
+- Category filter bar styling
+  - Attempted to use `categoryButton.id = value` for CSS targeting, but IDs 
+    cannot contain spaces — broke on "Frozen Food" and "Fish / Seafood"
+  - Solution: switch to `categoryButton.classList.add("category-btn")` so all 
+    filter buttons share one class regardless of their label text
+  - Active button highlight still needed (requires adding/removing a second 
+    class like "active" via JavaScript on click)
+
 ### Known Issues
 - Adding an item while a category filter is active appends it to the 
   visible list regardless of whether it matches the current filter
