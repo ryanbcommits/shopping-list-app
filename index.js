@@ -476,7 +476,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         /*
         *****
         SORT BUTTON logic: This is housed within the DOMContentLoaded listener.
-
+        This is where the filter buttons are generated.
         *****
         */
         CATEGORIES.forEach(function(value) {
@@ -484,9 +484,10 @@ import { multiFactor, signOut } from 'firebase/auth';
             categoryButton.type = "button";
             categoryButton.textContent = value;
             categoryButton.dataset.category = value;
-        
+            categoryButton.id = value;
             // button style
             // Left off here
+            categoryButton.classList.add("category-btn");
 
             
 

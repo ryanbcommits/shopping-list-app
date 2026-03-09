@@ -204,3 +204,31 @@ p { max-width: 600px; } /*no change*/
   background-color: #5cb85c;
   color: white;
 }
+
+/*
+The CSS for the Categories bar
+*/
+
+#All:hover {
+  background-color: lightblue;
+}
+
+#Dairy:hover {
+  background-color: lightblue;
+}
+
+#Produce:hover {
+  background-color: lightblue;
+}
+
+#Grocery:hover {
+  background-color: lightblue;
+}
+
+#Meat:hover {
+  background-color: lightblue;
+}
+
+#Frozen Food:hover {
+  background-color: lightblue;
+}
