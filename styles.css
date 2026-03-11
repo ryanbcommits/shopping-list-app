@@ -21,7 +21,12 @@ p { width: 100%; } /*no change*/
 p { width: 600px; } /*paragraph doesn't extend to end of window but 70%*/
 
 /*
-p { max-width: 600px; } /*no change*/
+
+/* All buttons */
+
+button {
+  border-radius: 4px;
+}
 
 /* Google button CSS */
 .gsi-material-button {
@@ -209,26 +214,11 @@ p { max-width: 600px; } /*no change*/
 The CSS for the Categories bar
 */
 
-#All:hover {
-  background-color: lightblue;
+.category-btn {
+  /* design for button look*/
+  border-radius: 4px;
 }
 
-#Dairy:hover {
-  background-color: lightblue;
-}
-
-#Produce:hover {
-  background-color: lightblue;
-}
-
-#Grocery:hover {
-  background-color: lightblue;
-}
-
-#Meat:hover {
-  background-color: lightblue;
-}
-
-#Frozen Food:hover {
+.category-btn:hover {
   background-color: lightblue;
 }
