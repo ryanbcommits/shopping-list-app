@@ -140,6 +140,12 @@ button:hover {
   opacity: 8%;
 }
 
+.gsi-material-button:not(:disabled):hover {
+    background-color: WHITE; /* keeps original color, cancels button:hover */
+    -webkit-box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .30), 0 1px 3px 1px rgba(60, 64, 67, .15);
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .30), 0 1px 3px 1px rgba(60, 64, 67, .15);
+}
+
 
 /*end of google */
 
