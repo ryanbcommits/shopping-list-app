@@ -1,5 +1,11 @@
 ## Development Log
 
+### 2026-03-10 — CSS override on hover issue
+
+CSS override only works if both rules target the same property. 
+If the specific rule doesn't mention a property at all, the less specific
+rule still wins for that property.
+
 ### 2026-03-08 — CSS IDs can't have spaces
 Tried to use the category name as the button ID for styling. Worked for 
 "Dairy" and "Produce" but broke on "Frozen Food". 
