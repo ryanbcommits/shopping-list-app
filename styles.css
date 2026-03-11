@@ -28,6 +28,13 @@ button {
   border-radius: 4px;
 }
 
+button:hover {
+  
+  background-color: lightskyblue;
+  
+}
+
+
 /* Google button CSS */
 .gsi-material-button {
   -moz-user-select: none;
@@ -134,10 +141,10 @@ button {
 }
 
 
+/*end of google */
 
 
 
-/*end of google
 
 
 /* The Modal (background) */
