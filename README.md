@@ -1,9 +1,16 @@
 # Shopping List App
 
 ![Status](https://img.shields.io/badge/status-stable-green)
-![Version](https://img.shields.io/badge/version-1.1.0-blue)
+![Version](https://img.shields.io/badge/version-1.2.0-blue)
 
 A full-stack shopping list application built with vanilla JavaScript and Firebase, featuring real-time data synchronization, user authentication, and comprehensive CRUD operations.
+
+## 🎉 Version 1.2.0 Release Notes
+
+### New Features
+- **✅ Category Filter System**: Filter your shopping list by category using 
+  dynamic filter buttons. Select any category to narrow the list, or hit 
+  "All" to return to the full view.
 
 ## 🎉 Version 1.1.0 Release Notes
 
@@ -47,7 +54,7 @@ Then open your browser to the localhost URL that Vite provides (usually `http://
 
 The app is deployed at: [https://app.ryanbcommits.com](https://app.ryanbcommits.com)
 
-**Current Status:** Production-Ready (v1.1.0)
+**Current Status:** Production-Ready (v1.2.0)
 - ✅ HTTPS/SSL certificate active
 - ✅ Full CRUD operations implemented
 - ✅ Mobile compatibility tested
@@ -61,7 +68,8 @@ The app is deployed at: [https://app.ryanbcommits.com](https://app.ryanbcommits.
 - **Full CRUD Operations**: 
   - Create new items
   - Read/display items
-  - Update/edit existing items (NEW in v1.1.0!)
+  - Update/edit existing items
+  - Category filtering by item type (NEW in v1.2.0!) 
   - Delete items (soft delete)
 - **Security Features**:
   - Session timeout after 15 minutes of inactivity
@@ -85,6 +93,13 @@ The app is deployed at: [https://app.ryanbcommits.com](https://app.ryanbcommits.
 
 ## 📚 Key Learnings
 
+### Recent Development (v1.2.0)
+- **Collect → Filter → Display Pipeline**: Refactored data loading into three 
+  stages — non-hidden items are collected into an `allItems[]` array, filtered 
+  against `currentFilter` using `Array.filter()`, then rendered to the DOM
+- **Module-level State**: `currentFilter` lives outside all functions so both 
+  the button listeners and `loadUserData()` can read and update it
+
 ### Recent Development (v1.1.0)
 - **State Management**: Single source of truth using `data-edit-mode` attribute
 - **Event Listener Scope**: Importance of defining listeners at component creation level
@@ -106,6 +121,10 @@ The app is deployed at: [https://app.ryanbcommits.com](https://app.ryanbcommits.
 
 ## 📋 Development Roadmap
 
+### ✅ Completed (v1.2.0)
+- Category filter system with dynamic buttons and active state
+- Categories/tags for items
+
 ### ✅ Completed (v1.1.0)
 - User authentication system
 - Add items functionality
@@ -121,7 +140,7 @@ The app is deployed at: [https://app.ryanbcommits.com](https://app.ryanbcommits.
 - Enhanced mobile UI
 
 ### 📋 Planned Features
-- Categories/tags for items
+
 - Drag-and-drop reordering
 - Shopping list sharing
 - Quantity tracking
@@ -165,5 +184,4 @@ This project uses Claude AI as a learning assistant, not as a code generator. My
 Ryan Burns - [GitHub](https://github.com/ryanbcommits)
 
 ---
-
-**Last Updated:** December 2025 | **Version:** 1.1.0
+**Last Updated:** March 2026 | **Version:** 1.2.0
