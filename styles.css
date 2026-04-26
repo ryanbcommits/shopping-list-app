@@ -223,7 +223,7 @@ button:hover {
 The CSS for the Categories bar
 */
 
-.category-btn {
+/* .category-btn {
   /* design for button look*/
   border-radius: 4px;
 }
@@ -231,3 +231,40 @@ The CSS for the Categories bar
 .category-btn:hover {
   background-color: lightblue;
 }
+
+
+option[value=""]{
+      background-color: gray;
+      color: #fff;
+  }
+
+option[value="Dairy"]{
+      background-color: #1f51ff;
+      color: #fff;
+  }  
+
+option[value="Produce"]{
+      background-color: green;
+      color: #fff;
+  } 
+  
+
+option[value="Grocery"]{
+      background-color: #4a0404;
+      color: #fff;
+  }     
+
+option[value="Meat"]{
+      background-color: #701705;
+      color: #fff;
+  }   
+
+option[value="Frozen Food"]{
+      background-color: blue;
+      color: #fff;
+  }   
+
+option[value="Fish / Seafood"]{
+      background-color: #E3735E;
+      color: #fff;
+  }    */
