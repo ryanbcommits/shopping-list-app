@@ -153,6 +153,8 @@ The app is deployed at: [https://app.ryanbcommits.com](https://app.ryanbcommits.
 - [ ] Firestore Security Rules need production hardening
 - [ ] Special character validation pending implementation
 - [ ] alert modal creates timeout error.
+- [ ] blank category can be submitted to list
+
 
 ## 💡 AI Disclosure
 
