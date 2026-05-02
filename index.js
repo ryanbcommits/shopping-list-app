@@ -471,12 +471,12 @@ import { multiFactor, signOut } from 'firebase/auth';
             return { valid: true };
         }
 
-        const sortDiv = document.getElementById("sort"); // gets the div elemnt in html
+        const sortDiv = document.getElementById("sort"); // gets the div elemnt in html with id tag 'sort'.
 
         /*
         *****
         SORT BY CATEGORY BUTTON logic: This is housed within the DOMContentLoaded listener.
-        This is where the filter buttons are generated.
+        This is where the filter buttons are generated. Below creates the button with the category titles
         *****
         */
         CATEGORIES.forEach(function(value) {
@@ -490,7 +490,7 @@ import { multiFactor, signOut } from 'firebase/auth';
 
             
 
-            // Add click listener 
+            // This is where we can create an event lister for on click events 
             categoryButton.addEventListener("click", function() {
                 console.log("Clicked: ", value);
                 // Filter Logic will go here

@@ -23,16 +23,16 @@
     <h1 id="greeting"></h1>
 
     <form id="userForm">
-        <div style="margin-bottom: 10px;">Add items to your shopping list!</div>
-        <div>Step 1: First add an item to your shopping List</div>
-        
+        <div style="margin-bottom: 10px;">Get started:</div>
+        <div>Step 1: Add an item to the text field.</div>
+        <div style="margin-bottom: 10px;">Step 2: Select the corresponding category for that item and click "Add to List."</div>
         <div style="margin-bottom: 10px;">
-            <label for="itemName">Enter Item Here: </label>
+            <label for="itemName">Enter a Shopping List Item Here: </label>
             <input type="text" id="itemName" placeholder="Milk, Eggs, Cheese..." autofocus>
         </div>
     </form>
     <form>
-        <label for="categories">Choose a category</label>
+        <label for="categories">Category:</label>
         <select name="categories" id="categories">
             <!--At some point add a prompt so there's no default to Dairy-->
             <option value="" disabled selected>-- Select a category --</option>
@@ -43,9 +43,10 @@
             <option value="Frozen Food">Frozen Food</option>
             <option value="Fish / Seafood">Fish / Seafood</option>
         </select>
+        <button id="connect">Add to List</button>
     </form>
 
-    <button id="connect">Add to List</button>
+    
 
     <button id="logOut">Log out</button>
     
