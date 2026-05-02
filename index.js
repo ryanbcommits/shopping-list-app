@@ -349,7 +349,7 @@ import { multiFactor, signOut } from 'firebase/auth';
             let allItems = [];
             
             
-            // Stage 1: Collect, loops through the firestore doc and gather ething not hidden, no rendereing just raw data.
+            // Stage 1: Collect, loops through the firestore doc and gather everything not hidden, no rendereing just raw data.
             for (let i = 0; i < docs.length; i++) {
                 const doc = docs[i];
                 const data = doc.data();
@@ -399,7 +399,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         const logOut = document.getElementById("logOut");
         const itemInput = document.getElementById("itemName");
 
-        // Listen for when a user presses akey in the text field
+        // Listen for when a user presses a key in the text field
         itemInput.addEventListener("keypress", function(event) {
                 // check if the key they pressed was Enter (strict equality) - checks if the vals are equal AND the same type.
                 if (event.key === "Enter") {
@@ -473,6 +473,8 @@ import { multiFactor, signOut } from 'firebase/auth';
 
         const sortDiv = document.getElementById("sort"); // gets the div elemnt in html with id tag 'sort'.
 
+        
+        
         /*
         *****
         SORT BY CATEGORY BUTTON logic: This is housed within the DOMContentLoaded listener.
@@ -487,6 +489,7 @@ import { multiFactor, signOut } from 'firebase/auth';
             categoryButton.id = value;
             // button styles are in styles.css
             categoryButton.classList.add("category-btn"); // see Changelog 
+            // categoryButton.className = "category"; // class name for categoryButton
 
             
 
@@ -496,13 +499,40 @@ import { multiFactor, signOut } from 'firebase/auth';
                 // Filter Logic will go here
                 // I want to see if I can get Dairy to filter here
                 // assign a value to currentFilter
-                currentFilter = value;         
+
+                
+                currentFilter = value; 
                 loadUserData(); 
+
+                let test = sortDiv.children;
+                
+                for(let i = 0; i < sortDiv.children.length; i++){
+                //  console.log(i + " " + test[i].textContent);
+                test[i].classList.remove("active");
+                }
+
+                categoryButton.classList.add("active");
+
+                
             });
 
+            // if a certain category button is clicked then that 
+            // button needs to be highlighted... try doing it in the event listener first.
+            
+            
+            
             sortDiv.appendChild(categoryButton);
 
+            
         });
+        
+        // console.log("sortDiv Length: Not an array, error expected: " +sortDiv.length);
+        // console.log("sortDiv children: " + sortDiv.children); // returns [HTMLCollection]
+        // console.log("sortDiv querySelector: " + sortDiv.querySelectorAll(".category-btn")); // returnes [object NodeList]
+        
+
+
+       
         
 
         // The Database logic - Outside the event listener 
@@ -571,8 +601,11 @@ import { multiFactor, signOut } from 'firebase/auth';
             console.log(`the item: ${itemName}, is of type: ${typeof(itemName)}`);
             console.log(`the category selected: ${categoryName}`);
 
+            
+
         });
 
+        
 
         /*
         ************************

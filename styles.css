@@ -34,8 +34,15 @@ button:hover {
   
 }
 
+.category-btn.active {
+
+  background-color: lightskyblue;
+  color: white;
+}
 
 /* Google button CSS */
+
+
 .gsi-material-button {
   background-color: WHITE;
   background-image: none;
@@ -165,6 +172,8 @@ button:hover {
 }
 
 /* Modal Content */
+
+
 .modal-content {
   position: relative;
   background-color: #fefefe;
