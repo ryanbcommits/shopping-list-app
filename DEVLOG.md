@@ -1,5 +1,26 @@
 ## Development Log
 
+### 2026-05-02 — Active button highlight complete
+
+**What I built:** The selected category filter button now stays highlighted 
+so the user always knows which filter is active.
+
+**How it works:** Inside the category button click listener, I loop through 
+`sortDiv.children` to remove the "active" class from all buttons first, 
+then add "active" to the button that was clicked. The CSS rule 
+`.category-btn.active` controls what the highlighted button looks like.
+
+**Key learnings:**
+- `sortDiv.children` returns an HTMLCollection, not an array. You can loop 
+  through it with a for loop using an index `[i]`, but you can't call 
+  methods like `.remove()` on the whole collection — only on individual 
+  elements inside it.
+- `toggle` was the wrong tool because "category-btn" was already on every 
+  button — toggling it just removed the class entirely. The right pattern 
+  is `remove` from all, then `add` to the clicked one.
+- `active` is not a built-in browser class — it's a name I created. CSS 
+  and JavaScript just need to agree on the same name.
+
 ### 2026-03-10 — CSS override on hover issue
 
 CSS override only works if both rules target the same property. 

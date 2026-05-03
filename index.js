@@ -486,7 +486,6 @@ import { multiFactor, signOut } from 'firebase/auth';
             categoryButton.type = "button";
             categoryButton.textContent = value;
             categoryButton.dataset.category = value;
-            categoryButton.id = value;
             // button styles are in styles.css
             categoryButton.classList.add("category-btn"); // see Changelog 
             // categoryButton.className = "category"; // class name for categoryButton
@@ -515,11 +514,6 @@ import { multiFactor, signOut } from 'firebase/auth';
 
                 
             });
-
-            // if a certain category button is clicked then that 
-            // button needs to be highlighted... try doing it in the event listener first.
-            
-            
             
             sortDiv.appendChild(categoryButton);
 

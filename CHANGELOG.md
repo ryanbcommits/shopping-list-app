@@ -7,19 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
 ### In Progress
-- Category filter bar styling
-  - Attempted to use `categoryButton.id = value` for CSS targeting, but IDs 
-    cannot contain spaces — broke on "Frozen Food" and "Fish / Seafood"
-  - Solution: switch to `categoryButton.classList.add("category-btn")` so all 
-    filter buttons share one class regardless of their label text
-  - Active button highlight still needed (requires adding/removing a second 
-    class like "active" via JavaScript on click)
+- Live search feature
+  - Search input field added to UI (home.html) ✅
+  - Live search JS logic pending
+  - Combined search + category filter pending
+  - Clear search button pending
+  - 'No results' message pending
+  
+### Added
+- Active button highlight for category filter bar — selected button 
+  stays visually highlighted using CSS `.category-btn.active` class, 
+  toggled via JavaScript reset-then-set pattern on click
 
 ### Known Issues
 - Adding an item while a category filter is active appends it to the 
   visible list regardless of whether it matches the current filter
-- User is not logged out after alotted time after hitting ok on the alert button.
+- User is not logged out after alotted time after hitting ok on the alert button. But happens sometimes...
 - Session timeout alert does not reliably log the user out — clicking OK 
   on the alert triggers the document click listener, resetting the 
   inactivity timer. Needs a custom modal to fix properly.
