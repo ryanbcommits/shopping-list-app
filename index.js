@@ -9,7 +9,7 @@ import { multiFactor, signOut } from 'firebase/auth';
     let warningTimer;
     let inactivityTimer;
     let currentFilter = "All";
-    
+    let currentSearch = "";
 
     // setTimeout variables
     const TIMEOUT_DURATION = 15 * 60 * 1000; // 15 min in milliseconds
@@ -85,7 +85,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         // console.log("item ID:", data.id);
         // console.log("item name:", data.item);
         // console.log("Full data objeect", data);
-        console.log("category name:", data.category); // prior to this, it would not work until I added category to the loadUserData function in line 315
+        // console.log("category name:", data.category); // prior to this, it would not work until I added category to the loadUserData function in line 315
         
         const myList = document.getElementById("myList"); //get the list container        
         const listItem = document.createElement("li"); //create a new list item
@@ -398,6 +398,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         const button = document.getElementById("connect"); // Add to List button
         const logOut = document.getElementById("logOut");
         const itemInput = document.getElementById("itemName");
+        const searchInput = document.getElementById("searchInput");
 
         // Listen for when a user presses a key in the text field
         itemInput.addEventListener("keypress", function(event) {
@@ -410,6 +411,12 @@ import { multiFactor, signOut } from 'firebase/auth';
                     button.click();
                 }
             })
+
+        // Seach input filter
+        searchInput.addEventListener("input", () =>{
+            // code here...
+            console.log("user is typing");
+        })
 
         // get user profile 'first name' from Firestore
         async function getUserProfile(userId) {
@@ -471,16 +478,15 @@ import { multiFactor, signOut } from 'firebase/auth';
             return { valid: true };
         }
 
-        const sortDiv = document.getElementById("sort"); // gets the div elemnt in html with id tag 'sort'.
-
-        
-        
         /*
         *****
         SORT BY CATEGORY BUTTON logic: This is housed within the DOMContentLoaded listener.
         This is where the filter buttons are generated. Below creates the button with the category titles
         *****
         */
+
+        const sortDiv = document.getElementById("sort"); // gets the div elemnt in html with id tag 'sort'.
+
         CATEGORIES.forEach(function(value) {
             const categoryButton = document.createElement("button"); 
             categoryButton.type = "button";
@@ -542,7 +548,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         
         /*
         ****
-        The code below reads the input from the dom validates the item and pushes it to the db then clears the form
+        The code below reads the input from the DOM, validates the item, and pushes it to the db then clears the form
         ****
         */
 
