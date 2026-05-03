@@ -504,11 +504,11 @@ import { multiFactor, signOut } from 'firebase/auth';
                 currentFilter = value; 
                 loadUserData(); 
 
-                let test = sortDiv.children;
-                
+                let filterButtons = sortDiv.children;
+
                 for(let i = 0; i < sortDiv.children.length; i++){
                 //  console.log(i + " " + test[i].textContent);
-                test[i].classList.remove("active");
+                filterButtons[i].classList.remove("active");
                 }
 
                 categoryButton.classList.add("active");
