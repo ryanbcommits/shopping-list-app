@@ -362,22 +362,31 @@ import { multiFactor, signOut } from 'firebase/auth';
                 }
             }
             
-            // filter() hands me one item at a time. I describe what makes a single item pass. JavaScript handles the looping.
+            // filter() hands me one item at a time. This asks a boolean question about each item
             let filtered = allItems.filter(function(item) {
+                console.log("Checking item:", item.item, "| currentSearch is: ", currentSearch);
+                // Question 1 - does the category mathc?
+                let categoryMatch;
                 if (currentFilter === "All") {
-                    return true; // pass everything through
+                    categoryMatch = true; // pass everything through
+                } else {
+                    categoryMatch = item.category === currentFilter;
                 }
-                return item.category === currentFilter;
+                
+                // Question 2 - does the name contain the seach text?
+                let nameMatch = item.item.toLowerCase().includes(currentSearch.toLowerCase());
+
+                // Both MUST be yes
+                return categoryMatch && nameMatch
             });
 
             
-            // Stage 3: Display - if currentFilter is assigned to Dairy then dairy will load to list Dairy button is pressed
+            // Stage 3: Display - if currentFilter is assigned to Dairy then dairy items will load to the list.
             for (let i = 0; i < filtered.length; i++) {
                 addToList(filtered[i]);
             }
             
-            console.log('Loaded ShoppingList from DB', querySnapshot.size, 'items from database');
-            
+           // console.log('Loaded ShoppingList from DB', querySnapshot.size, 'items from database');
             
         } catch (error) {
             console.error("Error loading user data:", error);
@@ -414,13 +423,11 @@ import { multiFactor, signOut } from 'firebase/auth';
         // Seach input filter
         searchInput.addEventListener("input", () => {
             // code here...
-            // console.log("user is typing"); // this seems to work ok.
-            // console.log(searchInput.value);
-            let userInput = searchInput.value;
-            // now what... I have the input printing to the console and a variable name for it. I now have to match it against the current list
-            //console.log(userInput);
-            // how to I get the currentList to print to the console?
-            
+             console.log("user is typing"); // this seems to work ok.
+            console.log(searchInput.value); // this works too
+            currentSearch = searchInput.value;
+            console.log("current Searhing for: " + currentSearch)
+            loadUserData();
             
         })
 
