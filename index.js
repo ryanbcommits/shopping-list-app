@@ -315,7 +315,6 @@ import { multiFactor, signOut } from 'firebase/auth';
         
         // this function should be called last
         myList.appendChild(listItem);
-        
 
         
     // end of addToList(data) function    
@@ -389,7 +388,7 @@ import { multiFactor, signOut } from 'firebase/auth';
    
     /**
      * ****
-     * DOMCONTENT LOADED
+     * DOM CONTENT LOADED
      * ****
      */
     // Code for writing to and reading from the db
@@ -413,9 +412,16 @@ import { multiFactor, signOut } from 'firebase/auth';
             })
 
         // Seach input filter
-        searchInput.addEventListener("input", () =>{
+        searchInput.addEventListener("input", () => {
             // code here...
-            console.log("user is typing");
+            // console.log("user is typing"); // this seems to work ok.
+            // console.log(searchInput.value);
+            let userInput = searchInput.value;
+            // now what... I have the input printing to the console and a variable name for it. I now have to match it against the current list
+            //console.log(userInput);
+            // how to I get the currentList to print to the console?
+            
+            
         })
 
         // get user profile 'first name' from Firestore
@@ -507,6 +513,7 @@ import { multiFactor, signOut } from 'firebase/auth';
 
                 
                 currentFilter = value; 
+                
                 loadUserData(); 
 
                 let filterButtons = sortDiv.children;
@@ -600,7 +607,7 @@ import { multiFactor, signOut } from 'firebase/auth';
             //console.log(typeof(itemName));
             console.log(`the item: ${itemName}, is of type: ${typeof(itemName)}`);
             console.log(`the category selected: ${categoryName}`);
-
+            
             
 
         });
