@@ -92,6 +92,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         const deleteButton = document.createElement("button");
         const editButton = document.createElement("button"); 
         const cancelButton = document.createElement("button"); 
+        
        
 
         
@@ -364,7 +365,7 @@ import { multiFactor, signOut } from 'firebase/auth';
             
             // filter() hands me one item at a time. This asks a boolean question about each item
             let filtered = allItems.filter(function(item) {
-                console.log("Checking item:", item.item, "| currentSearch is: ", currentSearch);
+                // console.log("Checking item:", item.item, "| currentSearch is: ", currentSearch);
                 // Question 1 - does the category mathc?
                 let categoryMatch;
                 if (currentFilter === "All") {
@@ -378,6 +379,9 @@ import { multiFactor, signOut } from 'firebase/auth';
 
                 // Both MUST be yes
                 return categoryMatch && nameMatch
+
+                // Question 3 - does the input name exist?
+                
             });
 
             
@@ -407,6 +411,11 @@ import { multiFactor, signOut } from 'firebase/auth';
         const logOut = document.getElementById("logOut");
         const itemInput = document.getElementById("itemName");
         const searchInput = document.getElementById("searchInput");
+        const clearSearch = document.getElementById("clear"); 
+
+        // set attributes for clearSearch
+        
+        
 
         // Listen for when a user presses a key in the text field
         itemInput.addEventListener("keypress", function(event) {
@@ -422,12 +431,40 @@ import { multiFactor, signOut } from 'firebase/auth';
 
         // Seach input filter
         searchInput.addEventListener("input", () => {
-            // code here...
-            //  console.log("user is typing"); // this seems to work ok.
-            // console.log(searchInput.value); // this works too
+
             currentSearch = searchInput.value;
-            // console.log("current Searhing for: " + currentSearch)
-            loadUserData();
+
+            // console.log(currentSearch.length); // prints to the console the string count (length) durning each run through 
+
+            // searchInput.appendChild(clearSearch); // didn't work
+            // clearSearch.appendChild(test); // This doesn't seem to work either
+            clearSearch.textContent = "X";
+            clearSearch.style.fontWeight = "bold";
+            
+            
+            // Add a clear search button — an X that appears only when the search field has text
+            if (currentSearch.length > 0) {
+                clearSearch.hidden = false;
+            } else {
+                clearSearch.hidden = true;
+            }
+
+
+
+            // clear inputs
+            clearSearch.onclick = () => {
+                    console.log("the x was clicked");
+                    // clearSearch.hidden = true; // works as well.
+                    // clearSearch.hidden = false;
+                     searchInput.value = ""; // but doesn't reset the input
+                     
+                    clearSearch.hidden = true; 
+                   
+            }
+            
+
+            // call loadUser function
+            loadUserData(); 
             
         })
 
@@ -543,11 +580,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         // console.log("sortDiv Length: Not an array, error expected: " +sortDiv.length);
         // console.log("sortDiv children: " + sortDiv.children); // returns [HTMLCollection]
         // console.log("sortDiv querySelector: " + sortDiv.querySelectorAll(".category-btn")); // returnes [object NodeList]
-        
 
-
-       
-        
 
         // The Database logic - Outside the event listener 
         async function saveItemToDatabase(userId, itemName, category) {
