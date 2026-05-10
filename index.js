@@ -365,8 +365,8 @@ import { multiFactor, signOut } from 'firebase/auth';
             
             // filter() hands me one item at a time. This asks a boolean question about each item
             let filtered = allItems.filter(function(item) {
-                // console.log("Checking item:", item.item, "| currentSearch is: ", currentSearch);
-                // Question 1 - does the category mathc?
+                 console.log("Checking item:", item.item, "| currentSearch is: ", currentSearch);
+                // Question 1 - does the category match?
                 let categoryMatch;
                 if (currentFilter === "All") {
                     categoryMatch = true; // pass everything through
@@ -381,7 +381,8 @@ import { multiFactor, signOut } from 'firebase/auth';
                 return categoryMatch && nameMatch
 
                 // Question 3 - does the input name exist?
-                
+              
+
             });
 
             
@@ -432,6 +433,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         // Seach input filter
         searchInput.addEventListener("input", () => {
 
+            // this tracks what the user inputs
             currentSearch = searchInput.value;
 
             // console.log(currentSearch.length); // prints to the console the string count (length) durning each run through 
@@ -449,15 +451,15 @@ import { multiFactor, signOut } from 'firebase/auth';
                 clearSearch.hidden = true;
             }
 
-
-
             // clear inputs
             clearSearch.onclick = () => {
                     console.log("the x was clicked");
                     // clearSearch.hidden = true; // works as well.
                     // clearSearch.hidden = false;
-                     searchInput.value = ""; // but doesn't reset the input
-                     
+                    searchInput.value = ""; // works, but doesn't reset the filter list
+                    // currentSearch.value = ""; // doesn't work - error - TypeError: Cannot create property 'value' on string 'Grav'
+                    // console.log(currentSearch);
+                    // currentSearch.value = ""; // throws an error
                     clearSearch.hidden = true; 
                    
             }
