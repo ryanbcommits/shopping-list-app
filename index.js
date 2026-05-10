@@ -423,10 +423,10 @@ import { multiFactor, signOut } from 'firebase/auth';
         // Seach input filter
         searchInput.addEventListener("input", () => {
             // code here...
-             console.log("user is typing"); // this seems to work ok.
-            console.log(searchInput.value); // this works too
+            //  console.log("user is typing"); // this seems to work ok.
+            // console.log(searchInput.value); // this works too
             currentSearch = searchInput.value;
-            console.log("current Searhing for: " + currentSearch)
+            // console.log("current Searhing for: " + currentSearch)
             loadUserData();
             
         })
