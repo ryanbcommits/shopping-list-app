@@ -1,5 +1,29 @@
 ## Development Log
 
+### 2026-05-09 - Live search complete
+
+<!-- Added a top-level variable currentSearh to index.js and updated the event listener to the DOM so the user input could be listend for updated the filter() function within loadUserData() function so that the user input text could be checked to include the current text input. -->
+**What I built:** A real-time search bar that filters the shopping 
+list as the user types, working simultaneously with the category filter.
+
+**How it works:** Added a module-level `currentSearch` variable to 
+track the search term. The `searchInput` event listener updates 
+`currentSearch` on every keystroke and calls `loadUserData()` to 
+re-render. Inside `loadUserData()`, the filter stage checks two 
+conditions: category match AND name match. Both must be true for 
+an item to appear.
+
+**Key learnings:**
+- State variables are silent — updating `currentSearch` alone does 
+  nothing visible. You always need to pair a state change with the 
+  function that re-renders the screen (`loadUserData()`).
+- Added a `console.log` inside the filter to prove `currentSearch` 
+  was visible inside `loadUserData()`. Logging at each step — 
+  listener, state variable, filter — is how you bridge the gap 
+  between what you expect and what's actually happening.
+- `.includes()` combined with `.toLowerCase()` on both sides makes 
+  the search case-insensitive without needing extra logic.
+
 ### 2026-05-02 — Active button highlight complete
 
 **What I built:** The selected category filter button now stays highlighted 
