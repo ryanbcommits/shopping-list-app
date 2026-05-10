@@ -9,17 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### In Progress
-- Live search feature
-  - Search input field added to UI (home.html) ✅
-  - Live search JS logic pending
-  - Combined search + category filter pending
-  - Clear search button pending
-  - 'No results' message pending
-  
+- 'No results' message pending
+
+
 ### Added
 - Active button highlight for category filter bar — selected button 
   stays visually highlighted using CSS `.category-btn.active` class, 
   toggled via JavaScript reset-then-set pattern on click
+- Search input field with live search — filters the list in real-time 
+  as the user types, case-insensitive match against item name
+- Combined search + category filter — both filters work simultaneously
+- Clear search button — X appears when search field has text, clears 
+  input and resets list on click
 
 ### Known Issues
 - Adding an item while a category filter is active appends it to the 
