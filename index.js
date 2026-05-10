@@ -365,7 +365,7 @@ import { multiFactor, signOut } from 'firebase/auth';
             
             // filter() hands me one item at a time. This asks a boolean question about each item
             let filtered = allItems.filter(function(item) {
-                 console.log("Checking item:", item.item, "| currentSearch is: ", currentSearch);
+                // console.log("Checking item:", item.item, "| currentSearch is: ", currentSearch);
                 // Question 1 - does the category match?
                 let categoryMatch;
                 if (currentFilter === "All") {
@@ -399,6 +399,21 @@ import { multiFactor, signOut } from 'firebase/auth';
 
     // end of loadUserData function    
     }
+
+
+        // Set attributes for clearSearch - advised to keep 
+        const clearSearch = document.getElementById("clear"); 
+
+        clearSearch.onclick = () => {
+            console.log("the x was clicked");
+
+            currentSearch = searchInput.value = ""; // works, but doesn't reset the filter list without putting currentSearch to the left of the searchInput.value = "";
+
+            clearSearch.hidden = true; 
+
+            // you need to call the function again inside the click event.
+            loadUserData();
+        }
    
     /**
      * ****
@@ -412,9 +427,9 @@ import { multiFactor, signOut } from 'firebase/auth';
         const logOut = document.getElementById("logOut");
         const itemInput = document.getElementById("itemName");
         const searchInput = document.getElementById("searchInput");
-        const clearSearch = document.getElementById("clear"); 
+        
 
-        // set attributes for clearSearch
+        
         
         
 
@@ -433,10 +448,10 @@ import { multiFactor, signOut } from 'firebase/auth';
         // Seach input filter
         searchInput.addEventListener("input", () => {
 
-            // this tracks what the user inputs
+            // this tracks and updates what the user inputs
             currentSearch = searchInput.value;
 
-            // console.log(currentSearch.length); // prints to the console the string count (length) durning each run through 
+            // console.log(currentSearch.length); // prints to the console the string count (length) durning each iteration
 
             // searchInput.appendChild(clearSearch); // didn't work
             // clearSearch.appendChild(test); // This doesn't seem to work either
@@ -451,18 +466,7 @@ import { multiFactor, signOut } from 'firebase/auth';
                 clearSearch.hidden = true;
             }
 
-            // clear inputs
-            clearSearch.onclick = () => {
-                    console.log("the x was clicked");
-                    // clearSearch.hidden = true; // works as well.
-                    // clearSearch.hidden = false;
-                    searchInput.value = ""; // works, but doesn't reset the filter list
-                    // currentSearch.value = ""; // doesn't work - error - TypeError: Cannot create property 'value' on string 'Grav'
-                    // console.log(currentSearch);
-                    // currentSearch.value = ""; // throws an error
-                    clearSearch.hidden = true; 
-                   
-            }
+            
             
 
             // call loadUser function
