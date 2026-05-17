@@ -364,8 +364,10 @@ import { multiFactor, signOut } from 'firebase/auth';
             }
             
             // filter() hands me one item at a time. This asks a boolean question about each item
+            // filtered is an array.
             let filtered = allItems.filter(function(item) {
-                // console.log("Checking item:", item.item, "| currentSearch is: ", currentSearch);
+                console.log("Checking item:", item.item, "| currentSearch is: ", currentSearch, "| current filter: ", currentFilter);
+
                 // Question 1 - does the category match?
                 let categoryMatch;
                 if (currentFilter === "All") {
@@ -376,16 +378,48 @@ import { multiFactor, signOut } from 'firebase/auth';
                 
                 // Question 2 - does the name contain the seach text?
                 let nameMatch = item.item.toLowerCase().includes(currentSearch.toLowerCase());
+                // console.log( "| nameMatch is: ", nameMatch);
+                
+                
+                // // check if user input a value
+                // if (currentSearch.length === 0) {
+                //     return console.log("Please search for an item.");
+                // } else if (nameMatch === false) {
+                //     console.log("not a match");
+                // }
 
-                // Both MUST be yes
+                
+                // Both MUST be yes to allow the list to be written to the DOM
                 return categoryMatch && nameMatch
-
-                // Question 3 - does the input name exist?
-              
-
+                
+                
+                  
+                
             });
 
+            let notFound = document.getElementById("noResults");
+
+        
+
+            // loop everytime there is text
             
+                if (currentSearch.length === 0) {
+                console.log ("Nothing entered");
+            } else if (currentSearch.length > 0 && filtered.length > 0) {
+                notFound.textContent("there's")
+                console.log("there is a match");
+
+            } else {
+                notFound.textContent = "No Results";
+            }
+          
+
+
+            
+            console.log(currentSearch.length);
+            console.log(filtered.length);
+            
+                        
             // Stage 3: Display - if currentFilter is assigned to Dairy then dairy items will load to the list.
             for (let i = 0; i < filtered.length; i++) {
                 addToList(filtered[i]);
@@ -405,7 +439,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         const clearSearch = document.getElementById("clear"); 
 
         clearSearch.onclick = () => {
-            console.log("the x was clicked");
+            //console.log("the x was clicked");
 
             currentSearch = searchInput.value = ""; // works, but doesn't reset the filter list without putting currentSearch to the left of the searchInput.value = "";
 
@@ -466,7 +500,7 @@ import { multiFactor, signOut } from 'firebase/auth';
                 clearSearch.hidden = true;
             }
 
-            
+            // Show a 'no results' message — displayed when the filtered array is empty
             
 
             // call loadUser function
