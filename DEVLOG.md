@@ -1,5 +1,27 @@
 ## Development Log
 
+### 2026-05-17 — No results message added
+
+**What I built:** A "No items found" message that appears when the 
+user's search text doesn't match any items on the list, and 
+disappears when results exist or the search is cleared.
+
+**How it works:** After the filter runs, an if statement checks two 
+things: is the search field empty, and does filtered.length have 
+any items? If the user has typed something and filtered.length is 
+zero, the message is shown by setting hidden = false. Otherwise 
+it stays hidden.
+
+**Key learnings:**
+- `loadUserData()` is already called on every keystroke by the 
+  search listener, so the if statement runs fresh automatically 
+  each time — no additional loop needed.
+- In event-driven programming, you don't write loops that wait for 
+  things to happen. Event listeners call your functions when 
+  something changes. The function runs, does its job, and stops.
+- When stuck, check what existing functions are already doing 
+  before adding new logic — the answer is often already there.
+
 ### 2026-05-09 - Live search complete
 
 <!-- Added a top-level variable currentSearh to index.js and updated the event listener to the DOM so the user input could be listend for updated the filter() function within loadUserData() function so that the user input text could be checked to include the current text input. -->

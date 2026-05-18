@@ -9,7 +9,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### In Progress
-- 'No results' message pending
 
 
 ### Added
@@ -21,6 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Combined search + category filter — both filters work simultaneously
 - Clear search button — X appears when search field has text, clears 
   input and resets list on click
+- No results message — "No items found" appears when search returns 
+  zero matches, disappears when results exist or search is cleared
 
 ### Known Issues
 - Adding an item while a category filter is active appends it to the 

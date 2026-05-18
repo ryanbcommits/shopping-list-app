@@ -378,33 +378,18 @@ import { multiFactor, signOut } from 'firebase/auth';
                 
                 // Question 2 - does the name contain the seach text?
                 let nameMatch = item.item.toLowerCase().includes(currentSearch.toLowerCase());
-                // console.log( "| nameMatch is: ", nameMatch);
-                
-                
-                // // check if user input a value
-                // if (currentSearch.length === 0) {
-                //     return console.log("Please search for an item.");
-                // } else if (nameMatch === false) {
-                //     console.log("not a match");
-                // }
-
                 
                 // Both MUST be yes to allow the list to be written to the DOM
                 return categoryMatch && nameMatch
+            
                 
-                
-                  
-                
-            });
-
+            }); // end of filtered array
+            
+            //** NO Results Logic */
             let notFound = document.getElementById("noResults");
-
-        
-
-            // loop everytime there is text
             
             if (currentSearch.length === 0) {
-                console.log ("Nothing entered");
+                // console.log ("Nothing entered");
                 notFound.hidden = true;
             } else if (filtered.length > 0) {
                 notFound.hidden = true;
@@ -412,12 +397,7 @@ import { multiFactor, signOut } from 'firebase/auth';
             } else {
                 notFound.hidden = false;
             }
-          
-            
-                
 
-
-            
             // console.log(currentSearch.length);
             // console.log(filtered.length);
             
