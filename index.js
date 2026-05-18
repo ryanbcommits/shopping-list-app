@@ -403,21 +403,23 @@ import { multiFactor, signOut } from 'firebase/auth';
 
             // loop everytime there is text
             
-                if (currentSearch.length === 0) {
+            if (currentSearch.length === 0) {
                 console.log ("Nothing entered");
-            } else if (currentSearch.length > 0 && filtered.length > 0) {
-                notFound.textContent("there's")
-                console.log("there is a match");
-
+                notFound.hidden = true;
+            } else if (filtered.length > 0) {
+                notFound.hidden = true;
+                
             } else {
-                notFound.textContent = "No Results";
+                notFound.hidden = false;
             }
           
+            
+                
 
 
             
-            console.log(currentSearch.length);
-            console.log(filtered.length);
+            // console.log(currentSearch.length);
+            // console.log(filtered.length);
             
                         
             // Stage 3: Display - if currentFilter is assigned to Dairy then dairy items will load to the list.
