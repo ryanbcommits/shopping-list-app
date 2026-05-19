@@ -5,6 +5,19 @@
 
 A full-stack shopping list application built with vanilla JavaScript and Firebase, featuring real-time data synchronization, user authentication, and comprehensive CRUD operations.
 
+## 🎉 Version 1.3.0 Release Notes
+
+### New Features
+- **✅ Live Search**: Real-time filtering as you type, 
+  case-insensitive match against item names
+- **✅ Combined Filters**: Search and category filter 
+  work simultaneously
+- **✅ Clear Button**: X appears when search has text, 
+  resets list on click
+- **✅ No Results Message**: Appears when nothing matches, 
+  disappears when results exist
+
+
 ## 🎉 Version 1.2.0 Release Notes
 
 ### New Features
@@ -83,6 +96,8 @@ The app is deployed at: [https://app.ryanbcommits.com](https://app.ryanbcommits.
 - **Keyboard Support**: Enter key to add items
 - **Responsive Design**: Works on desktop and mobile devices
 - **Data Persistence**: All data saved to cloud, survives logout/login
+- **Live Search**: Real-time filtering as you type with clear button
+- **Smart Filtering**: Search and category filters work simultaneously
 
 ## 🛠️ Technology Stack
 
@@ -92,6 +107,12 @@ The app is deployed at: [https://app.ryanbcommits.com](https://app.ryanbcommits.
 - **Deployment**: Netlify
 
 ## 📚 Key Learnings
+
+### Recent Development (v1.3.0)
+- **Dual Filter State**: `currentFilter` and `currentSearch` both 
+  feed the same filter stage simultaneously without interfering
+- **Event-driven rendering**: `loadUserData()` is called on every 
+  keystroke — no manual loop needed
 
 ### Recent Development (v1.2.0)
 - **Collect → Filter → Display Pipeline**: Refactored data loading into three 
@@ -120,6 +141,12 @@ The app is deployed at: [https://app.ryanbcommits.com](https://app.ryanbcommits.
 - Soft delete patterns for data recovery
 
 ## 📋 Development Roadmap
+
+### ✅ Completed (v1.3.0)
+- Real-time search with case-insensitive matching
+- Combined search + category filter working simultaneously
+- Clear search button
+- No results message
 
 ### ✅ Completed (v1.2.0)
 - Category filter system with dynamic buttons and active state
@@ -186,4 +213,4 @@ This project uses Claude AI as a learning assistant, not as a code generator. My
 Ryan Burns - [GitHub](https://github.com/ryanbcommits)
 
 ---
-**Last Updated:** March 2026 | **Version:** 1.2.0
+**Last Updated:** May 2026 | **Version:** 1.3.0
