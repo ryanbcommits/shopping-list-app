@@ -5,11 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
-
-
-### In Progress
-
+## [1.3.0] - 2026-05-17
 
 ### Added
 - Active button highlight for category filter bar — selected button 
@@ -22,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   input and resets list on click
 - No results message — "No items found" appears when search returns 
   zero matches, disappears when results exist or search is cleared
+ 
 
 ### Known Issues
 - Adding an item while a category filter is active appends it to the 
@@ -118,6 +115,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Version History Summary
 
+- **1.3.0** - Search feature with live filtering, combined filters, and no results message
 - **1.2.0** - Category system with filter buttons and collect → filter → display pipeline
 - **1.1.0** - Full CRUD operations with inline editing
 - **1.0.0** - First stable release with production deployment
