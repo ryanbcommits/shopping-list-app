@@ -389,7 +389,7 @@ import { multiFactor, signOut } from 'firebase/auth';
             let notFound = document.getElementById("noResults");
             
             if (currentSearch.length === 0) {
-                // console.log ("Nothing entered");
+                // console.log ("Empty string");
                 notFound.hidden = true;
             } else if (filtered.length > 0) {
                 notFound.hidden = true;
@@ -459,9 +459,9 @@ import { multiFactor, signOut } from 'firebase/auth';
                     // Act as though they clicked the button instead
                     button.click();
                 }
-            })
+        })
 
-        // Seach input filter
+        // Seach input filter:
         searchInput.addEventListener("input", () => {
 
             // this tracks and updates what the user inputs
@@ -470,7 +470,7 @@ import { multiFactor, signOut } from 'firebase/auth';
             // console.log(currentSearch.length); // prints to the console the string count (length) durning each iteration
 
             // searchInput.appendChild(clearSearch); // didn't work
-            // clearSearch.appendChild(test); // This doesn't seem to work either
+            
             clearSearch.textContent = "X";
             clearSearch.style.fontWeight = "bold";
             
