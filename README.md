@@ -1,7 +1,7 @@
 # Shopping List App
 
 ![Status](https://img.shields.io/badge/status-stable-green)
-![Version](https://img.shields.io/badge/version-1.2.0-blue)
+![Version](https://img.shields.io/badge/version-1.3.0-blue)
 
 A full-stack shopping list application built with vanilla JavaScript and Firebase, featuring real-time data synchronization, user authentication, and comprehensive CRUD operations.
 
