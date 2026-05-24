@@ -119,10 +119,12 @@ import { multiFactor, signOut } from 'firebase/auth';
 
         // quantity prints to the DOM
         const quantity = document.createElement("span");
-        quantity.textContent = data.quantity;
+        //quantity.textContent = data.quantity; // try using the ${}
+        quantity.textContent = (`Qty: ${data.quantity}`);
         listItem.appendChild(quantity);
 
         quantity.style.marginLeft = "10px";
+        quantity.style.fontWeight = "bold";
 
 
         // category css to add padding
@@ -359,9 +361,10 @@ import { multiFactor, signOut } from 'firebase/auth';
             let allItems = [];
             
             /**
-             * IMPORTANT LOOP - This for loop loops through the database (the lengthe of the docs length) and adds the content of the db to that array. When it came to rendering the quantity to the DOM without having quantity: data.quantiy the info could be written to the db from the user, but wasn't able to be written to the DOM unit that property was added.
+             * IMPORTANT LOOP - This for loop loops through the database (the lengthe of the docs length) and adds the content of the db to that array. When it came to rendering the quantity to the DOM without having quantity: data.quantiy the info could be written to the db from the user, but wasn't able to be written to the DOM unit that property was
              * 
              */
+
             // Stage 1: Collect, loops through the firestore doc and gather everything not hidden, no rendereing just raw data.
             for (let i = 0; i < docs.length; i++) {
                 const doc = docs[i];
@@ -447,7 +450,7 @@ import { multiFactor, signOut } from 'firebase/auth';
    
     /**
      * ****
-     * DOM CONTENT LOADED
+     * DOM CONTENT LOADED SECTION
      * ****
      */
     // Code for writing to and reading from the db
