@@ -10,6 +10,7 @@ import { multiFactor, signOut } from 'firebase/auth';
     let inactivityTimer;
     let currentFilter = "All";
     let currentSearch = "";
+    let currentQty;
 
     // setTimeout variables
     const TIMEOUT_DURATION = 15 * 60 * 1000; // 15 min in milliseconds
@@ -83,10 +84,10 @@ import { multiFactor, signOut } from 'firebase/auth';
 
     function addToList(data) {
         
-        console.log("item ID:", data.id);
-        console.log("item name:", data.item);
-        console.log("quantity:", data.quantity);
-        console.log("Full data object", data);
+        // console.log("item ID:", data.id);
+        // console.log("item name:", data.item);
+        // console.log("quantity:", data.quantity);
+        // console.log("Full data object", data);
         // console.log("category name:", data.category); // prior to this, it would not work until I added category to the loadUserData function in line 315
         
         
@@ -95,9 +96,6 @@ import { multiFactor, signOut } from 'firebase/auth';
         const deleteButton = document.createElement("button");
         const editButton = document.createElement("button"); 
         const cancelButton = document.createElement("button"); 
-        
-       
-
         
 
         // Sets up edit/update mode tracking.
@@ -307,10 +305,12 @@ import { multiFactor, signOut } from 'firebase/auth';
                     //Get currently logged in user
                     const user = auth.currentUser;
 
+                    // add new category and quantity option
                     await updateDoc(doc(db, 'users', user.uid, 'shoppingList', data.id), {
                     item: newValue, // This was original
                     timestamp: newTimeStamp, // This might work...
                     });
+
 
                     loadUserData();
                 } catch (error) {
@@ -330,8 +330,8 @@ import { multiFactor, signOut } from 'firebase/auth';
         myList.appendChild(listItem);
 
         
-    // end of addToList(data) function    
-    }
+    
+    } // end of addToList(data) function    
 
     
     // Function to load existing user data
@@ -347,7 +347,8 @@ import { multiFactor, signOut } from 'firebase/auth';
             const myList = document.getElementById("myList");
             myList.innerHTML = "";
 
-            console.log("Found", querySnapshot.size, 'documents');
+            /** useful console log... */
+            // console.log("Found", querySnapshot.size, 'documents');
 
             // Use regular for loop as you wanted to practice to write all data written to the db to the DOM.
             const docs = querySnapshot.docs;
@@ -383,8 +384,8 @@ import { multiFactor, signOut } from 'firebase/auth';
             // filter() hands me one item at a time. This asks a boolean question about each item
             // filtered is an array.
             let filtered = allItems.filter(function(item) {
-                // console.log("Checking item:", item.item, "| currentSearch is: ", currentSearch, "| current filter: ", currentFilter);
-
+                 // console.log("Checking item:", item.item, "| currentSearch is: ", currentSearch, "| current filter: ", currentFilter);
+                 // console.log("Checking item:", item.item, "| current filter: ", currentFilter, "| current qty: ", item.quantity);    
                 // Question 1 - does the category match?
                 let categoryMatch;
                 if (currentFilter === "All") {
@@ -399,7 +400,26 @@ import { multiFactor, signOut } from 'firebase/auth';
                 // Both MUST be yes to allow the list to be written to the DOM
                 return categoryMatch && nameMatch
             
+                // Undefined fix, if undefined change value to one. Doesn't work here try in Edit db section
+                let itemQty = item.quantity;
+
+                if (itemQty === undefined) {
+                    itemQty = 1;
+
+                    try {
+                        await updateDoc(doc(db, 'users', user.uid, 'shoppingList', data.id), {
+                            quantity = itemQuantity,
+                            timeStamp: newTimeStamp
+                        });
+                    } catch (error) {
+                        console.error("Update to the db failed:", error);
+                    }
+                }
+
+             
                 
+
+
             }); // end of filtered array
             
             //** NO Results Logic */
@@ -417,7 +437,7 @@ import { multiFactor, signOut } from 'firebase/auth';
 
             // console.log(currentSearch.length);
             // console.log(filtered.length);
-            
+        
                         
             // Stage 3: Display - if currentFilter is assigned to Dairy then dairy items will load to the list.
             for (let i = 0; i < filtered.length; i++) {
@@ -430,8 +450,10 @@ import { multiFactor, signOut } from 'firebase/auth';
             console.error("Error loading user data:", error);
         }
 
-    // end of loadUserData function    
-    }
+    
+    }   // end of loadUserData function    
+
+        // Undefined Check Function
 
 
         // Set attributes for clearSearch - advised to keep 
@@ -453,18 +475,14 @@ import { multiFactor, signOut } from 'firebase/auth';
      * DOM CONTENT LOADED SECTION
      * ****
      */
-    // Code for writing to and reading from the db
+    // Code for writing to and reading from the DOM and to the DB
     document.addEventListener("DOMContentLoaded", () => {
         
         const button = document.getElementById("connect"); // Add to List button
         const logOut = document.getElementById("logOut");
         const itemInput = document.getElementById("itemName");
         const searchInput = document.getElementById("searchInput");
-        
-
-        
-        
-        
+        const itemQuantity = document.getElementById("itemNumber");
 
         // Listen for when a user presses a key in the text field
         itemInput.addEventListener("keypress", function(event) {
@@ -614,7 +632,7 @@ import { multiFactor, signOut } from 'firebase/auth';
             sortDiv.appendChild(categoryButton);
 
             
-        });
+        }); // end of categories for each
         
         // console.log("sortDiv Length: Not an array, error expected: " +sortDiv.length);
         // console.log("sortDiv children: " + sortDiv.children); // returns [HTMLCollection]
@@ -630,6 +648,9 @@ import { multiFactor, signOut } from 'firebase/auth';
                 timestamp: new Date().toISOString(),
                 hidden: false
             });
+
+            
+
             return docRef;
         }
         
@@ -654,6 +675,7 @@ import { multiFactor, signOut } from 'firebase/auth';
             const quantity = document.getElementById("itemNumber").value;
             // console.log(categoryName);
 
+            
             // Validation 
             const validation = validateItemName(itemName);
             if (!validation.valid) {
@@ -715,5 +737,6 @@ import { multiFactor, signOut } from 'firebase/auth';
             alert("Log out failed. Please try again");
         }
 
-        });
-    });
+        }); // end of Log out listener
+
+    }); // end of DOMContentLoaded
