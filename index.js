@@ -366,7 +366,7 @@ import { multiFactor, signOut } from 'firebase/auth';
             // filter() hands me one item at a time. This asks a boolean question about each item
             // filtered is an array.
             let filtered = allItems.filter(function(item) {
-                console.log("Checking item:", item.item, "| currentSearch is: ", currentSearch, "| current filter: ", currentFilter);
+                // console.log("Checking item:", item.item, "| currentSearch is: ", currentSearch, "| current filter: ", currentFilter);
 
                 // Question 1 - does the category match?
                 let categoryMatch;
@@ -605,10 +605,11 @@ import { multiFactor, signOut } from 'firebase/auth';
 
 
         // The Database logic - Outside the event listener 
-        async function saveItemToDatabase(userId, itemName, category) {
+        async function saveItemToDatabase(userId, itemName, category, quantity) {
             const docRef = await addDoc(collection(db, 'users', userId, 'shoppingList'), {
                 item: itemName,
                 category: category, 
+                quantity: quantity,
                 timestamp: new Date().toISOString(),
                 hidden: false
             });
@@ -633,7 +634,8 @@ import { multiFactor, signOut } from 'firebase/auth';
             
             const itemName = document.getElementById("itemName").value;
             const categoryName = document.getElementById("categories").value;
-            console.log(categoryName);
+            const quantity = document.getElementById("itemNumber").value;
+            // console.log(categoryName);
 
             // Validation 
             const validation = validateItemName(itemName);
@@ -648,10 +650,11 @@ import { multiFactor, signOut } from 'firebase/auth';
 
             try {
                 const user = auth.currentUser;
-                const docRef = await saveItemToDatabase(user.uid, itemName, categoryName);
+                const docRef = await saveItemToDatabase(user.uid, itemName, categoryName, quantity);
                 addToList({
                     item: itemName,
                     category: categoryName,
+                    quantity: quantity,
                     id: docRef.id
                 });
 
@@ -668,7 +671,8 @@ import { multiFactor, signOut } from 'firebase/auth';
             // everything input by the user is of type string
             //console.log(typeof(itemName));
             console.log(`the item: ${itemName}, is of type: ${typeof(itemName)}`);
-            console.log(`the category selected: ${categoryName}`);
+            console.log(`the category selected: ${categoryName} and the quantity of: ${quantity}`);
+            
             
             
 
