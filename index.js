@@ -57,13 +57,14 @@ import { multiFactor, signOut } from 'firebase/auth';
         document.removeEventListener('scroll', resetInactivityTimer);
     }
 
-    // Moved addtoList function to top because it was defined inside the button click event, so loadUserData can't see it.
+    // Moved addToList function to top because it was defined inside the button click event, so loadUserData can't see it.
     // Success functions:
 
     /**
      * @param {{item: string, id: string}} data
      */
-     // refactoring delete btn so this function handles the delete button logic instead
+
+    // refactoring delete btn so this function handles the delete button logic instead
     async function handleDeleteButton (itemId, listItemElement) {
         try {
             const user = auth.currentUser;
@@ -82,10 +83,12 @@ import { multiFactor, signOut } from 'firebase/auth';
 
     function addToList(data) {
         
-        // console.log("item ID:", data.id);
-        // console.log("item name:", data.item);
-        // console.log("Full data objeect", data);
+        console.log("item ID:", data.id);
+        console.log("item name:", data.item);
+        console.log("quantity:", data.quantity);
+        console.log("Full data object", data);
         // console.log("category name:", data.category); // prior to this, it would not work until I added category to the loadUserData function in line 315
+        
         
         const myList = document.getElementById("myList"); //get the list container        
         const listItem = document.createElement("li"); //create a new list item
@@ -113,6 +116,13 @@ import { multiFactor, signOut } from 'firebase/auth';
         const category = document.createElement("span"); // uses color as part of text
         category.textContent = data.category;
         listItem.appendChild(category); 
+
+        // quantity prints to the DOM
+        const quantity = document.createElement("span");
+        quantity.textContent = data.quantity;
+        listItem.appendChild(quantity);
+
+        quantity.style.marginLeft = "10px";
 
 
         // category css to add padding
@@ -290,7 +300,7 @@ import { multiFactor, signOut } from 'firebase/auth';
 
 
 
-                // - Update database
+                // ** EDIT - UPDATES THE DATABASE **
                 try {
                     //Get currently logged in user
                     const user = auth.currentUser;
@@ -335,9 +345,9 @@ import { multiFactor, signOut } from 'firebase/auth';
             const myList = document.getElementById("myList");
             myList.innerHTML = "";
 
-            //console.log("Found", querySnapshot.size, 'documents');
+            console.log("Found", querySnapshot.size, 'documents');
 
-            // Use regular for loop as you wanted to practice to write all data written to the db to the window.
+            // Use regular for loop as you wanted to practice to write all data written to the db to the DOM.
             const docs = querySnapshot.docs;
         
             /**
@@ -348,7 +358,10 @@ import { multiFactor, signOut } from 'firebase/auth';
 
             let allItems = [];
             
-            
+            /**
+             * IMPORTANT LOOP - This for loop loops through the database (the lengthe of the docs length) and adds the content of the db to that array. When it came to rendering the quantity to the DOM without having quantity: data.quantiy the info could be written to the db from the user, but wasn't able to be written to the DOM unit that property was added.
+             * 
+             */
             // Stage 1: Collect, loops through the firestore doc and gather everything not hidden, no rendereing just raw data.
             for (let i = 0; i < docs.length; i++) {
                 const doc = docs[i];
@@ -358,7 +371,8 @@ import { multiFactor, signOut } from 'firebase/auth';
                     allItems.push({
                         item: data.item,
                         id: doc.id,
-                        category: data.category 
+                        category: data.category, 
+                        quantity: data.quantity
                     });
                 }
             }
@@ -407,7 +421,7 @@ import { multiFactor, signOut } from 'firebase/auth';
                 addToList(filtered[i]);
             }
             
-           // console.log('Loaded ShoppingList from DB', querySnapshot.size, 'items from database');
+            // console.log('Loaded ShoppingList from DB', querySnapshot.size, 'items from database');
             
         } catch (error) {
             console.error("Error loading user data:", error);
