@@ -10,7 +10,6 @@ import { multiFactor, signOut } from 'firebase/auth';
     let inactivityTimer;
     let currentFilter = "All";
     let currentSearch = "";
-    let currentQty;
 
     // setTimeout variables
     const TIMEOUT_DURATION = 15 * 60 * 1000; // 15 min in milliseconds
@@ -361,6 +360,9 @@ import { multiFactor, signOut } from 'firebase/auth';
 
             let allItems = [];
             
+
+
+
             /**
              * IMPORTANT LOOP - This for loop loops through the database (the lengthe of the docs length) and adds the content of the db to that array. When it came to rendering the quantity to the DOM without having quantity: data.quantiy the info could be written to the db from the user, but wasn't able to be written to the DOM unit that property was
              * 
@@ -376,7 +378,7 @@ import { multiFactor, signOut } from 'firebase/auth';
                         item: data.item,
                         id: doc.id,
                         category: data.category, 
-                        quantity: data.quantity
+                        quantity: data.quantity ?? 1 // this forces the undefined content to show as 1  
                     });
                 }
             }
@@ -385,7 +387,7 @@ import { multiFactor, signOut } from 'firebase/auth';
             // filtered is an array.
             let filtered = allItems.filter(function(item) {
                  // console.log("Checking item:", item.item, "| currentSearch is: ", currentSearch, "| current filter: ", currentFilter);
-                 // console.log("Checking item:", item.item, "| current filter: ", currentFilter, "| current qty: ", item.quantity);    
+                  console.log("Checking item:", item.item, "| current filter: ", currentFilter, "| current qty: ", item.quantity);    
                 // Question 1 - does the category match?
                 let categoryMatch;
                 if (currentFilter === "All") {
@@ -398,28 +400,9 @@ import { multiFactor, signOut } from 'firebase/auth';
                 let nameMatch = item.item.toLowerCase().includes(currentSearch.toLowerCase());
                 
                 // Both MUST be yes to allow the list to be written to the DOM
-                return categoryMatch && nameMatch
-            
-                // Undefined fix, if undefined change value to one. Doesn't work here try in Edit db section
-                let itemQty = item.quantity;
+                return categoryMatch && nameMatch 
 
-                if (itemQty === undefined) {
-                    itemQty = 1;
-
-                    try {
-                        await updateDoc(doc(db, 'users', user.uid, 'shoppingList', data.id), {
-                            quantity = itemQuantity,
-                            timeStamp: newTimeStamp
-                        });
-                    } catch (error) {
-                        console.error("Update to the db failed:", error);
-                    }
-                }
-
-             
-                
-
-
+                // anything after return in line 400 is dead in the water
             }); // end of filtered array
             
             //** NO Results Logic */
@@ -453,6 +436,7 @@ import { multiFactor, signOut } from 'firebase/auth';
     
     }   // end of loadUserData function    
 
+
         // Undefined Check Function
 
 
@@ -483,6 +467,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         const itemInput = document.getElementById("itemName");
         const searchInput = document.getElementById("searchInput");
         const itemQuantity = document.getElementById("itemNumber");
+
 
         // Listen for when a user presses a key in the text field
         itemInput.addEventListener("keypress", function(event) {

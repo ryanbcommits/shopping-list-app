@@ -1,5 +1,40 @@
 ## Development Log
 
+## 2026-05-25
+
+**What I built:**
+All quantity amount that are on the user's list now has a value of at least one even if they had a prior list from an old release.
+
+**How it works:**
+Items that were previously entered without a value show as undefined. The fix
+is to us Nullish Coalescing ( ?? ) in the for loop of stage 1 of collecting the data from the db.
+
+**Why ?? and not ||:**
+|| would also replace 0 with 1, which would be wrong if 
+someone intentionally set a quantity to 0. The current code has a set min val of 1 but in general,
+?? only replaces null and undefined — truly missing values.
+
+Pattern: Fix data at the source, not at the symptom
+When to use: Any time a value is wrong/missing downstream
+Question to ask: "Where does this value first exist in my code?"
+Example: quantity ?? 1 belonged in Stage 1 (collect), 
+         not Stage 2 (filter) where I first noticed the bug
+
+## 2026-05-24
+
+successfully created a quantity field for the usere and it feeds
+to the database so new inputs show an item's quantity along with it's category.
+
+**Roadblocks: Gettingg the Quantity to equal 1 when prior inputs were undefined**
+
+### Dead code after return
+Symptom: code "did nothing," no error.
+Cause: I put logic AFTER `return` in the filter callback — 
+       unreachable, never executed.
+Rule: nothing after `return` in the same block ever runs.
+       When code seems to do nothing, ask "is it even reachable?"
+       BEFORE asking "is it correct?"
+
 ### 2026-05-17 — No results message added
 
 **What I built:** A "No items found" message that appears when the 
