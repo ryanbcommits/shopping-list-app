@@ -74,10 +74,25 @@ import { multiFactor, signOut } from 'firebase/auth';
             });
             listItemElement.remove();
             console.log("item hidden");
+
         } catch (error) {
             console.error("Delete failed", error);
         }
 
+    }
+
+    async function handleAddQtyBtn (itemId, itemQty) {
+        try {
+            const user = auth.currentUser;
+
+            await updateDoc(doc(db, 'users', user.uid, 'shoppingList', itemId), {
+                quantity: 99
+            });
+            console.log(`item: ${itemId.itemName} is now ${itemId.quantity}` )
+
+        } catch (error) {
+            console.error("Add failed", error);
+        }
     }
 
 
@@ -95,6 +110,9 @@ import { multiFactor, signOut } from 'firebase/auth';
         const deleteButton = document.createElement("button");
         const editButton = document.createElement("button"); 
         const cancelButton = document.createElement("button"); 
+        const plusBtn = document.createElement("button");
+        const minusBtn = document.createElement("button");;
+    
         
 
         // Sets up edit/update mode tracking.
@@ -118,11 +136,15 @@ import { multiFactor, signOut } from 'firebase/auth';
         const quantity = document.createElement("span");
         //quantity.textContent = data.quantity; // try using the ${}
         quantity.textContent = (`Qty: ${data.quantity}`);
+        
         listItem.appendChild(quantity);
+        listItem.appendChild(plusBtn);
+        listItem.appendChild(minusBtn);
 
         quantity.style.marginLeft = "10px";
         quantity.style.fontWeight = "bold";
 
+        
 
         // category css to add padding
         category.style.marginLeft = "10px";
@@ -194,6 +216,14 @@ import { multiFactor, signOut } from 'firebase/auth';
         editButton.type = "button";
         editButton.id = "edit"
 
+        // Plus and minus button attributes
+        plusBtn.textContent = "+";
+        plusBtn.type = "button";
+        plusBtn.id = "pluss";
+
+        minusBtn.textContent = "-";
+        minusBtn.type = "button";
+        minusBtn.id = "minus"
         
   
         // cancel button style: - might be useful later for the user if that accidentally hit cancel, but not using now
@@ -201,6 +231,18 @@ import { multiFactor, signOut } from 'firebase/auth';
         cancelButton.style.marginLeft = "10px";
         cancelButton.style.background = "";
         cancelButton.style.color = "black";
+        
+        // quantity plus and minus logic
+        plusBtn.addEventListener('click', async () => {
+            
+            console.log("plus button clicked");
+
+        })
+
+        minusBtn.addEventListener('click', async () => {
+            console.log("minus button clicked")
+        })
+
         
 
         // this will allow the user to hide (soft delete)  the item from the window, but will remain in the db.
@@ -238,8 +280,7 @@ import { multiFactor, signOut } from 'firebase/auth';
             }
             lastSubmitTime = now;
             
-
-
+            
             // check if we're currently editing, this variable establishes a baseline that isEditing must equal 'true'
             const isEditing = listItem.getAttribute('data-edit-mode') === 'true';
    
@@ -378,7 +419,7 @@ import { multiFactor, signOut } from 'firebase/auth';
                         item: data.item,
                         id: doc.id,
                         category: data.category, 
-                        quantity: data.quantity ?? 1 // this forces the undefined content to show as 1  
+                        quantity: data.quantity ?? 1 // this changes the undefined content to show as 1  
                     });
                 }
             }
@@ -386,8 +427,9 @@ import { multiFactor, signOut } from 'firebase/auth';
             // filter() hands me one item at a time. This asks a boolean question about each item
             // filtered is an array.
             let filtered = allItems.filter(function(item) {
-                 // console.log("Checking item:", item.item, "| currentSearch is: ", currentSearch, "| current filter: ", currentFilter);
-                  console.log("Checking item:", item.item, "| current filter: ", currentFilter, "| current qty: ", item.quantity);    
+                // console.log("Checking item:", item.item, "| currentSearch is: ", currentSearch, "| current filter: ", currentFilter);
+                // console.log("Checking item:", item.item, "| current filter: ", currentFilter, "| current qty: ", item.quantity);    
+
                 // Question 1 - does the category match?
                 let categoryMatch;
                 if (currentFilter === "All") {
