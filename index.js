@@ -82,14 +82,17 @@ import { multiFactor, signOut } from 'firebase/auth';
 
     }
 
-    async function handleAddQtyBtn (itemId, itemQty) {
+    async function handleAddQtyBtn (itemId, quantity) {
         try {
             const user = auth.currentUser;
 
             await updateDoc(doc(db, 'users', user.uid, 'shoppingList', itemId), {
-                quantity: itemId.quantity++,
-                timestamp: newTimeStamp,
+                quantity: quantity.quantity + 1,
+                timestamp: new Date().toISOString(),
             });
+            console.log(itemId);
+            console.log(quantity.value);
+            console.log("new quantity added");
             
 
         } catch (error) {
@@ -114,7 +117,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         const cancelButton = document.createElement("button"); 
         const plusBtn = document.createElement("button");
         const minusBtn = document.createElement("button");;
-    
+        
         
 
         // Sets up edit/update mode tracking.
@@ -433,7 +436,7 @@ import { multiFactor, signOut } from 'firebase/auth';
             // filtered is an array.
             let filtered = allItems.filter(function(item) {
                 // console.log("Checking item:", item.item, "| currentSearch is: ", currentSearch, "| current filter: ", currentFilter);
-                // console.log("Checking item:", item.item, "| current filter: ", currentFilter, "| current qty: ", item.quantity);    
+                 console.log("Checking item:", item.item, "| current filter: ", currentFilter, "| current qty: ", item.quantity);    
 
                 // Question 1 - does the category match?
                 let categoryMatch;
