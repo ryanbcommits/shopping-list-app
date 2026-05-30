@@ -73,6 +73,7 @@ import { multiFactor, signOut } from 'firebase/auth';
                 hidden: true
             });
             listItemElement.remove();
+            
             console.log("item hidden");
 
         } catch (error) {
@@ -86,9 +87,10 @@ import { multiFactor, signOut } from 'firebase/auth';
             const user = auth.currentUser;
 
             await updateDoc(doc(db, 'users', user.uid, 'shoppingList', itemId), {
-                quantity: 99
+                quantity: itemId.quantity++,
+                timestamp: newTimeStamp,
             });
-            console.log(`item: ${itemId.itemName} is now ${itemId.quantity}` )
+            
 
         } catch (error) {
             console.error("Add failed", error);
@@ -235,6 +237,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         // quantity plus and minus logic
         plusBtn.addEventListener('click', async () => {
             
+            await handleAddQtyBtn(data.id, listItem);
             console.log("plus button clicked");
 
         })
@@ -251,6 +254,8 @@ import { multiFactor, signOut } from 'firebase/auth';
             await handleDeleteButton(data.id, listItem);
    
         })
+
+        
 
         cancelButton.addEventListener('click', async () => {
             try {
