@@ -85,12 +85,11 @@ import { multiFactor, signOut } from 'firebase/auth';
     async function handleAddQtyBtn (itemId, quantity) {
         try {
             const user = auth.currentUser;
-
-            await updateDoc(doc(db, 'users', user.uid, 'shoppingList', itemId), {
-                quantity: quantity.quantity + 1,
+                await updateDoc(doc(db, 'users', user.uid, 'shoppingList', itemId), {
+                quantity: quantity++,
                 timestamp: new Date().toISOString(),
             });
-            console.log(itemId);
+            console.log(itemId.categoryName);
             console.log(quantity.value);
             console.log("new quantity added");
             
@@ -240,7 +239,8 @@ import { multiFactor, signOut } from 'firebase/auth';
         // quantity plus and minus logic
         plusBtn.addEventListener('click', async () => {
             
-            await handleAddQtyBtn(data.id, listItem);
+            await handleAddQtyBtn(data.quantity, listItem);
+        
             console.log("plus button clicked");
 
         })
