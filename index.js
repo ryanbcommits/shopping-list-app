@@ -86,12 +86,12 @@ import { multiFactor, signOut } from 'firebase/auth';
         try {
             const user = auth.currentUser;
                 await updateDoc(doc(db, 'users', user.uid, 'shoppingList', itemId), {
-                quantity: quantity++,
+                quantity: quantity + 1,
                 timestamp: new Date().toISOString(),
             });
-            console.log(itemId.categoryName);
-            console.log(quantity.value);
+            console.log(quantity);
             console.log("new quantity added");
+            
             
 
         } catch (error) {
@@ -99,6 +99,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         }
     }
 
+    
 
     function addToList(data) {
         
@@ -236,15 +237,16 @@ import { multiFactor, signOut } from 'firebase/auth';
         cancelButton.style.background = "";
         cancelButton.style.color = "black";
         
-        // quantity plus and minus logic
+        // quantity plus logic
         plusBtn.addEventListener('click', async () => {
             
-            await handleAddQtyBtn(data.quantity, listItem);
+            await handleAddQtyBtn(data.id, data.quantity );
         
             console.log("plus button clicked");
-
+            loadUserData();
         })
 
+        // qty minus logic
         minusBtn.addEventListener('click', async () => {
             console.log("minus button clicked")
         })
@@ -427,7 +429,8 @@ import { multiFactor, signOut } from 'firebase/auth';
                         item: data.item,
                         id: doc.id,
                         category: data.category, 
-                        quantity: data.quantity ?? 1 // this changes the undefined content to show as 1  
+                        quantity: parseInt(data.quantity ?? 1)
+                        // the above qty changes the undefined content to show as 1  
                     });
                 }
             }
@@ -707,7 +710,7 @@ import { multiFactor, signOut } from 'firebase/auth';
             
             const itemName = document.getElementById("itemName").value;
             const categoryName = document.getElementById("categories").value;
-            const quantity = document.getElementById("itemNumber").value;
+            const quantity = parseInt(document.getElementById("itemNumber").value); // ensures quantity is an int.
             // console.log(categoryName);
 
             
