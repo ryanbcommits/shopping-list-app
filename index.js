@@ -100,6 +100,25 @@ import { multiFactor, signOut } from 'firebase/auth';
     }
 
     
+    async function handleMinusQtyBtn (itemId, quantity) {
+        try {
+            const user = auth.currentUser;
+                await updateDoc(doc(db, 'users', user.uid, 'shoppingList', itemId), {
+                quantity: quantity - 1,
+                timestamp: new Date().toISOString(),
+            });
+            console.log(quantity);
+            console.log("Quantity removed by 1");
+            
+            
+
+        } catch (error) {
+            console.error("Minus failed", error);
+        }
+    }
+
+
+    
 
     function addToList(data) {
         
@@ -246,21 +265,27 @@ import { multiFactor, signOut } from 'firebase/auth';
             loadUserData();
         })
 
-        // qty minus logic
-        minusBtn.addEventListener('click', async () => {
-            console.log("minus button clicked")
-        })
-
-        
-
         // this will allow the user to hide (soft delete)  the item from the window, but will remain in the db.
         deleteButton.addEventListener('click', async () => {
 
             await handleDeleteButton(data.id, listItem);
+            // maybe conditional stmt goes here?
    
         })
 
-        
+        // qty minus logic
+        minusBtn.addEventListener('click', async () => {
+
+            await handleMinusQtyBtn(data.id, data.quantity);
+            
+            console.log("minus button clicked");
+
+            if (data.quantity == 0) {
+                console.log("hide from view - same as handle delete.")
+            }
+
+            loadUserData();
+        })
 
         cancelButton.addEventListener('click', async () => {
             try {
@@ -430,7 +455,7 @@ import { multiFactor, signOut } from 'firebase/auth';
                         id: doc.id,
                         category: data.category, 
                         quantity: parseInt(data.quantity ?? 1)
-                        // the above qty changes the undefined content to show as 1  
+                        // the above qty changes the undefined content to show as 1 - this is a nullish opperator
                     });
                 }
             }
