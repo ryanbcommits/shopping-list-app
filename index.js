@@ -102,6 +102,10 @@ import { multiFactor, signOut } from 'firebase/auth';
     
     async function handleMinusQtyBtn (itemId, quantity) {
         try {
+            if (quantity <= 1){
+
+                return;
+            }
             const user = auth.currentUser;
                 await updateDoc(doc(db, 'users', user.uid, 'shoppingList', itemId), {
                 quantity: quantity - 1,
@@ -110,10 +114,7 @@ import { multiFactor, signOut } from 'firebase/auth';
             console.log(quantity);
             console.log("Quantity removed by 1");
 
-            if (quantity < 0){
-
-                quantity = 0;
-            }
+            
             
             
 
