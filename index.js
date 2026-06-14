@@ -109,6 +109,11 @@ import { multiFactor, signOut } from 'firebase/auth';
             });
             console.log(quantity);
             console.log("Quantity removed by 1");
+
+            if (quantity < 0){
+
+                quantity = 0;
+            }
             
             
 
@@ -280,8 +285,14 @@ import { multiFactor, signOut } from 'firebase/auth';
             
             console.log("minus button clicked");
 
-            if (data.quantity == 0) {
-                console.log("hide from view - same as handle delete.")
+            console.log("data.quqntity:" + data.quantity);
+
+            if (data.quantity === 0) {
+                console.log("the item is now zero")
+            }
+
+            if (data.quantity < 0) {
+                data.quantity = 0;
             }
 
             loadUserData();
