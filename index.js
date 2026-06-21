@@ -143,7 +143,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         const plusBtn = document.createElement("button");
         const minusBtn = document.createElement("button");;
         
-        
+
 
         // Sets up edit/update mode tracking.
         listItem.setAttribute('data-edit-mode', 'false');
@@ -167,18 +167,28 @@ import { multiFactor, signOut } from 'firebase/auth';
         //quantity.textContent = data.quantity; // try using the ${}
         quantity.textContent = (`Qty: ${data.quantity}`);
         
-        listItem.appendChild(quantity);
-        listItem.appendChild(plusBtn);
-        listItem.appendChild(minusBtn);
+        // listItem.appendChild(quantity);
+        // listItem.appendChild(plusBtn);
+        // listItem.appendChild(minusBtn);
 
-        quantity.style.marginLeft = "10px";
-        quantity.style.fontWeight = "bold";
+        // quantity.style.marginLeft = "10px";
+        // quantity.style.fontWeight = "bold";
 
         
-
         // category css to add padding
         category.style.marginLeft = "10px";
 
+
+        // changes made 6/19/26
+        const qtyContainer = document.createElement("div");
+        qtyContainer.classList.add("qty-controls");
+
+        qtyContainer.appendChild(plusBtn);
+        qtyContainer.appendChild(quantity); // the span
+        qtyContainer.appendChild(minusBtn);
+        
+
+        listItem.appendChild(qtyContainer);
         /*
         put code here to color the categories
         Try hardcoding the Categories to have colors
@@ -249,11 +259,11 @@ import { multiFactor, signOut } from 'firebase/auth';
         // Plus and minus button attributes
         plusBtn.textContent = "+";
         plusBtn.type = "button";
-        plusBtn.id = "pluss";
+        plusBtn.classList.add("qty-btn");
 
         minusBtn.textContent = "-";
         minusBtn.type = "button";
-        minusBtn.id = "minus"
+        minusBtn.classList.add("qty-btn");
         
   
         // cancel button style: - might be useful later for the user if that accidentally hit cancel, but not using now

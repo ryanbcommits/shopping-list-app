@@ -1,5 +1,23 @@
 ## Development Log
 
+## 2026-06-21
+
+**What I built**
+Enhanced quality controls for the quantity buttons, changing the plus and minues buttons to have class identifiers rather than IDs because classes are more flexible than IDs which must be unique. Classes are designed to be reused across many elements. IDs are unique per page. When elements repeat (like list items), use classes.
+
+DEVLOG error → cause → fix:
+
+Error: Multiple elements sharing the same ID.
+
+Cause: Used element.id = inside a function that runs once per list item.
+
+Fix: Use classList.add() instead.
+
+**How it works**
+
+
+
+
 ## 2026-05-25
 
 **What I built:**
