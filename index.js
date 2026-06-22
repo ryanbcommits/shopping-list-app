@@ -182,11 +182,12 @@ import { multiFactor, signOut } from 'firebase/auth';
         // changes made 6/19/26
         const qtyContainer = document.createElement("div");
         qtyContainer.classList.add("qty-controls");
+        quantity.classList.add("qty-display");
 
-        qtyContainer.appendChild(plusBtn);
-        qtyContainer.appendChild(quantity); // the span
+        // turns out [-] Qty: 3 [+] is "more professional"
         qtyContainer.appendChild(minusBtn);
-        
+        qtyContainer.appendChild(quantity); // the span
+        qtyContainer.appendChild(plusBtn);
 
         listItem.appendChild(qtyContainer);
         /*
@@ -298,13 +299,15 @@ import { multiFactor, signOut } from 'firebase/auth';
 
             console.log("data.quqntity:" + data.quantity);
 
-            if (data.quantity === 0) {
-                console.log("the item is now zero")
-            }
+            // replaced with handleMinusQtyBtn (if (quantity <= 1) return; see line 104.
+            // if (data.quantity === 0) {
+            //     console.log("the item is now zero")
+            // }
 
-            if (data.quantity < 0) {
-                data.quantity = 0;
-            }
+            // if (data.quantity < 0) {
+            //     data.quantity = 0;
+            // }
+            
 
             loadUserData();
         })

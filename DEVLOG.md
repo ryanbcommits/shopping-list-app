@@ -1,22 +1,41 @@
 ## Development Log
 
-## 2026-06-21
-
 **What I built**
-Enhanced quality controls for the quantity buttons, changing the plus and minues buttons to have class identifiers rather than IDs because classes are more flexible than IDs which must be unique. Classes are designed to be reused across many elements. IDs are unique per page. When elements repeat (like list items), use classes.
-
-DEVLOG error → cause → fix:
-
-Error: Multiple elements sharing the same ID.
-
-Cause: Used element.id = inside a function that runs once per list item.
-
-Fix: Use classList.add() instead.
+Polished the quantity controls so the minus button, quantity, and plus
+button read as one unit, and changed the plus/minus buttons from IDs to
+classes.
 
 **How it works**
+I wrapped the three quantity elements (minus, span, plus) in a single
+`div.qty-controls`. Before this they were direct children of the `<li>`,
+sitting in a flat pile next to the item name, category, and edit/delete
+buttons — which made them hard to style as a group. The wrapper gives me
+one handle: the CSS rule `.qty-controls { display: inline-flex; gap: 4px;
+align-items: center; }` aligns all three as a unit instead of styling three
+loose siblings.
 
+I also swapped the plus/minus button IDs for classes (`qty-btn`). The
+duplicate IDs didn't break my click handlers, because I attach listeners
+directly to the element references (`plusBtn`, `minusBtn`), not via
+`getElementById`. They matter because `getElementById` returns only the
+first match — so any future lookup by that ID would silently grab the wrong
+item's button. Classes are the right tool for elements created repeatedly
+(once per item via `addToList`).
 
+**Key learning — updateDoc merges**
+The + and - buttons call `updateDoc(ref, { quantity })`. `updateDoc` merges:
+it changes only the fields I pass and leaves the rest alone, so `item` and
+`category` survive every click. If I'd used `setDoc(ref, { quantity })`
+instead, it would replace the whole document and wipe the name and category
+on every click.
 
+**error → cause → fix**
+Error: multiple elements sharing the same ID.
+Cause: used `element.id =` inside `addToList`, which runs once per list item.
+Fix: use `classList.add()` instead.
+
+**Principle**
+Repetition decides the tool: repeats → class; truly unique → ID.
 
 ## 2026-05-25
 

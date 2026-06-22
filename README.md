@@ -1,9 +1,22 @@
 # Shopping List App
 
 ![Status](https://img.shields.io/badge/status-stable-green)
-![Version](https://img.shields.io/badge/version-1.3.0-blue)
+![Version](https://img.shields.io/badge/version-1.4.0-blue)
 
 A full-stack shopping list application built with vanilla JavaScript and Firebase, featuring real-time data synchronization, user authentication, and comprehensive CRUD operations.
+
+### ✅ Completed (v1.4.0)
+- Quantity field on each item, saved to Firestore
+- + / - buttons to adjust quantity, synced to the database
+- Minimum quantity guard (can't go below 1)
+- Polished quantity controls grouped as a single UI unit
+
+## 🎉 Version 1.4.0 Release Notes
+
+### New Features
+- **✅ Quantity Controls**: Each item shows a quantity with + and -
+  buttons to adjust it. Changes sync to Firestore in real time, with a
+  minimum of 1.
 
 ## 🎉 Version 1.3.0 Release Notes
 
@@ -67,11 +80,12 @@ Then open your browser to the localhost URL that Vite provides (usually `http://
 
 The app is deployed at: [https://app.ryanbcommits.com](https://app.ryanbcommits.com)
 
-**Current Status:** Production-Ready (v1.2.0)
+**Current Status:** Production-Ready (v1.4.0)
 - ✅ HTTPS/SSL certificate active
 - ✅ Full CRUD operations implemented
 - ✅ Mobile compatibility tested
 - ✅ Environment variables secured
+
 
 ## ✨ Features
 
@@ -107,6 +121,13 @@ The app is deployed at: [https://app.ryanbcommits.com](https://app.ryanbcommits.
 - **Deployment**: Netlify
 
 ## 📚 Key Learnings
+
+### Recent Development (v1.4.0)
+- **Partial updates with `updateDoc()`**: The +/- buttons send only
+  `{ quantity }`. `updateDoc()` merges rather than replaces, so the item
+  name and category survive every click.
+- **Classes for repeated elements**: Buttons generated once per item use
+  classes, not IDs — `getElementById` only returns the first match.
 
 ### Recent Development (v1.3.0)
 - **Dual Filter State**: `currentFilter` and `currentSearch` both 
@@ -213,4 +234,4 @@ This project uses Claude AI as a learning assistant, not as a code generator. My
 Ryan Burns - [GitHub](https://github.com/ryanbcommits)
 
 ---
-**Last Updated:** May 2026 | **Version:** 1.3.0
+**Last Updated:** June 2026 | **Version:** 1.4.0
