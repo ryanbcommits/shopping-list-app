@@ -1,5 +1,12 @@
 ## Development Log
 
+### Recent Development (v1.4.0)
+- **Partial updates with `updateDoc()`**: The +/- buttons send only
+  `{ quantity }`. `updateDoc()` merges rather than replaces, so the item
+  name and category survive every click.
+- **Classes for repeated elements**: Buttons generated once per item use
+  classes, not IDs — `getElementById` only returns the first match.
+
 **What I built**
 Polished the quantity controls so the minus button, quantity, and plus
 button read as one unit, and changed the plus/minus buttons from IDs to

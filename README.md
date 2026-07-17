@@ -5,11 +5,7 @@
 
 A full-stack shopping list application built with vanilla JavaScript and Firebase, featuring real-time data synchronization, user authentication, and comprehensive CRUD operations.
 
-### ✅ Completed (v1.4.0)
-- Quantity field on each item, saved to Firestore
-- + / - buttons to adjust quantity, synced to the database
-- Minimum quantity guard (can't go below 1)
-- Polished quantity controls grouped as a single UI unit
+
 
 ## 🎉 Version 1.4.0 Release Notes
 
@@ -163,6 +159,12 @@ The app is deployed at: [https://app.ryanbcommits.com](https://app.ryanbcommits.
 
 ## 📋 Development Roadmap
 
+### ✅ Completed (v1.4.0)
+- Quantity field on each item, saved to Firestore
+- + / - buttons to adjust quantity, synced to the database
+- Minimum quantity guard (can't go below 1)
+- Polished quantity controls grouped as a single UI unit
+
 ### ✅ Completed (v1.3.0)
 - Real-time search with case-insensitive matching
 - Combined search + category filter working simultaneously
@@ -191,7 +193,6 @@ The app is deployed at: [https://app.ryanbcommits.com](https://app.ryanbcommits.
 
 - Drag-and-drop reordering
 - Shopping list sharing
-- Quantity tracking
 - Purchase history
 - Offline mode support
 - Progressive Web App (PWA) functionality

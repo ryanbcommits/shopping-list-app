@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2026-07-16
+
+### Added
+- Quantity field on each shopping list item, saved to Firestore
+  with every new item
+- Quantity displayed on each item in the list (defaults to 1 for
+  older items stored without a quantity)
+- Plus and minus buttons on each item to adjust quantity, synced
+  to Firestore via `updateDoc()`
+- Minimum quantity guard — the minus button stops at 1 and will
+  not decrement into zero or negatives
+- Quantity controls grouped in a single `qty-controls` container,
+  styled as one compact unit
+
+### Changed
+- `saveItemToDatabase` and the add-item flow now include a
+  quantity value
+- Quantity buttons use shared classes (`qty-btn`) instead of IDs,
+  since they are generated once per item
+
+### Fixed
+- Data normalization at the Firestore read stage — `parseInt(data.quantity ?? 1)`
+  handles older items with missing or string quantities
+
 ## [1.3.0] - 2026-05-17
 
 ### Added
