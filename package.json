@@ -2,6 +2,7 @@
   "name": "shopping-list-app",
   "version": "1.0.0",
   "description": "A firebase-powered shopping list application.",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
