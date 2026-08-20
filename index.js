@@ -2,7 +2,7 @@ import { addDoc, collection, getDoc, deleteDoc, getDocs, doc, updateDoc} from 'f
 import { db } from './firebase-config.js';
 import { auth, onAuthStateChanged } from './firebase-config.js'
 import { multiFactor, signOut } from 'firebase/auth';
-
+import { validateItemName } from './validation'
 
     // setting a rate limiting variable
     let lastSubmitTime = 0;
@@ -371,18 +371,7 @@ import { multiFactor, signOut } from 'firebase/auth';
                 const newTextInput = document.getElementById("newItem");
 
                 // nothing checks if newValue is valid.. 
-                
-                function validateItemName(newValue) {
-                    if (!newValue.trim()) {
-                        return { 
-                            valid: false, 
-                            error: "please add an item" };
-                    }
-                    if (newValue.length > 20) {
-                        return { valid: false, error: "Item name is too long!"};
-                    }
-                    return { valid: true };
-                }
+
         
                 const validateNewItem = validateItemName(newValue);
 
@@ -661,17 +650,7 @@ import { multiFactor, signOut } from 'firebase/auth';
         });
         
         // Outside the event listener - pure validation logic for itemName
-        function validateItemName(itemName) {
-            if (!itemName.trim()) {
-                return { 
-                    valid: false, 
-                    error: "please add an item" };
-            }
-            if (itemName.length > 20) {
-                return { valid: false, error: "Item name is too long!"};
-            }
-            return { valid: true };
-        }
+        // see validation.ts
 
         /*
         *****
