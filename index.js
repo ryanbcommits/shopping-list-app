@@ -3,6 +3,8 @@ import { db } from './firebase-config.js';
 import { auth, onAuthStateChanged } from './firebase-config.js'
 import { multiFactor, signOut } from 'firebase/auth';
 import { validateItemName } from './validation'
+import { matchesFilter } from './filters';
+
 
     // setting a rate limiting variable
     let lastSubmitTime = 0;
@@ -473,29 +475,32 @@ import { validateItemName } from './validation'
                     });
                 }
             }
-            
+            // new TS code
+            let filtered = allItems.filter(item => matchesFilter(item, currentFilter, currentSearch)); 
+
+            // Below is the old JS code that has been converted in filters.ts
             // filter() hands me one item at a time. This asks a boolean question about each item
             // filtered is an array.
-            let filtered = allItems.filter(function(item) {
-                // console.log("Checking item:", item.item, "| currentSearch is: ", currentSearch, "| current filter: ", currentFilter);
-                 console.log("Checking item:", item.item, "| current filter: ", currentFilter, "| current qty: ", item.quantity);    
+            // let filtered = allItems.filter(function(item) {
+            //     // console.log("Checking item:", item.item, "| currentSearch is: ", currentSearch, "| current filter: ", currentFilter);
+            //      console.log("Checking item:", item.item, "| current filter: ", currentFilter, "| current qty: ", item.quantity);    
 
-                // Question 1 - does the category match?
-                let categoryMatch;
-                if (currentFilter === "All") {
-                    categoryMatch = true; // pass everything through
-                } else {
-                    categoryMatch = item.category === currentFilter;
-                }
+            //     // Question 1 - does the category match?
+            //     let categoryMatch;
+            //     if (currentFilter === "All") {
+            //         categoryMatch = true; // pass everything through
+            //     } else {
+            //         categoryMatch = item.category === currentFilter;
+            //     }
                 
-                // Question 2 - does the name contain the seach text?
-                let nameMatch = item.item.toLowerCase().includes(currentSearch.toLowerCase());
+            //     // Question 2 - does the name contain the seach text?
+            //     let nameMatch = item.item.toLowerCase().includes(currentSearch.toLowerCase());
                 
-                // Both MUST be yes to allow the list to be written to the DOM
-                return categoryMatch && nameMatch 
+            //     // Both MUST be yes to allow the list to be written to the DOM
+            //     return categoryMatch && nameMatch 
 
-                // anything after return in line 400 is dead in the water
-            }); // end of filtered array
+            //     // anything after return in line 400 is dead in the water
+            // }); // end of filtered array
             
             //** NO Results Logic */
             let notFound = document.getElementById("noResults");
