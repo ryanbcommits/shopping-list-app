@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased] - 2026-08-20
+
+### Added
+- Created `types.ts` with a shared `ShoppingItem` interface.
+- Extracted the category/search filter logic out of `loadUserData` into `filters.ts` as `matchesFilter`, converting `currentFilter` and `currentSearch` from closure reads into explicit typed parameters.
+
+### Fixed
+- Set `moduleResolution` to `"bundler"` in `tsconfig.json` (was defaulting to `"nodenext"` via `"module": "nodenext"`), so relative imports no longer need explicit `.js` extensions.
+- Added `import type` for the `ShoppingItem` interface in `filters.ts`, required by `verbatimModuleSyntax` since interfaces don't exist at runtime.
+
+Tested: category filtering and search text both confirmed working, independently and together.
 
 ## [Unreleased] - 2026-08-19
 
