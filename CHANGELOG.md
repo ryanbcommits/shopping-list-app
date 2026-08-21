@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
+## [Unreleased] - 2026-08-19
+
+### Added
+- Started TypeScript conversion: created `validation.ts` as the first typed module.
+- Moved `validateItemName` out of `index.js` into `validation.ts`, exported it, and typed it (itemName: string parameter, { valid: boolean; error?: string } return type).
+- Added "type": "module" to package.json so TypeScript recognizes the project as ESM.
+
+### Fixed
+- Found and removed a duplicate validateItemName declaration in the edit handler. An uncommented note line inside it was causing a syntax error that broke the entire app on load.
+
+Tested: add-item and edit flows both validate empty names and names over 20 characters correctly.
+
 ## [1.4.0] - 2026-07-16
 
 ### Added
