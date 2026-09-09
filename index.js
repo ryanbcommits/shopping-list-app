@@ -4,6 +4,7 @@ import { auth, onAuthStateChanged } from './firebase-config.js'
 import { multiFactor, signOut } from 'firebase/auth';
 import { validateItemName } from './validation'
 import { matchesFilter } from './filters';
+import { getCategoryColor } from './categoryColors'; 
 
 
     // setting a rate limiting variable
@@ -196,33 +197,40 @@ import { matchesFilter } from './filters';
         put code here to color the categories
         Try hardcoding the Categories to have colors
         */
-        if (category.textContent === "Dairy") {
-            category.style.color = "#1F51FF";
+        // if (category.textContent === "Dairy") {
+        //     category.style.color = "#1F51FF";
+        //     category.style.fontWeight = "bold";
+        // }
+        // else if (category.textContent === "Produce") {
+        //     category.style.color = "Green";
+        //     category.style.fontWeight = "bold";
+        // }
+        // else if (category.textContent === "Grocery") {
+        //     category.style.color = "#4A0404";
+        //     category.style.fontWeight = "bold";
+        // }
+        // else if (category.textContent === "Meat") {
+        //     category.style.color = "#701705";
+        //     category.style.fontWeight = "bold";
+        // }
+        // else if (category.textContent === "Frozen Food") {
+        //     category.style.color = "Blue";
+        //     category.style.fontWeight = "bold";
+        // }
+        // else if (category.textContent === "Fish / Seafood") {
+        //     category.style.color = "#E3735E";
+        //     category.style.fontWeight = "bold";
+        // }
+        // else {
+        //     category.style.color = "lightgray";
+        // }
+
+        const categoryStyle = getCategoryColor(category.textContent);
+        category.style.color = categoryStyle.color;
+        if (categoryStyle.bold) {
             category.style.fontWeight = "bold";
         }
-        else if (category.textContent === "Produce") {
-            category.style.color = "Green";
-            category.style.fontWeight = "bold";
-        }
-        else if (category.textContent === "Grocery") {
-            category.style.color = "#4A0404";
-            category.style.fontWeight = "bold";
-        }
-        else if (category.textContent === "Meat") {
-            category.style.color = "#701705";
-            category.style.fontWeight = "bold";
-        }
-        else if (category.textContent === "Frozen Food") {
-            category.style.color = "Blue";
-            category.style.fontWeight = "bold";
-        }
-        else if (category.textContent === "Fish / Seafood") {
-            category.style.color = "#E3735E";
-            category.style.fontWeight = "bold";
-        }
-        else {
-            category.style.color = "lightgray";
-        }
+        
 
         const newInput = document.createElement("input");
         newInput.type = "text";

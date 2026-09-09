@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased] - [2026-09-09]
+
+### Added
+- Extracted the category color/bold logic out of `addToList` into `categoryColors.ts` as `getCategoryColor`, converting direct DOM style mutation into a pure function that returns { color, bold } instead.
+
+Tested: all six categories (Dairy, Produce, Grocery, Meat, Frozen Food, Fish / Seafood) plus the fallback case still render with correct color and boldness.
+
+
 ## [Unreleased] - 2026-08-20
 
 ### Added
